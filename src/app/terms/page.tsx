@@ -33,7 +33,7 @@ export default function TermsPage() {
               1. Acceptance of Terms
             </h2>
             <p>
-              By accessing the website of Cheap Adelaide Removalist (<Link href="/" className="text-[#FF6A00] underline">{business.domain}</Link>) or submitting an online enquiry, you agree to comply with these terms.
+              By accessing the website of Cheap Adelaide Removalist (<Link href="/" className="text-[#FF6A00] underline [overflow-wrap:anywhere]">{business.domain}</Link>) or submitting an online enquiry, you agree to comply with these terms.
             </p>
             <p className="mt-2">
               {business.operatorNotice}

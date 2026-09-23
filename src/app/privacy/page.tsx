@@ -33,7 +33,7 @@ export default function PrivacyPage() {
               1. Introduction & Operator Notice
             </h2>
             <p>
-              Cheap Adelaide Removalist respects your privacy. This Privacy Policy describes how we handle the personal information collected through our website (<Link href="/" className="text-[#FF6A00] underline">{business.domain}</Link>).
+              Cheap Adelaide Removalist respects your privacy. This Privacy Policy describes how we handle the personal information collected through our website (<Link href="/" className="text-[#FF6A00] underline [overflow-wrap:anywhere]">{business.domain}</Link>).
             </p>
             <p className="mt-2">
               {business.operatorNotice} Our operations depot is situated at {business.location.fullAddress}.
