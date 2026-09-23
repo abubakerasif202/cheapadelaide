@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="sun-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF6A00"/>
+      <stop offset="100%" stop-color="#E63900"/>
+    </linearGradient>
+    <linearGradient id="road-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B2D5B"/>
+      <stop offset="100%" stop-color="#071933"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="112" fill="#0B2D5B"/>
+
+  <!-- Orange Sun Backdrop -->
+  <circle cx="280" cy="230" r="160" fill="url(#sun-grad)"/>
+
+  <!-- Adelaide Skyline Silhouette -->
+  <path d="M220 280 V220 H240 V280 H250 V200 H265 V280 H280 V170 L290 150 L300 170 V280 H315 V195 H330 V280 H350 V230 H365 V280 H430 V350 H150 Z" fill="#071933" opacity="0.95"/>
+
+  <!-- Curved Highway -->
+  <path d="M80 430 C 200 420, 320 370, 480 340 L 480 440 C 320 460, 200 470, 80 470 Z" fill="#06162C"/>
+  <path d="M120 440 C 220 435, 300 405, 460 375" stroke="#FFFFFF" stroke-width="8" stroke-dasharray="24 16" fill="none" opacity="0.85"/>
+
+  <!-- Speed Lines -->
+  <path d="M50 250 H 170" stroke="#FF6A00" stroke-width="12" stroke-linecap="round"/>
+  <path d="M30 280 H 150" stroke="#FF6A00" stroke-width="12" stroke-linecap="round"/>
+  <path d="M60 310 H 130" stroke="#FF6A00" stroke-width="12" stroke-linecap="round"/>
+  <path d="M20 340 H 120" stroke="#FF6A00" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Moving Truck Body -->
+  <!-- Cargo Container -->
+  <polygon points="120,330 310,310 320,180 140,195" fill="#FF6A00" stroke="#0B2D5B" stroke-width="8" stroke-linejoin="round"/>
+  <!-- Cargo Highlights -->
+  <polygon points="125,325 305,305 305,300 125,315" fill="#E63900"/>
+
+  <!-- Cabin -->
+  <polygon points="310,310 410,300 415,220 375,200 320,180" fill="#FFFFFF" stroke="#0B2D5B" stroke-width="8" stroke-linejoin="round"/>
+  <!-- Front Bumper Accent -->
+  <polygon points="360,305 410,300 405,275 365,278" fill="#FF6A00"/>
+  <!-- Windshield -->
+  <polygon points="330,225 375,210 400,230 365,255 325,255" fill="#0B2D5B"/>
+  <!-- Side Door Panel -->
+  <polygon points="330,265 365,262 360,295 325,298" fill="#FFFFFF" stroke="#0B2D5B" stroke-width="3"/>
+
+  <!-- Wheels -->
+  <circle cx="160" cy="350" r="26" fill="#071933" stroke="#FFFFFF" stroke-width="6"/>
+  <circle cx="160" cy="350" r="10" fill="#FFFFFF"/>
+
+  <circle cx="360" cy="335" r="26" fill="#071933" stroke="#FFFFFF" stroke-width="6"/>
+  <circle cx="360" cy="335" r="10" fill="#FFFFFF"/>
+</svg>
