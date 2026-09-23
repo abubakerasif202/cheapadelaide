@@ -32,35 +32,35 @@ export const generalFaqs: FAQItem[] = [
     category: "services",
     question: "Do you handle apartment moves with stairs or lifts?",
     answer:
-      "Yes. Our movers regularly manage apartment relocations involving lift bookings, basement parking constraints, and walk-up stairs across Adelaide CBD and suburban complexes.",
+      "Yes, you can include apartment details such as lift access, stairs, parking and building requirements in your quote request.",
   },
   {
     id: "office-moves",
     category: "services",
     question: "Do you handle commercial and office moves?",
     answer:
-      "Yes. We relocate offices, retail stores, and commercial workspaces across Adelaide, handling desks, task chairs, IT equipment cartons, meeting tables, and storage units with minimal operational disruption.",
+      "Office and commercial removals are listed services. Include the locations, items, access conditions and preferred timing in your enquiry.",
   },
   {
     id: "packing-assistance",
     category: "services",
     question: "Can I request packing assistance for our move?",
     answer:
-      "Yes. We offer professional packing and unpacking support. Our team can pack your entire home or focus specifically on high-fragility areas like kitchen glassware, ceramics, and ornaments.",
+      "Packing and unpacking are listed as additional service options. Include the areas and items you have in mind in your request so availability can be discussed.",
   },
   {
     id: "interstate-moves",
     category: "services",
     question: "Do you handle interstate moves and backloading?",
     answer:
-      "Yes. We coordinate interstate removals connecting Adelaide with major destinations including Melbourne, Sydney, Brisbane, Canberra, and regional centres, offering both direct vehicle allocations and budget-friendly backloading.",
+      "Interstate removals and backloading are listed services. Share your pickup and destination details to discuss route availability.",
   },
   {
     id: "preparation",
     category: "preparation",
     question: "How should I prepare before moving day?",
     answer:
-      "To ensure a fast, efficient move: have all loose items packed into sealed boxes before the truck arrives, disassemble non-standard flat-pack items if possible, empty desk and dresser drawers, and ensure clear parking for the truck outside your property.",
+      "If possible, list the larger items, note any stairs or lift access, and check what parking is available at both addresses. You can include these details in your quote request.",
   },
   {
     id: "cost-factors",
@@ -74,6 +74,6 @@ export const generalFaqs: FAQItem[] = [
     category: "pricing",
     question: "How do I choose between two and three movers?",
     answer:
-      "2 Movers + Truck (from $79 / 30 min) is best for 1-2 bedroom apartments and lighter loads. 3 Movers + Truck (from $99 / 30 min) is recommended for 3+ bedroom houses or jobs with stairs, as the third mover keeps the loading flow constant and frequently reduces the overall billable time.",
+      "Starting rates are $79 / 30 min for 2 Movers + Truck and $99 / 30 min for 3 Movers + Truck. Share your inventory, access and travel details if you would like help considering a team size.",
   },
 ];

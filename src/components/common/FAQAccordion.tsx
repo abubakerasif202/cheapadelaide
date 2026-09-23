@@ -31,9 +31,9 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
         {items.map((item) => {
           const isOpen = openId === item.id;
           return (
-            <div
+            <article
               key={item.id}
-              className={`rounded-2xl border transition-colors ${
+              className={`scroll-reveal rounded-2xl border transition-colors duration-200 ${
                 isOpen
                   ? "border-[#FF6A00]/40 bg-orange-50/20"
                   : "border-slate-200 bg-white hover:border-slate-300"
@@ -45,6 +45,7 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
                 className="flex w-full items-center justify-between p-5 text-left focus:outline-none"
                 aria-expanded={isOpen}
                 aria-controls={`faq-answer-${item.id}`}
+                id={`faq-question-${item.id}`}
               >
                 <span className="text-base font-bold text-[#0B2D5B] pr-4">
                   {item.question}
@@ -60,15 +61,21 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
                 </div>
               </button>
 
-              {isOpen && (
-                <div
-                  id={`faq-answer-${item.id}`}
-                  className="px-5 pb-5 text-sm leading-relaxed text-slate-600 border-t border-slate-100 pt-3"
-                >
-                  <p>{item.answer}</p>
+              <div
+                id={`faq-answer-${item.id}`}
+                role="region"
+                aria-labelledby={`faq-question-${item.id}`}
+                aria-hidden={!isOpen}
+                inert={!isOpen}
+                className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+              >
+                <div className="overflow-hidden">
+                  <div className="border-t border-slate-100 px-5 pb-5 pt-3 text-sm leading-relaxed text-slate-600">
+                    <p>{item.answer}</p>
+                  </div>
                 </div>
-              )}
-            </div>
+              </div>
+            </article>
           );
         })}
       </div>

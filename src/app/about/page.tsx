@@ -50,11 +50,11 @@ export default function AboutPage() {
               </div>
 
               <p className="text-base text-slate-600 leading-relaxed">
-                The name &quot;Cheap Adelaide Removalist&quot; refers to value, affordability, and practical pricing. But when our team arrives at your door, there is nothing cheap about the standard of service we deliver.
+                The name &quot;Cheap Adelaide Removalist&quot; reflects a focus on affordable starting rates and straightforward information. We list the team options, contact details and business hours clearly so you can decide whether to get in touch.
               </p>
 
               <p className="text-base text-slate-600 leading-relaxed">
-                Too often, budget moving companies cut corners by hiring inexperienced workers, skipping protective blankets, or surprising customers with hidden fees at the end of the day. We take the exact opposite approach: transparent starting rates, fully equipped trucks, and careful handling from start to finish.
+                Our starting rates are $79 per 30 minutes for 2 Movers + Truck and $99 per 30 minutes for 3 Movers + Truck. Final pricing depends on move size, inventory, access, travel and any additional services required.
               </p>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-3">
@@ -68,11 +68,11 @@ export default function AboutPage() {
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
-                    <span><strong>Real Furniture Protection:</strong> Every load carries heavy-duty furniture blankets and tie-down strapping.</span>
+                    <span><strong>Clear Contact Details:</strong> Call or email us directly to discuss your move.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
-                    <span><strong>Direct Local Contact:</strong> Talk directly to our coordinators on 0491 704 136, 7 days a week.</span>
+                    <span><strong>Direct Contact:</strong> Call 0491 704 136 during our listed hours.</span>
                   </li>
                 </ul>
               </div>

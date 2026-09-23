@@ -105,7 +105,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
                   href={`/get-a-quote?service=${service.slug}`}
-                  className="rounded-xl bg-[#FF6A00] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition hover:bg-[#E63900]"
+                  className="rounded-xl bg-[#FF6A00] px-6 py-3.5 text-sm font-bold text-[#071933] shadow-lg shadow-orange-500/20 transition hover:bg-orange-300"
                 >
                   Request a Free Quote
                 </Link>
@@ -138,21 +138,21 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <div className="space-y-2 text-xs text-slate-600">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="h-4 w-4 text-[#FF6A00]" />
-                    <span>Equipped with blankets, straps & trolleys</span>
+                    <span>Starting rates from $79 / 30 min</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-[#FF6A00]" />
-                    <span>2 or 3 Mover teams available</span>
+                    <span>2 or 3 movers with a truck</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CalendarCheck className="h-4 w-4 text-[#FF6A00]" />
-                    <span>7 Days: 7:00 am – 8:00 pm daily</span>
+                    <span>{business.hours}</span>
                   </div>
                 </div>
 
                 <div className="pt-2">
                   <p className="text-[11px] text-slate-500 italic">
-                    Final pricing depends on move size, inventory, access, travel and additional services.
+                    {business.pricing.disclaimer}
                   </p>
                 </div>
               </div>
@@ -243,7 +243,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               Our {service.title} Process
             </h2>
             <p className="mt-2 text-sm text-slate-600">
-              Clear stages to ensure your move happens smoothly and on schedule.
+              A sequence of practical steps from enquiry to delivery.
             </p>
           </div>
 
@@ -342,7 +342,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {/* 7. CTA */}
       <CTASection
         title={`Ready to Book Your Adelaide ${service.title}?`}
-        subtitle="Call 0491 704 136 to speak with our local dispatch team or submit your requirements online."
+        subtitle="Call 0491 704 136 during our listed hours or submit your move details online."
       />
     </div>
   );

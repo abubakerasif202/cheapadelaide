@@ -86,7 +86,7 @@ export default function TermsPage() {
             <div className="mt-3 rounded-2xl bg-slate-50 p-5 border border-slate-200 text-xs sm:text-sm text-slate-700 space-y-1">
               <p><strong>{business.name}</strong></p>
               <p>Operations Base: {business.location.fullAddress}</p>
-              <p>Primary Dispatch Phone: <a href={business.contact.primaryPhoneHref} className="text-[#FF6A00] underline">{business.contact.primaryPhone}</a></p>
+              <p>Primary Phone: <a href={business.contact.primaryPhoneHref} className="text-[#FF6A00] underline">{business.contact.primaryPhone}</a></p>
               <p>Email: <a href={`mailto:${business.contact.email}`} className="text-[#FF6A00] underline">{business.contact.email}</a></p>
             </div>
           </div>

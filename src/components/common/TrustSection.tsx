@@ -1,44 +1,33 @@
 import Link from "next/link";
-import { ShieldCheck, Clock, MapPin, BadgeDollarSign, Truck, Phone } from "lucide-react";
+import { Clock, MapPin, BadgeDollarSign, Phone, Mail } from "lucide-react";
 import { business } from "@/config/business";
 
 export function TrustSection() {
   const trustPoints = [
     {
       icon: BadgeDollarSign,
-      title: "Transparent Starting Rates",
-      description:
-        "No hidden tiers. Clear starting rates of $79 / 30 min (2 movers) and $99 / 30 min (3 movers) with 30-minute billing intervals.",
+      title: "Published Starting Rates",
+      description: "$79 / 30 min for 2 movers + truck, or $99 / 30 min for 3 movers + truck.",
     },
     {
       icon: MapPin,
-      title: "Verified Adelaide Operations Base",
-      description:
-        `Dispatching daily from ${business.location.street}, ${business.location.suburb} SA ${business.location.postcode} across Greater Adelaide and regional SA.`,
+      title: "Adelaide Address",
+      description: business.location.fullAddress,
     },
     {
       icon: Phone,
-      title: "Direct Phone Contact",
-      description:
-        `Speak directly to our local coordinators at ${business.contact.primaryPhone}. Fast responses, honest scheduling, and zero runaround.`,
+      title: "Call Us Directly",
+      description: business.contact.primaryPhone,
     },
     {
-      icon: Truck,
-      title: "Equipped Moving Trucks",
-      description:
-        "Our vehicles carry heavy-duty furniture blankets, tie-down webbing, upright hand trucks, and furniture dollies on every run.",
+      icon: Mail,
+      title: "Email",
+      description: business.contact.email,
     },
     {
       icon: Clock,
-      title: "7 Days • 7:00 am – 8:00 pm",
-      description:
-        "Flexible weekend, early morning, and end-of-lease move windows designed to match real tenancy handovers and work schedules.",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Careful Two-Person Handling",
-      description:
-        "Heavy items are lifted using proper techniques to prevent strain and protect timber floors, walls, and door frames.",
+      title: "Contact Hours",
+      description: business.hours,
     },
   ];
 
@@ -50,10 +39,10 @@ export function TrustSection() {
             Transparent Service
           </span>
           <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
-            Why Adelaide Chooses Our Moving Teams
+            Practical Details, Up Front
           </h2>
           <p className="mt-4 text-base text-slate-600 leading-relaxed">
-            We focus on genuine, supportable service fundamentals: clear rates, punctual arrivals, careful furniture protection, and direct local communication.
+            Check the starting rates, contact details and listed hours, then share your move requirements for a quote.
           </p>
         </div>
 
@@ -63,7 +52,7 @@ export function TrustSection() {
             return (
               <div
                 key={point.title}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#FF6A00]/40"
+              className="scroll-reveal rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#FF6A00]/40"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-[#FF6A00]">
                   <Icon className="h-6 w-6" />
@@ -83,7 +72,7 @@ export function TrustSection() {
         <div className="mt-10 rounded-2xl bg-white p-6 sm:p-8 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center md:text-left">
             <h4 className="text-base font-bold text-[#0B2D5B]">
-              Part of an Established Local Adelaide Removals Operation
+              Operated by a Local Removals Business
             </h4>
             <p className="text-xs sm:text-sm text-slate-500">
               {business.operatorNotice}

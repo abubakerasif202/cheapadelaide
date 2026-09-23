@@ -13,7 +13,7 @@ export const adelaideRegions: RegionArea[] = [
     description:
       "Apartment towers, historic cottages, and commercial offices throughout the city centre and surrounding inner-ring precincts.",
     keyHubs: ["Adelaide CBD", "North Adelaide", "Norwood", "Parkside", "Mile End", "Prospect"],
-    serviceNotes: "Regular coordination with building managers, loading docks, and city council parking.",
+    serviceNotes: "Share any building access, loading dock or parking requirements when you enquire.",
   },
   {
     id: "northern-suburbs",
@@ -21,7 +21,7 @@ export const adelaideRegions: RegionArea[] = [
     description:
       "Rapidly growing residential estates, family homes, and industrial transport corridors across northern Adelaide.",
     keyHubs: ["Elizabeth Vale", "Salisbury", "Mawson Lakes", "Golden Grove", "Munno Para", "Gawler"],
-    serviceNotes: "Proximity to our 20 Prunus Ave operations base enables agile dispatch across the north.",
+    serviceNotes: "Send your pickup and delivery suburbs to discuss availability for this area.",
   },
   {
     id: "eastern-suburbs",
@@ -29,7 +29,7 @@ export const adelaideRegions: RegionArea[] = [
     description:
       "Established residential homes, tree-lined avenues, and multi-storey residences with varying driveway access.",
     keyHubs: ["Burnside", "Kensington", "Magill", "St Peters", "Unley", "Glenunga"],
-    serviceNotes: "Careful navigation of steep driveways and narrow residential streets with protective equipment.",
+    serviceNotes: "Include driveway, parking and access details in your enquiry.",
   },
   {
     id: "western-suburbs-coast",
@@ -37,7 +37,7 @@ export const adelaideRegions: RegionArea[] = [
     description:
       "Beachfront apartments, coastal homes, and port-side commercial spaces across the western metro.",
     keyHubs: ["Glenelg", "Henley Beach", "Semaphore", "West Lakes", "Findon", "Woodville"],
-    serviceNotes: "Frequent apartment moves and single-level residential relocations across coastal strips.",
+    serviceNotes: "Send your pickup and delivery suburbs to discuss availability for this area.",
   },
   {
     id: "southern-suburbs",
@@ -45,7 +45,7 @@ export const adelaideRegions: RegionArea[] = [
     description:
       "Family residences, hilly terrains, and beachside suburbs extending toward the southern hills and coastline.",
     keyHubs: ["Marion", "Morphett Vale", "Hallett Cove", "Brighton", "Blackwood", "Noarlunga"],
-    serviceNotes: "Experienced handling of sloped properties, multi-level homes, and split-level floorplans.",
+    serviceNotes: "Include any slope, stairs or access details in your enquiry.",
   },
   {
     id: "adelaide-hills-regional",
@@ -53,33 +53,25 @@ export const adelaideRegions: RegionArea[] = [
     description:
       "Country properties, acreage, and regional towns connected to Greater Adelaide by main freight highways.",
     keyHubs: ["Mount Barker", "Stirling", "Hahndorf", "Barossa Valley", "Murray Bridge", "Victor Harbor"],
-    serviceNotes: "Scheduled regional trips with dedicated medium and large truck configurations.",
+    serviceNotes: "Contact us with your route and timing to discuss availability.",
   },
 ];
 
 export const interstateCorridors = [
   {
     route: "Adelaide ↔ Melbourne",
-    typicalTime: "1 – 2 Days",
-    frequency: "Weekly runs",
-    description: "Regular direct removals and backload capacity along the Western and Dukes Highways.",
+    description: "Contact us with your pickup, delivery and timing requirements to discuss availability.",
   },
   {
     route: "Adelaide ↔ Sydney",
-    typicalTime: "2 – 3 Days",
-    frequency: "Scheduled runs",
-    description: "Transport via Sturt and Hume Highways connecting Adelaide to Greater Sydney.",
+    description: "Contact us with your pickup, delivery and timing requirements to discuss availability.",
   },
   {
     route: "Adelaide ↔ Brisbane",
-    typicalTime: "3 – 4 Days",
-    frequency: "Scheduled runs",
-    description: "East coast corridor service for residential and business relocations.",
+    description: "Contact us with your pickup, delivery and timing requirements to discuss availability.",
   },
   {
     route: "Adelaide ↔ Canberra",
-    typicalTime: "2 – 3 Days",
-    frequency: "On-demand runs",
-    description: "Direct government, corporate, and private residential relocations to the ACT.",
+    description: "Contact us with your pickup, delivery and timing requirements to discuss availability.",
   },
 ];

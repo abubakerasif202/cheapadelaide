@@ -1,7 +1,7 @@
 # Cheap Adelaide Removalist
 
 > **Affordable Service. Premium Presentation.**  
-> Official local removals website for Cheap Adelaide Removalist ([cheapadelaideremovalist.com.au](https://cheapadelaideremovalist.com.au)).
+> Official local removals website for Cheap Adelaide Removalist ([cheapadelaideremovalist.com.au](https://www.cheapadelaideremovalist.com.au)).
 
 ---
 
@@ -19,7 +19,7 @@ Cheap Adelaide Removalist is an Adelaide-focused moving service pairing value-dr
 ## 🏢 Business Source of Truth
 
 - **Brand**: Cheap Adelaide Removalist
-- **Domain**: `https://cheapadelaideremovalist.com.au`
+- **Canonical Domain**: `https://www.cheapadelaideremovalist.com.au`
 - **Primary Phone**: `0491 704 136` (`tel:+61491704136`)
 - **Secondary Phone**: `0493 092 539` (`tel:+61493092539`)
 - **Email**: `admin@hfremovalsadelaide.com.au`
@@ -160,5 +160,4 @@ cp .env.example .env.local
 
 | Variable | Description | Default |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Canonical domain URL | `https://cheapadelaideremovalist.com.au` |
 | `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Web3Forms access key for lead capture | Optional (falls back gracefully to tel/email) |

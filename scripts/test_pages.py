@@ -1,77 +1,111 @@
-import urllib.request
-import urllib.error
+"""Smoke-test the production build over HTTP. Start `npm run start` first."""
+
+from html.parser import HTMLParser
 import sys
+from xml.etree import ElementTree
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
-routes = [
-    ("/", "Affordable Adelaide Removalists"),
-    ("/services", "Our Professional Moving Services"),
-    ("/services/house-removals", "House Removals Across Adelaide"),
-    ("/services/apartment-removals", "Efficient Apartment Moves in Adelaide"),
-    ("/services/furniture-removals", "Careful Furniture Removals Adelaide"),
-    ("/services/office-removals", "Adelaide Office Relocations"),
-    ("/services/commercial-removals", "Adelaide Commercial Removals"),
-    ("/services/packing-unpacking", "Packing &amp; Unpacking in Adelaide"),
-    ("/services/interstate-removals", "Interstate Removals From Adelaide"),
-    ("/services/backloading", "Affordable Backloading Adelaide"),
-    ("/service-areas", "Removalists Across Adelaide"),
-    ("/pricing", "Straightforward Moving Rates"),
-    ("/about", "About Cheap Adelaide Removalist"),
-    ("/faq", "Frequently Asked Questions"),
-    ("/contact", "Get in Touch with Our Adelaide Team"),
-    ("/get-a-quote", "Request Your Adelaide Moving Quote"),
-    ("/privacy", "Privacy Policy"),
-    ("/terms", "Terms of Service"),
-    ("/sitemap.xml", "<urlset"),
-    ("/robots.txt", "User-agent: *"),
+BASE_URL = "http://localhost:3000"
+ROUTES = [
+    "/", "/services", "/services/house-removals",
+    "/services/apartment-removals", "/services/furniture-removals",
+    "/services/office-removals", "/services/commercial-removals",
+    "/services/packing-unpacking", "/services/interstate-removals",
+    "/services/backloading", "/service-areas", "/pricing", "/about",
+    "/faq", "/contact", "/get-a-quote", "/privacy", "/terms",
+]
+ASSETS = [
+    "/brand/logo-horizontal.png", "/brand/logo-mark.png",
+    "/brand/favicon.png", "/brand/hero-truck.webp", "/brand/og-image.jpg",
 ]
 
-assets = [
-    "/brand/logo-horizontal.png",
-    "/brand/logo-stacked.png",
-    "/brand/logo-mark.png",
-    "/brand/favicon.png",
-    "/brand/hero-truck.webp",
-    "/brand/og-image.jpg",
-]
 
-base_url = "http://localhost:3000"
-failed = 0
+class PageInspector(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.h1_count = 0
+        self.canonical = None
+        self.language = None
 
-print("Testing Application Routes:")
-for path, expected_text in routes:
-    url = f"{base_url}{path}"
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "h1":
+            self.h1_count += 1
+        elif tag == "link" and attrs.get("rel") == "canonical":
+            self.canonical = attrs.get("href")
+        elif tag == "html":
+            self.language = attrs.get("lang")
+
+
+def fetch(path):
+    request = Request(f"{BASE_URL}{path}", headers={"User-Agent": "CheapAdelaideSmokeTest/1.0"})
+    with urlopen(request, timeout=10) as response:
+        return response.status, response.headers, response.read()
+
+
+failures = 0
+print("Testing route status, landmarks and canonical host:")
+for path in ROUTES:
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "AntigravityQA/1.0"})
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            status = resp.status
-            body = resp.read().decode("utf-8", errors="ignore")
-            has_expected = (expected_text in body) or (expected_text.replace("&amp;", "&") in body) or (expected_text.lower() in body.lower())
-            if status == 200 and has_expected:
-                print(f"  [PASS] 200 OK: {path}")
-            else:
-                print(f"  [FAIL] {status} on {path} (Expected text match: {has_expected})")
-                failed += 1
-    except Exception as e:
-        print(f"  [FAIL] {path} -> {e}")
-        failed += 1
+        status, _, body = fetch(path)
+        parser = PageInspector()
+        parser.feed(body.decode("utf-8", errors="replace"))
+        valid = status == 200 and parser.h1_count == 1 and parser.language == "en-AU"
+        valid = valid and bool(parser.canonical) and "www.cheapadelaideremovalist.com.au" in parser.canonical
+        print(f"  [{'PASS' if valid else 'FAIL'}] {status} {path} (H1={parser.h1_count}, lang={parser.language}, canonical={parser.canonical})")
+        failures += not valid
+    except (HTTPError, URLError, TimeoutError) as error:
+        print(f"  [FAIL] {path}: {error}")
+        failures += 1
 
-print("\nTesting Brand Static Assets:")
-for path in assets:
-    url = f"{base_url}{path}"
+print("\nTesting sitemap and robots:")
+for path, marker in [("/sitemap.xml", "<urlset"), ("/robots.txt", "Sitemap:")]:
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "AntigravityQA/1.0"})
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            status = resp.status
-            length = len(resp.read())
-            if status == 200 and length > 100:
-                print(f"  [PASS] 200 OK: {path} ({length} bytes)")
-            else:
-                print(f"  [FAIL] {status} on {path}")
-                failed += 1
-    except Exception as e:
-        print(f"  [FAIL] {path} -> {e}")
-        failed += 1
+        status, _, body = fetch(path)
+        valid = status == 200 and marker.encode() in body
+        if path == "/sitemap.xml":
+            root = ElementTree.fromstring(body)
+            urls = [item.text for item in root.findall("{*}url/{*}loc")]
+            valid = valid and len(urls) == len(set(urls)) and all("https://www.cheapadelaideremovalist.com.au" in url for url in urls)
+            valid = valid and all(
+                f"https://www.cheapadelaideremovalist.com.au{route.rstrip('/')}" in urls
+                for route in ROUTES
+            )
+        else:
+            text = body.decode("utf-8", errors="replace")
+            valid = valid and "Disallow: /" not in text and "https://www.cheapadelaideremovalist.com.au/sitemap.xml" in text
+        print(f"  [{'PASS' if valid else 'FAIL'}] {status} {path}")
+        failures += not valid
+    except (HTTPError, URLError, TimeoutError) as error:
+        print(f"  [FAIL] {path}: {error}")
+        failures += 1
 
-print(f"\nQA Route Testing Finished. Failures: {failed}")
-if failed > 0:
-    sys.exit(1)
+print("\nTesting custom 404:")
+try:
+    fetch("/codex-smoke-test-missing-route")
+    print("  [FAIL] unknown route returned 200")
+    failures += 1
+except HTTPError as error:
+    parser = PageInspector()
+    parser.feed(error.read().decode("utf-8", errors="replace"))
+    valid = error.code == 404 and parser.h1_count == 1
+    print(f"  [{'PASS' if valid else 'FAIL'}] HTTP {error.code}, H1={parser.h1_count}")
+    failures += not valid
+except (URLError, TimeoutError) as error:
+    print(f"  [FAIL] 404 check: {error}")
+    failures += 1
+
+print("\nTesting Concept 4 brand assets:")
+for path in ASSETS:
+    try:
+        status, _, body = fetch(path)
+        valid = status == 200 and len(body) > 100
+        print(f"  [{'PASS' if valid else 'FAIL'}] {status} {path} ({len(body)} bytes)")
+        failures += not valid
+    except (HTTPError, URLError, TimeoutError) as error:
+        print(f"  [FAIL] {path}: {error}")
+        failures += 1
+
+print(f"\nSmoke test complete: {failures} failure(s)")
+sys.exit(1 if failures else 0)

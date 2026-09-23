@@ -45,12 +45,12 @@ export const navigation = {
         {
           title: "Interstate Removals",
           href: "/services/interstate-removals",
-          description: "Direct scheduled long-distance moves from Adelaide to all major cities.",
+          description: "Ask about Adelaide moves to interstate destinations.",
         },
         {
           title: "Backloading",
           href: "/services/backloading",
-          description: "Cost-effective shared truck space on scheduled regional and interstate routes.",
+          description: "Ask about shared space for regional or interstate routes.",
         },
       ],
     },

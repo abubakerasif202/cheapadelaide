@@ -37,7 +37,7 @@ export default function PricingPage() {
               Straightforward Moving Rates
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              We believe in honest, predictable rates without hidden surcharges. Our pricing is billed in transparent 30-minute intervals so you only pay for the actual moving time needed.
+              Starting rates are shown for both team options. Final pricing depends on move size, inventory, access, travel and any additional services required.
             </p>
           </div>
         </div>

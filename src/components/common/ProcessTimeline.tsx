@@ -5,28 +5,28 @@ const steps = [
     step: "01",
     title: "Request a Quote",
     description:
-      "Send through your move details online or give our Adelaide team a quick call to check vehicle availability.",
+      "Share your move details through the online form or call us directly.",
     icon: FileText,
   },
   {
     step: "02",
     title: "Tell Us About Your Move",
     description:
-      "We review your inventory, property layout (stairs, elevators, access), and recommend whether 2 or 3 movers fit best.",
+      "Include your inventory, property access, pickup and delivery locations, and any additional service requests.",
     icon: PhoneCall,
   },
   {
     step: "03",
     title: "Confirm the Plan",
     description:
-      "We lock in your arrival time window, truck configuration, and provide clear starting rates with zero ambiguity.",
+      "Discuss the move details and the available team options before confirming arrangements.",
     icon: CalendarCheck,
   },
   {
     step: "04",
     title: "Moving Day",
     description:
-      "Our uniformed team arrives on schedule, blanket-wraps your furniture, loads the truck securely, and unloads room-by-room.",
+      "The movers transport your belongings from the pickup location to the delivery address.",
     icon: Truck,
   },
 ];
@@ -40,7 +40,7 @@ export function ProcessTimeline() {
           return (
             <div
               key={item.step}
-              className="relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#FF6A00]/40 hover:shadow-md"
+              className="scroll-reveal relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#FF6A00]/40 hover:shadow-md"
             >
               <div>
                 <div className="flex items-center justify-between">

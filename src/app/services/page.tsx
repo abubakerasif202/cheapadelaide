@@ -40,7 +40,7 @@ export default function ServicesPage() {
               Our Professional Moving Services
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Every relocation has unique requirements. We provide structured, careful moving services across Greater Adelaide and interstate with clear starting rates and experienced local removalists.
+              Compare the removal services available and share your move details to discuss the right option. Starting rates are published for both team sizes.
             </p>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function ServicesPage() {
       {/* CTA */}
       <CTASection
         title="Ready to Discuss Your Move with Adelaide Locals?"
-        subtitle="Call our team on 0491 704 136 or send an online enquiry for prompt scheduling."
+        subtitle="Call 0491 704 136 during our listed hours or send an online enquiry."
       />
     </div>
   );

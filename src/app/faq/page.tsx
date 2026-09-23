@@ -89,7 +89,7 @@ export default function FAQPage() {
               Have a Specific Question About Your Move?
             </h3>
             <p className="text-sm text-slate-600 max-w-lg mx-auto">
-              Our Adelaide dispatch team is on hand 7 days a week from 7:00 am to 8:00 pm to discuss access, trucks, and bookings.
+              Call us during our listed hours to discuss access, team options and your move details.
             </p>
             <div className="pt-2 flex flex-wrap justify-center gap-4">
               <a

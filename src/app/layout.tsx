@@ -49,7 +49,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-800 font-[family-name:var(--font-body)]">
         <Header />
-        <main className="flex-1 pb-16 md:pb-0">{children}</main>
+        <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">{children}</main>
         <Footer />
         <MobileActionBar />
       </body>

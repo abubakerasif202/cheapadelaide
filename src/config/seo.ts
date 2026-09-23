@@ -37,12 +37,14 @@ export function constructMetadata({
   noIndex?: boolean;
 } = {}): Metadata {
   const pageTitle = title
-    ? `${title} | ${business.name}`
+    ? title.toLowerCase().includes(business.name.toLowerCase())
+      ? title
+      : `${title} | ${business.name}`
     : `${business.name} | Affordable Adelaide Movers`;
 
   const canonicalUrl = canonical
     ? `${business.domain}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
-    : business.domain;
+    : `${business.domain}/`;
 
   return {
     title: pageTitle,
@@ -111,11 +113,6 @@ export function generateMovingCompanySchema() {
       addressRegion: business.location.state,
       postalCode: business.location.postcode,
       addressCountry: "AU",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: -34.7577,
-      longitude: 138.6757,
     },
     openingHoursSpecification: [
       {

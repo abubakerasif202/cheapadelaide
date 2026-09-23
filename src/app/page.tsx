@@ -41,32 +41,33 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-white py-12 lg:py-20 border-b border-slate-100">
+      <section className="relative overflow-hidden bg-[#071933] py-10 text-white sm:py-14 lg:py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-30 [background-image:linear-gradient(115deg,transparent_62%,#FF6A00_62.1%,transparent_62.5%),linear-gradient(115deg,transparent_67%,#fff_67.1%,transparent_67.2%)]" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
             {/* Left Column: Hero Copy & Actions */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                <span className="h-2 w-2 rounded-full bg-[#FF6A00] animate-pulse" />
+            <div className="reveal relative z-10 space-y-5 text-center lg:col-span-7 lg:text-left lg:space-y-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-orange-200">
+                <span className="h-2 w-2 rounded-full bg-[#FF6A00]" />
                 <span>Adelaide Removalists</span>
               </div>
 
-              <h1 className="text-4xl font-extrabold tracking-tight text-[#0B2D5B] sm:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] leading-[1.1]">
+              <h1 className="reveal reveal-delay-1 text-[2.1rem] font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] leading-[1.04]">
                 Affordable Adelaide Removalists{" "}
                 <span className="text-[#FF6A00] block mt-1">
                   Without the Runaround.
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              <p className="reveal reveal-delay-2 mx-auto max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg lg:mx-0">
                 Straightforward moving services for homes, apartments, offices and furniture moves across Adelaide. Tell us what you&apos;re moving and we&apos;ll help scope the right team for the job.
               </p>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <div className="reveal reveal-delay-3 flex flex-col items-center justify-center gap-4 pt-2 sm:flex-row lg:justify-start">
                 <Link
                   href="/get-a-quote"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-7 py-4 text-base font-bold text-white shadow-xl shadow-orange-500/25 transition hover:bg-[#E63900] active:scale-[0.98]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-7 py-4 text-base font-extrabold text-[#071933] shadow-xl shadow-orange-500/25 transition hover:bg-orange-300 active:scale-[0.98]"
                 >
                   <span>Get My Free Quote</span>
                   <ArrowRight className="h-5 w-5" />
@@ -74,7 +75,7 @@ export default function HomePage() {
 
                 <a
                   href={business.contact.primaryPhoneHref}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-[#0B2D5B] bg-white px-7 py-4 text-base font-bold text-[#0B2D5B] transition hover:bg-slate-50 active:scale-[0.98]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/40 bg-white/5 px-7 py-4 text-base font-bold text-white transition hover:bg-white/10 active:scale-[0.98]"
                 >
                   <Phone className="h-5 w-5 text-[#FF6A00]" />
                   <span>Call {business.contact.primaryPhone}</span>
@@ -82,56 +83,56 @@ export default function HomePage() {
               </div>
 
               {/* Quick Pricing Badge Strip */}
-              <div className="mt-8 pt-6 border-t border-slate-200/80">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
-                  <div className="flex items-center gap-3 rounded-2xl bg-white p-3.5 border border-slate-200 shadow-sm">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-[#FF6A00] font-bold text-sm">
+              <div className="mt-7 border-t border-white/20 pt-6">
+                <div className="grid grid-cols-2 gap-2 text-left sm:gap-3">
+                  <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 p-2.5 sm:gap-3 sm:p-3.5">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#FF6A00] text-xs font-bold text-[#071933] sm:h-10 sm:w-10 sm:rounded-xl sm:text-sm">
                       2P
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-[#0B2D5B]">
+                      <div className="text-[11px] font-bold leading-tight text-white sm:text-xs">
                         2 Movers + Truck
                       </div>
-                      <div className="text-xs text-slate-600">
-                        From <strong className="text-[#FF6A00]">$79</strong> / 30 min{" "}
-                        <span className="text-slate-400">($158/hr)</span>
+                      <div className="text-[10px] leading-tight text-slate-200 sm:text-xs">
+                        From <strong className="text-orange-300">$79</strong> / 30 min{" "}
+                        <span className="text-slate-300">($158/hr)</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 rounded-2xl bg-white p-3.5 border border-slate-200 shadow-sm">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-[#FF6A00] font-bold text-sm">
+                  <div className="flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 p-2.5 sm:gap-3 sm:p-3.5">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#FF6A00] text-xs font-bold text-[#071933] sm:h-10 sm:w-10 sm:rounded-xl sm:text-sm">
                       3P
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-[#0B2D5B]">
+                      <div className="text-[11px] font-bold leading-tight text-white sm:text-xs">
                         3 Movers + Truck
                       </div>
-                      <div className="text-xs text-slate-600">
-                        From <strong className="text-[#FF6A00]">$99</strong> / 30 min{" "}
-                        <span className="text-slate-400">($198/hr)</span>
+                      <div className="text-[10px] leading-tight text-slate-200 sm:text-xs">
+                        From <strong className="text-orange-300">$99</strong> / 30 min{" "}
+                        <span className="text-slate-300">($198/hr)</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <p className="mt-2 text-[11px] text-slate-500 text-center lg:text-left">
-                  Final price depends on move scope, access, travel and additional services.
+                <p className="mt-2 text-[11px] text-slate-300 text-center lg:text-left">
+                  {business.pricing.disclaimer}
                 </p>
               </div>
             </div>
 
             {/* Right Column: Concept 4 Visual Composition */}
-            <div className="lg:col-span-5 relative">
+            <div className="reveal reveal-delay-2 relative lg:col-span-5">
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 {/* Background decorative glow */}
                 <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#0B2D5B]/10 to-[#FF6A00]/15 blur-2xl" />
 
                 {/* Branded Truck Visual Card */}
-                <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-2xl">
+                <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white shadow-2xl shadow-black/30">
                   <div className="relative aspect-[16/11] w-full bg-slate-900">
                     <Image
                       src="/brand/hero-truck.webp"
-                      alt="Cheap Adelaide Removalist - Branded Moving Truck with Adelaide Skyline"
+                        alt="Concept 4 branded removal truck on an Adelaide road"
                       fill
                       priority
                       className="object-cover"
@@ -143,25 +144,25 @@ export default function HomePage() {
                         <MapPin className="h-3.5 w-3.5 text-[#FF6A00]" />
                         Adelaide Metro & Regional SA
                       </span>
-                      <span className="rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-[10px] uppercase">
-                        Active Dispatch
+                      <span className="rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-[10px] uppercase text-[#071933]">
+                        Adelaide
                       </span>
                     </div>
                   </div>
 
                   {/* Trust Highlights Under Card */}
-                  <div className="p-5 space-y-3 bg-white">
+                  <div className="space-y-3 bg-white p-5">
                     <div className="flex items-center gap-3 text-xs text-slate-700">
                       <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0" />
-                      <span>Thick protective furniture blankets & tie-down straps</span>
+                      <span>{business.location.fullAddress}</span>
                     </div>
                     <div className="flex items-center gap-3 text-xs text-slate-700">
                       <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0" />
-                      <span>Available 7 Days a week from 7:00 am to 8:00 pm</span>
+                      <span>{business.hours}</span>
                     </div>
                     <div className="flex items-center gap-3 text-xs text-slate-700">
                       <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0" />
-                      <span>Elizabeth Vale operations depot serving all Adelaide suburbs</span>
+                      <span>Call or send a quote request to discuss your move</span>
                     </div>
                   </div>
                 </div>
@@ -183,12 +184,12 @@ export default function HomePage() {
                 Our Adelaide Removals Services
               </h2>
               <p className="mt-2 text-base text-slate-600 max-w-xl">
-                Practical, well-equipped transport solutions for residential households, commercial offices, and interstate relocations.
+                House, apartment, furniture, office, commercial, packing and interstate moving services.
               </p>
             </div>
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-[#E63900] transition"
+              className="contrast-safe-accent inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-[#A63F00] transition"
             >
               <span>Explore All 8 Services</span>
               <ArrowRight className="h-4 w-4" />
@@ -202,7 +203,7 @@ export default function HomePage() {
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className="group relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#FF6A00]/50 hover:shadow-lg"
+                  className="scroll-reveal group relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#FF6A00]/50 hover:shadow-lg"
                 >
                   <div>
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-[#FF6A00] transition group-hover:bg-[#FF6A00] group-hover:text-white">
@@ -238,7 +239,7 @@ export default function HomePage() {
               Straightforward Moving Rates
             </h2>
             <p className="mt-3 text-base text-slate-600">
-              Clear 30-minute incremental billing. Select your team size and pay only for the time and scope required for your move.
+              Compare the two starting rates and share your move details to discuss the final price.
             </p>
           </div>
 
@@ -269,7 +270,7 @@ export default function HomePage() {
               How Moving Works With Us
             </h2>
             <p className="mt-3 text-base text-slate-600">
-              A 4-step process designed to keep your moving day organised, stress-free, and punctual.
+              A clear sequence from your first enquiry through to moving day.
             </p>
           </div>
 
@@ -284,49 +285,49 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-6">
-              <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                Residential Specialists
+              <span className="inline-block rounded-full bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-orange-200">
+                Residential Moves
               </span>
               <h2 className="text-3xl font-extrabold sm:text-4xl font-[family-name:var(--font-heading)] leading-tight">
                 Homes & Apartments Moved With Real Care Across Adelaide
               </h2>
               <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
-                Whether relocating a 4-bedroom family home in the eastern foothills or a high-rise CBD apartment with strict 2-hour goods lift restrictions, our teams understand the specific requirements of residential moves.
+                Moving from a house or apartment? Share your pickup and delivery details, inventory and any building access requirements when you request a quote.
               </p>
 
               <div className="space-y-3 pt-2">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF6A00] text-white">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF6A00] text-[#071933]">
                     <Check className="h-3.5 w-3.5" />
                   </div>
                   <div>
-                    <strong className="text-white block text-sm">Elevator & Building Protocols:</strong>
+                    <strong className="text-white block text-sm">Building Access:</strong>
                     <span className="text-xs text-slate-300">
-                      We coordinate closely with building managers and protect lift interiors.
+                      Include lift bookings, stairs and loading-area details in your request.
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF6A00] text-white">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF6A00] text-[#071933]">
                     <Check className="h-3.5 w-3.5" />
                   </div>
                   <div>
-                    <strong className="text-white block text-sm">Full Blanket Wrapping:</strong>
+                    <strong className="text-white block text-sm">Move Details:</strong>
                     <span className="text-xs text-slate-300">
-                      Mattresses, solid timber tables, and modular lounges are padded before transit.
+                      List larger furniture, appliances and boxes to help describe your inventory.
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF6A00] text-white">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FF6A00] text-[#071933]">
                     <Check className="h-3.5 w-3.5" />
                   </div>
                   <div>
                     <strong className="text-white block text-sm">Flexible 2 or 3 Mover Crews:</strong>
                     <span className="text-xs text-slate-300">
-                      Match the crew size to your home volume to minimise total billable hours.
+                      Starting rates are available for both 2 and 3 movers with a truck.
                     </span>
                   </div>
                 </div>
@@ -335,7 +336,7 @@ export default function HomePage() {
               <div className="pt-4 flex flex-wrap gap-4">
                 <Link
                   href="/services/house-removals"
-                  className="rounded-xl bg-[#FF6A00] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#E63900]"
+                  className="rounded-xl bg-[#FF6A00] px-6 py-3 text-sm font-bold text-[#071933] transition hover:bg-orange-300"
                 >
                   House Removals
                 </Link>
@@ -350,27 +351,27 @@ export default function HomePage() {
 
             {/* Right side: Office & Commercial Box */}
             <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm space-y-6">
-              <span className="rounded-full bg-orange-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                Commercial Capability
+              <span className="rounded-full bg-orange-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-orange-200">
+                Office & Commercial
               </span>
               <h3 className="text-2xl font-bold text-white font-[family-name:var(--font-heading)]">
                 Office & Commercial Relocations
               </h3>
               <p className="text-sm text-slate-300 leading-relaxed">
-                Minimise downtime for your workplace. We move workstations, file storage, meeting rooms, retail fixtures, and inventory with structured labelling and punctual schedules.
+                Share the items, locations, access details and preferred timing for an office or commercial move.
               </p>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF6A00]" />
-                  <span>After-hours and weekend office transitions available</span>
+                  <span>Ask about your preferred moving date and time</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF6A00]" />
-                  <span>Systematic floor-plan delivery to designated cubicles</span>
+                  <span>Include floor, lift and loading-area information</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF6A00]" />
-                  <span>Clear tax invoices issued for company accounting</span>
+                  <span>Describe workstations, furniture and other items to move</span>
                 </li>
               </ul>
               <div className="pt-2">
@@ -401,7 +402,7 @@ export default function HomePage() {
               Removalists Across Greater Adelaide
             </h2>
             <p className="mt-3 text-base text-slate-600">
-              From our dispatch base at 20 Prunus Ave, Elizabeth Vale, our trucks operate across all metropolitan districts and regional South Australian corridors.
+              Based in Elizabeth Vale, Adelaide. Contact us with your pickup and delivery suburbs to discuss service availability.
             </p>
           </div>
 
@@ -419,7 +420,7 @@ export default function HomePage() {
                   {region.description}
                 </p>
                 <div className="mt-4 pt-3 border-t border-slate-200/80">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1">
                     Key Areas Covered:
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -469,7 +470,7 @@ export default function HomePage() {
           <div className="mt-10 text-center">
             <Link
               href="/faq"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-[#E63900] transition"
+              className="contrast-safe-accent inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-[#A63F00] transition"
             >
               <span>View All Moving Questions & Answers</span>
               <ArrowRight className="h-4 w-4" />

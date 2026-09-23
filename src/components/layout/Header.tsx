@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, ChevronDown, Menu, ArrowRight } from "lucide-react";
@@ -12,6 +12,8 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,9 +56,14 @@ export function Header() {
               className="relative"
               onMouseEnter={() => setServicesDropdownOpen(true)}
               onMouseLeave={() => setServicesDropdownOpen(false)}
+              onFocus={() => setServicesDropdownOpen(true)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setServicesDropdownOpen(false);
+              }}
             >
               <Link
                 href="/services"
+                aria-controls="desktop-services-menu"
                 className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
                 aria-expanded={servicesDropdownOpen}
               >
@@ -65,7 +72,7 @@ export function Header() {
               </Link>
 
               {servicesDropdownOpen && (
-                <div className="absolute left-0 top-full pt-2 w-80 z-50">
+                <div id="desktop-services-menu" className="absolute left-0 top-full pt-2 w-80 z-50">
                   <div className="rounded-2xl bg-white p-3 shadow-xl border border-slate-100 ring-1 ring-black/5">
                     <div className="grid grid-cols-1 gap-1">
                       {navigation.mainNav[0].children?.map((service) => (
@@ -150,7 +157,7 @@ export function Header() {
 
             <Link
               href="/get-a-quote"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#FF6A00] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-orange-500/20 transition hover:bg-[#E63900] active:scale-[0.98]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#FF6A00] px-5 py-2.5 text-sm font-bold text-[#071933] shadow-md shadow-orange-500/20 transition hover:bg-orange-300 active:scale-[0.98]"
             >
               <span>Get a Free Quote</span>
               <ArrowRight className="h-4 w-4" />
@@ -167,6 +174,7 @@ export function Header() {
               <Phone className="h-5 w-5" />
             </a>
             <button
+              ref={menuTriggerRef}
               type="button"
               onClick={() => setMobileMenuOpen(true)}
               className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50"
@@ -183,7 +191,8 @@ export function Header() {
       {/* Mobile Drawer */}
       <MobileMenu
         isOpen={mobileMenuOpen}
-        onClose={() => setMobileMenuOpen(false)}
+        onClose={closeMobileMenu}
+        triggerRef={menuTriggerRef}
       />
     </>
   );

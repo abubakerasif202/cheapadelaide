@@ -8,7 +8,7 @@ import { constructMetadata } from "@/config/seo";
 export const metadata: Metadata = constructMetadata({
   title: "Get a Free Moving Quote Adelaide | Cheap Adelaide Removalist",
   description:
-    "Request an upfront, no-obligation moving quote for Adelaide house, apartment, office, or interstate relocations. Starting from $79 / 30 min.",
+    "Request a moving quote for Adelaide house, apartment, office, furniture, or interstate relocations. Team rates start from $79 / 30 min.",
   canonical: "/get-a-quote",
 });
 
@@ -47,7 +47,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
               Request Your Adelaide Moving Quote
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Tell us what you&apos;re moving, where from, and where to. We&apos;ll calculate the scope and recommend the most cost-effective team size for your job.
+              Tell us what you&apos;re moving, where from, and where to. Include access details and any additional services you need so we can discuss your request.
             </p>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                   Direct Phone Enquiries
                 </h3>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  Call our Adelaide dispatch team directly to check truck availability or discuss specialized access.
+                  Call us during our listed hours to discuss availability or access requirements.
                 </p>
 
                 <div className="pt-2">
@@ -104,7 +104,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                 <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-700">
                   <div className="flex items-center justify-between font-bold text-[#0B2D5B]">
                     <span>2 Movers + Truck</span>
-                    <span className="text-[#FF6A00]">From $79 / 30 min</span>
+                    <span className="text-[#A63F00]">From $79 / 30 min</span>
                   </div>
                   <span className="text-[11px] text-slate-500">Hourly reference: $158/hr</span>
                 </div>
@@ -112,7 +112,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                 <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-700">
                   <div className="flex items-center justify-between font-bold text-[#0B2D5B]">
                     <span>3 Movers + Truck</span>
-                    <span className="text-[#FF6A00]">From $99 / 30 min</span>
+                    <span className="text-[#A63F00]">From $99 / 30 min</span>
                   </div>
                   <span className="text-[11px] text-slate-500">Hourly reference: $198/hr</span>
                 </div>
@@ -125,23 +125,23 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
               {/* Moving Inclusions */}
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm space-y-2.5 text-xs text-slate-600">
                 <h4 className="font-bold text-[#0B2D5B] text-sm mb-2">
-                  All Moves Include:
+                  Before You Submit:
                 </h4>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0 mt-0.5" />
-                  <span>Thick padded furniture blankets for all large items</span>
+                    <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-[#A63F00] shrink-0 mt-0.5" />
+                  <span>Include pickup and delivery suburbs</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0 mt-0.5" />
-                  <span>Heavy-duty webbing straps & internal truck tie-rails</span>
+                    <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-[#A63F00] shrink-0 mt-0.5" />
+                  <span>List the main furniture and larger items</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0 mt-0.5" />
-                  <span>Professional dollies, upright trolleys & ramps</span>
+                    <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-[#A63F00] shrink-0 mt-0.5" />
+                  <span>Note stairs, lifts, parking or other access details</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0 mt-0.5" />
-                  <span>Room-by-room unloading at your new address</span>
+                    <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-[#A63F00] shrink-0 mt-0.5" />
+                  <span>Tell us about any additional services you need</span>
                 </div>
               </div>
             </div>

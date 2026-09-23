@@ -17,10 +17,10 @@ export function Footer() {
               Ready to Book Your Adelaide Move?
             </span>
             <h3 className="mt-1 text-2xl font-bold text-white sm:text-3xl font-[family-name:var(--font-heading)]">
-              Get an Upfront, Transparent Quote Today.
+              Discuss Your Adelaide Move With Us.
             </h3>
             <p className="mt-1 text-sm text-slate-300">
-              2 Movers from $79 / 30 min • 3 Movers from $99 / 30 min • 7 Days
+              2 Movers from $79 / 30 min • 3 Movers from $99 / 30 min • Open daily
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -33,7 +33,7 @@ export function Footer() {
             </a>
             <Link
               href="/get-a-quote"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#FF6A00] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition hover:bg-[#E63900]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#FF6A00] px-6 py-3 text-sm font-bold text-[#071933] shadow-lg shadow-orange-500/20 transition hover:bg-orange-300"
             >
               <span>Get a Free Quote</span>
               <ArrowRight className="h-4 w-4" />
@@ -55,12 +55,12 @@ export function Footer() {
                   alt="Cheap Adelaide Removalist"
                   width={210}
                   height={50}
-                  className="h-10 w-auto object-contain"
+                  className="aspect-[21/5] h-10 w-auto object-contain"
                 />
               </div>
             </Link>
             <p className="text-sm text-slate-300 leading-relaxed max-w-sm">
-              {business.positioning} Straightforward moving rates, careful handling, and dependable moving crews across Adelaide and regional South Australia.
+              {business.positioning} Starting rates, contact details and listed service areas are available here for Adelaide moves.
             </p>
             <div className="rounded-xl border border-white/10 bg-white/5 p-4 text-xs text-slate-300 space-y-2">
               <div className="flex items-center gap-2 font-semibold text-white">
@@ -146,7 +146,7 @@ export function Footer() {
                   >
                     {business.contact.primaryPhone}
                   </a>
-                  <span className="block text-xs text-slate-400">Primary Dispatch</span>
+                  <span className="block text-xs text-slate-400">Primary Phone</span>
                 </div>
               </li>
               <li className="flex items-start gap-3">

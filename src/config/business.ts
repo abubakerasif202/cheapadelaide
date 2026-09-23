@@ -4,7 +4,7 @@ export const business = {
   tagline: "Adelaide Moves Further Together",
   positioning: "Affordable Adelaide removalists presented with a premium, trustworthy and modern brand.",
   corePrinciple: "AFFORDABLE SERVICE. PREMIUM PRESENTATION.",
-  domain: "https://cheapadelaideremovalist.com.au",
+  domain: "https://www.cheapadelaideremovalist.com.au",
 
   contact: {
     primaryPhone: "0491 704 136",
@@ -37,13 +37,13 @@ export const business = {
       name: "2 Movers + Truck",
       thirtyMinutes: 79,
       hourlyReference: 158,
-      description: "Ideal for 1-2 bedroom apartments, small homes, and single-item or furniture transfers.",
+      description: "A two-person moving team with a truck.",
     },
     threeMovers: {
       name: "3 Movers + Truck",
       thirtyMinutes: 99,
       hourlyReference: 198,
-      description: "Recommended for 3+ bedroom family homes, large offices, and heavier multi-storey moves.",
+      description: "A three-person moving team with a truck.",
     },
     disclaimer: "Final pricing depends on move size, inventory, access, travel and any additional services required.",
   },

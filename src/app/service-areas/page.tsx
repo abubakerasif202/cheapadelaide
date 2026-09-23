@@ -30,7 +30,7 @@ export default function ServiceAreasPage() {
               Removalists Across Adelaide
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Cheap Adelaide Removalist coordinates relocations across all metropolitan Adelaide councils, the Adelaide Hills, and regional South Australia, dispatching daily from our Elizabeth Vale operations depot.
+              We are based in Elizabeth Vale and provide removal services around Adelaide. Send your pickup and delivery suburbs to confirm whether your route can be accommodated.
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function ServiceAreasPage() {
                   {business.location.street}, {business.location.suburb} SA {business.location.postcode}
                 </h3>
                 <p className="mt-1 text-xs sm:text-sm text-slate-600">
-                  Our trucks are stationed locally with fast arterial route access to Main North Road, the Northern Expressway, and the Port River Expressway.
+                  Our listed address is {business.location.fullAddress}. Contact us with your route and timing to discuss availability.
                 </p>
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function ServiceAreasPage() {
               Adelaide Metropolitan Sectors
             </h2>
             <p className="mt-2 text-base text-slate-600">
-              We handle moves across all major suburban clusters based on your exact job requirements.
+              These locations provide a guide to areas around Adelaide. Confirm your pickup and delivery suburbs with us before making plans.
             </p>
           </div>
 
@@ -149,14 +149,6 @@ export default function ServiceAreasPage() {
                   <div className="flex items-center gap-2 text-[#0B2D5B] font-bold text-base">
                     <Route className="h-5 w-5 text-[#FF6A00]" />
                     <span>{route.route}</span>
-                  </div>
-                  <div className="mt-3 space-y-1 text-xs text-slate-600">
-                    <p>
-                      <strong className="text-slate-800">Transit:</strong> {route.typicalTime}
-                    </p>
-                    <p>
-                      <strong className="text-slate-800">Schedule:</strong> {route.frequency}
-                    </p>
                   </div>
                   <p className="mt-3 text-xs text-slate-500 leading-relaxed">
                     {route.description}

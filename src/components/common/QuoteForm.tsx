@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CheckCircle2, AlertCircle, Loader2, Send } from "lucide-react";
 import { business } from "@/config/business";
 
@@ -33,6 +33,7 @@ export function QuoteForm({
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "unconfigured">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const submittingRef = useRef(false);
 
   const moveTypeOptions = [
     "House",
@@ -78,6 +79,7 @@ export function QuoteForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submittingRef.current) return;
 
     // Basic Validation
     if (!formData.fullName.trim() || !formData.phone.trim() || !formData.movingFrom.trim() || !formData.movingTo.trim()) {
@@ -99,6 +101,7 @@ export function QuoteForm({
       return;
     }
 
+    submittingRef.current = true;
     setStatus("loading");
     setErrorMessage("");
 
@@ -117,13 +120,14 @@ export function QuoteForm({
           lead_type: "Moving Quote Request",
           submission_source: sourcePage,
           ...formData,
+          botcheck: formData.botcheck || false,
           additionalServices: formData.additionalServices.join(", ") || "None",
         }),
       });
 
       const result = await response.json();
 
-      if (result.success) {
+      if (response.ok && result.success) {
         setStatus("success");
       } else {
         setStatus("error");
@@ -132,12 +136,14 @@ export function QuoteForm({
     } catch {
       setStatus("error");
       setErrorMessage("Network error sending quote. Please call us directly on 0491 704 136.");
+    } finally {
+      submittingRef.current = false;
     }
   };
 
   if (status === "success") {
     return (
-      <div className="rounded-3xl border border-emerald-200 bg-emerald-50/60 p-8 text-center sm:p-12">
+      <div role="status" aria-live="polite" className="rounded-3xl border border-emerald-200 bg-emerald-50/60 p-8 text-center sm:p-12">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
           <CheckCircle2 className="h-10 w-10" />
         </div>
@@ -145,7 +151,7 @@ export function QuoteForm({
           Thank You, {formData.fullName}!
         </h3>
         <p className="mt-2 text-sm text-slate-700 max-w-md mx-auto leading-relaxed">
-          Your moving details have been received. Our Adelaide coordination team will review your route from <strong className="text-slate-900">{formData.movingFrom}</strong> to <strong className="text-slate-900">{formData.movingTo}</strong> and contact you promptly with your starting estimate.
+          Your online request was received for a move from <strong className="text-slate-900">{formData.movingFrom}</strong> to <strong className="text-slate-900">{formData.movingTo}</strong>. For direct contact, call us during our listed business hours.
         </p>
         <div className="mt-6 rounded-2xl bg-white p-4 text-xs text-slate-600 max-w-md mx-auto border border-emerald-100 space-y-1">
           <p className="font-semibold text-[#0B2D5B]">Need immediate confirmation?</p>
@@ -168,13 +174,13 @@ export function QuoteForm({
     <form onSubmit={handleSubmit} className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-lg">
       <div className="border-b border-slate-100 pb-5">
         <span className="rounded-full bg-orange-100 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#FF6A00]">
-          Fast Response
+          Quote Request
         </span>
         <h3 className="mt-2 text-2xl font-bold text-[#0B2D5B] sm:text-3xl font-[family-name:var(--font-heading)]">
           Tell Us About Your Move
         </h3>
         <p className="mt-1 text-xs sm:text-sm text-slate-500">
-          Fields marked with <span className="text-[#FF6A00] font-bold">*</span> are required. We never share your details.
+          Fields marked with <span className="text-[#FF6A00] font-bold">*</span> are required. Submission is handled by our online form provider; see our privacy policy for details.
         </p>
       </div>
 
@@ -182,8 +188,9 @@ export function QuoteForm({
       <input
         type="checkbox"
         name="botcheck"
-        className="hidden"
+        aria-hidden="true"
         style={{ display: "none" }}
+        value={formData.botcheck}
         checked={!!formData.botcheck}
         onChange={(e) => setFormData({ ...formData, botcheck: e.target.checked ? "bot" : "" })}
         tabIndex={-1}
@@ -228,7 +235,7 @@ export function QuoteForm({
 
         <div>
           <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-            Email Address <span className="text-slate-400 font-normal lowercase">(optional for written quote)</span>
+            Email Address <span className="text-slate-500 font-normal lowercase">(optional for written quote)</span>
           </label>
           <input
             type="email"
@@ -328,10 +335,10 @@ export function QuoteForm({
         </div>
 
         {/* Preferred Team */}
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+        <fieldset>
+          <legend className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
             Preferred Team Option
-          </label>
+          </legend>
           <div className="space-y-2">
             {teamOptions.map((opt) => (
               <label
@@ -354,13 +361,13 @@ export function QuoteForm({
               </label>
             ))}
           </div>
-        </div>
+        </fieldset>
 
         {/* Additional Services */}
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+        <fieldset>
+          <legend className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
             Additional Services Required
-          </label>
+          </legend>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
             {additionalServiceOptions.map((service) => (
               <label
@@ -381,7 +388,7 @@ export function QuoteForm({
               </label>
             ))}
           </div>
-        </div>
+        </fieldset>
 
         {/* Access Details */}
         <div>
@@ -416,23 +423,21 @@ export function QuoteForm({
 
       {/* Unconfigured Web3Forms Notice */}
       {status === "unconfigured" && (
-        <div className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-xs text-amber-900">
+        <div role="status" aria-live="polite" className="mt-6 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-xs text-amber-900">
           <div className="flex items-start gap-2.5">
             <AlertCircle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
             <div>
-              <p className="font-bold">Form Configuration Notice (Local Development):</p>
-              <p className="mt-1">
-                The quote form is ready for production. To receive live submissions, set{" "}
-                <code className="rounded bg-amber-100 px-1.5 py-0.5 font-mono text-amber-950 font-semibold">
-                  NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=your_key_here
-                </code>{" "}
-                in your local <code className="font-mono">.env.local</code> file.
-              </p>
-              <p className="mt-2 text-slate-700">
-                To request your quote right now, please call dispatch directly at{" "}
-                <a href={business.contact.primaryPhoneHref} className="font-bold text-[#FF6A00] underline">
+              <p className="font-bold">Online quote submission is not configured right now.</p>
+              <p className="mt-1 text-slate-700">
+                Please call{" "}
+                <a href={business.contact.primaryPhoneHref} className="font-bold text-[#A63F00] underline">
                   {business.contact.primaryPhone}
-                </a>.
+                </a>{" "}
+                or email{" "}
+                <a href={`mailto:${business.contact.email}`} className="font-bold text-[#A63F00] underline">
+                  {business.contact.email}
+                </a>{" "}
+                during our listed hours.
               </p>
             </div>
           </div>
@@ -441,7 +446,7 @@ export function QuoteForm({
 
       {/* Error Message */}
       {status === "error" && (
-        <div className="mt-6 flex items-start gap-2.5 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-xs text-rose-800">
+        <div role="alert" aria-live="assertive" className="mt-6 flex items-start gap-2.5 rounded-2xl border border-rose-200 bg-rose-50 p-4 text-xs text-rose-800">
           <AlertCircle className="h-4 w-4 text-rose-600 shrink-0 mt-0.5" />
           <span>{errorMessage}</span>
         </div>
@@ -462,7 +467,7 @@ export function QuoteForm({
         <button
           type="submit"
           disabled={status === "loading"}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition hover:bg-[#E63900] active:scale-[0.98] disabled:opacity-50"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-8 py-3.5 text-sm font-bold text-[#071933] shadow-lg shadow-orange-500/20 transition hover:bg-orange-300 active:scale-[0.98] disabled:opacity-50"
         >
           {status === "loading" ? (
             <>

@@ -78,7 +78,7 @@ export default function PrivacyPage() {
               4. Third-Party Transmission & Form Services
             </h2>
             <p>
-              Our online quote forms transmit form submission data securely using third-party email and notification infrastructure (such as Web3Forms) to deliver your enquiry directly to our dispatch team inbox. These providers process submission payloads strictly to relay the enquiry and do not use your information for independent purposes.
+              Quote form submissions are sent through Web3Forms, a third-party form processing service. Web3Forms says its servers are in the US East region and identifies its parent business in India; see the provider&apos;s <a href="https://docs.web3forms.com/getting-started/faq" target="_blank" rel="noreferrer" className="text-[#A63F00] underline">privacy FAQ</a>. Information may therefore be processed outside Australia and is subject to that provider&apos;s current terms as well as ours. Avoid including sensitive information that is not needed to discuss your move.
             </p>
           </div>
 

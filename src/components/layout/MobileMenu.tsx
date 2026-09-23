@@ -10,39 +10,52 @@ import { navigation } from "@/config/navigation";
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape & Lock body scroll
   useEffect(() => {
     if (!isOpen) return;
+    const trigger = triggerRef.current;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
+        trigger?.focus();
+      }
+      if (e.key === "Tab" && menuRef.current) {
+        const items = menuRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
       }
     };
 
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    menuRef.current?.querySelector<HTMLElement>('button[aria-label="Close menu"]')?.focus();
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
+      trigger?.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, triggerRef]);
 
   if (!isOpen) return null;
 
   return (
     <div
+      id="mobile-menu"
       className="fixed inset-0 z-50 flex lg:hidden"
       role="dialog"
       aria-modal="true"
-      aria-label="Navigation Menu"
+      aria-labelledby="mobile-menu-title"
     >
       {/* Backdrop */}
       <div
@@ -54,7 +67,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* Drawer */}
       <div
         ref={menuRef}
-        className="relative ml-auto flex h-full w-full max-w-sm flex-col bg-white shadow-2xl transition-transform"
+        className="relative ml-auto flex h-full w-full max-w-sm flex-col bg-white shadow-2xl animate-[drawer-in_220ms_ease-out]"
       >
         {/* Drawer Header */}
         <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
@@ -152,7 +165,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
           {/* Quick Info Box in Drawer */}
           <div className="mt-8 rounded-xl bg-slate-50 p-4 text-xs text-slate-600">
-            <p className="font-semibold text-[#0B2D5B]">{business.name}</p>
+            <p id="mobile-menu-title" className="font-semibold text-[#0B2D5B]">{business.name} navigation</p>
             <p className="mt-1">{business.hours}</p>
             <p className="mt-1">{business.location.suburb}, {business.location.state}</p>
             <p className="mt-2 text-slate-500">{business.operatorNotice}</p>
@@ -171,7 +184,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <Link
             href="/get-a-quote"
             onClick={onClose}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF6A00] py-3 text-sm font-bold text-white shadow-md shadow-orange-500/20 transition hover:bg-[#E63900]"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF6A00] py-3 text-sm font-bold text-[#071933] shadow-md shadow-orange-500/20 transition hover:bg-orange-300"
           >
             <span>Get a Free Quote</span>
             <ArrowRight className="h-4 w-4" />

@@ -1,109 +1,41 @@
 import Link from "next/link";
-import { Check, ArrowRight, Truck, Users } from "lucide-react";
-import { pricingPlans, priceDisclaimer } from "@/data/pricing";
+import { ArrowRight, Truck, Users } from "lucide-react";
+import { business } from "@/config/business";
+import { pricingPlans } from "@/data/pricing";
 
 export function PricingCards() {
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 md:grid-cols-2">
         {pricingPlans.map((plan) => {
+          const Icon = plan.id === "two-movers" ? Users : Truck;
           return (
-            <div
-              key={plan.id}
-              className={`relative flex flex-col justify-between rounded-3xl p-8 transition duration-200 ${
-                plan.popular
-                  ? "border-2 border-[#FF6A00] bg-white shadow-xl shadow-orange-500/10 ring-1 ring-[#FF6A00]/20"
-                  : "border border-slate-200 bg-white shadow-md hover:border-slate-300"
-              }`}
-            >
-              {plan.badge && (
-                <div className="absolute -top-3.5 right-6 rounded-full bg-[#FF6A00] px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-white shadow-sm">
-                  {plan.badge}
-                </div>
-              )}
-
-              <div>
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-                      plan.popular
-                        ? "bg-orange-50 text-[#FF6A00]"
-                        : "bg-slate-100 text-[#0B2D5B]"
-                    }`}
-                  >
-                    {plan.id === "two-movers" ? (
-                      <Users className="h-6 w-6" />
-                    ) : (
-                      <Truck className="h-6 w-6" />
-                    )}
-                  </div>
+            <article key={plan.id} className={`scroll-reveal interactive-card relative flex flex-col justify-between overflow-hidden rounded-[1.75rem] border p-6 sm:p-8 ${plan.popular ? "border-[#FF6A00] bg-[#071933] text-white shadow-2xl shadow-[#071933]/20" : "border-slate-200 bg-white text-[#0B2D5B] shadow-lg shadow-slate-900/5"}`}>
+              <div aria-hidden="true" className={`absolute right-0 top-0 h-32 w-32 translate-x-1/3 -translate-y-1/3 rounded-full ${plan.popular ? "bg-[#FF6A00]/15" : "bg-orange-100/70"}`} />
+              <div className="relative">
+                <div className="flex items-center gap-4">
+                  <span className={`flex h-12 w-12 items-center justify-center rounded-2xl ${plan.popular ? "bg-[#FF6A00] text-[#071933]" : "bg-orange-50 text-[#0B2D5B]"}`}><Icon aria-hidden="true" className="h-6 w-6" /></span>
                   <div>
-                    <h3 className="text-xl font-bold text-[#0B2D5B]">
-                      {plan.name}
-                    </h3>
-                    <p className="text-xs text-slate-500">{plan.suitability}</p>
+                    <h3 className="text-xl font-bold">{plan.name}</h3>
+                    <p className={`mt-1 text-sm ${plan.popular ? "text-slate-300" : "text-slate-600"}`}>{plan.suitability}</p>
                   </div>
                 </div>
-
-                {/* Rate Display */}
-                <div className="mt-6 rounded-2xl bg-slate-50 p-6 border border-slate-100">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                      From
-                    </span>
-                    <span className="text-4xl font-extrabold tracking-tight text-[#0B2D5B]">
-                      ${plan.ratePerHalfHour}
-                    </span>
-                    <span className="text-sm font-semibold text-slate-600">
-                      / 30 minutes
-                    </span>
-                  </div>
-                  <div className="mt-2 text-xs font-semibold text-[#FF6A00]">
-                    Hourly reference: ${plan.hourlyReference}/hr
-                  </div>
+                <div className={`mt-7 rounded-2xl border p-5 sm:p-6 ${plan.popular ? "border-white/15 bg-white/5" : "border-slate-200 bg-slate-50"}`}>
+                  <p className={`text-xs font-bold uppercase tracking-widest ${plan.popular ? "text-orange-200" : "text-slate-500"}`}>Starting rate</p>
+                  <p className="mt-1 flex items-baseline gap-2">
+                    <span className={`text-5xl font-extrabold tracking-tight ${plan.popular ? "text-white" : "text-[#0B2D5B]"}`}>{`$${plan.ratePerHalfHour}`}</span>
+                    <span className={plan.popular ? "text-slate-300" : "text-slate-600"}>/ 30 min</span>
+                  </p>
+                  <p className={`mt-2 text-sm font-semibold ${plan.popular ? "text-orange-200" : "text-[#0B2D5B]"}`}>${plan.hourlyReference}/hr reference</p>
                 </div>
-
-                {/* Feature List */}
-                <div className="mt-6 space-y-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    What is Included:
-                  </span>
-                  <ul className="space-y-2.5 text-sm text-slate-700">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
-                        <span className="text-xs sm:text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <p className={`mt-5 text-sm leading-relaxed ${plan.popular ? "text-slate-300" : "text-slate-600"}`}>{business.pricing.disclaimer}</p>
               </div>
-
-              {/* Card Action */}
-              <div className="mt-8 pt-6 border-t border-slate-100">
-                <Link
-                  href={`/get-a-quote?team=${plan.id}`}
-                  className={`flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold transition shadow-sm ${
-                    plan.popular
-                      ? "bg-[#FF6A00] text-white hover:bg-[#E63900] shadow-orange-500/20"
-                      : "bg-[#0B2D5B] text-white hover:bg-[#071933]"
-                  }`}
-                >
-                  <span>{plan.ctaText}</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
+              <Link href={`/get-a-quote?team=${plan.id}`} className={`relative mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold transition-colors ${plan.popular ? "bg-[#FF6A00] text-[#071933] hover:bg-orange-300" : "bg-[#0B2D5B] text-white hover:bg-[#071933]"}`}>
+                {plan.ctaText}<ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </article>
           );
         })}
-      </div>
-
-      {/* Required Qualifier Note */}
-      <div className="mx-auto mt-6 max-w-3xl text-center">
-        <p className="rounded-xl bg-slate-100 px-4 py-3 text-xs text-slate-600 border border-slate-200">
-          <span className="font-semibold text-slate-800">Please note: </span>
-          {priceDisclaimer}
-        </p>
       </div>
     </div>
   );

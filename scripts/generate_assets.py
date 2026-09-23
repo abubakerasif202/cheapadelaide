@@ -211,7 +211,7 @@ def main():
 
     og_draw.text((615, 400), 'House • Apartment • Office • Furniture • Interstate • Packing', fill='#E2E8F0', font=font_body)
     og_draw.text((615, 455), 'Phone: 0491 704 136  |  7:00 am – 8:00 pm Daily', fill='#38BDF8', font=font_contact)
-    og_draw.text((615, 510), 'https://cheapadelaideremovalist.com.au', fill='#94A3B8', font=font_url)
+    og_draw.text((615, 510), 'https://www.cheapadelaideremovalist.com.au', fill='#94A3B8', font=font_url)
 
     og.save(f'{out_dir}/og-image.jpg', quality=95)
     og.save(f'{out_dir}/og-image.png')

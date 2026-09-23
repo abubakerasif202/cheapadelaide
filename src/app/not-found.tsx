@@ -2,6 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Home, Truck, FileText } from "lucide-react";
 import { business } from "@/config/business";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (
@@ -14,7 +20,7 @@ export default function NotFound() {
           height={100}
           className="mx-auto rounded-3xl shadow-lg shadow-orange-500/10"
         />
-        <div className="absolute -bottom-2 -right-2 rounded-full bg-[#FF6A00] px-3 py-1 text-xs font-black text-white shadow-md">
+        <div className="absolute -bottom-2 -right-2 rounded-full bg-[#FF6A00] px-3 py-1 text-xs font-black text-[#071933] shadow-md">
           404
         </div>
       </div>

@@ -67,7 +67,7 @@ export default function ContactPage() {
                     </a>
                   </p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Fast phone response for urgent bookings & enquiries
+                    Call during our listed contact hours
                   </p>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function ContactPage() {
                     {business.location.suburb} {business.location.state} {business.location.postcode}
                   </p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Fleet dispatch hub serving Greater Adelaide
+                    Business address
                   </p>
                 </div>
               </div>

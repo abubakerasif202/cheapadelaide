@@ -1,5 +1,6 @@
 import os
 import re
+from pathlib import Path
 
 search_terms = [
     "lorem ipsum",
@@ -13,7 +14,7 @@ search_terms = [
     "cheapest guaranteed",
 ]
 
-src_dir = "C:/Users/abuba/cheapadelaide/src"
+src_dir = Path(__file__).resolve().parents[1] / "src"
 found = False
 
 for root, _, files in os.walk(src_dir):

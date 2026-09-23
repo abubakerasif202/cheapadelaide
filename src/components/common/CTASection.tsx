@@ -9,7 +9,7 @@ interface CTASectionProps {
 
 export function CTASection({
   title = "Tell Us What You're Moving & Get a Clear Price Estimate",
-  subtitle = "Our Adelaide removalists are ready 7 days a week. Speak directly with our dispatch team or submit your moving details online.",
+  subtitle = "Call us during our listed hours or send your move details through the online quote form.",
 }: CTASectionProps) {
   return (
     <section className="relative overflow-hidden bg-[#071933] py-16 sm:py-24 text-white">
@@ -18,7 +18,7 @@ export function CTASection({
       <div className="absolute -left-32 -bottom-32 h-96 w-96 rounded-full bg-[#0B2D5B]/40 blur-3xl" />
 
       <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#FF6A00] border border-white/10">
+        <span className="inline-block rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-orange-200">
           Adelaide Moves Further Together
         </span>
 
@@ -50,7 +50,7 @@ export function CTASection({
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/get-a-quote"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#FF6A00] px-8 py-4 text-base font-bold text-white shadow-xl shadow-orange-500/25 transition hover:bg-[#E63900] active:scale-[0.98]"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#FF6A00] px-8 py-4 text-base font-bold text-[#071933] shadow-xl shadow-orange-500/25 transition hover:bg-orange-300 active:scale-[0.98]"
           >
             <span>Request Free Moving Quote</span>
             <ArrowRight className="h-5 w-5" />
