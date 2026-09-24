@@ -44,18 +44,18 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {/* 1. HERO */}
-      <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
+      <section className="bg-slate-50 border-b border-slate-200/80 py-8 lg:py-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Breadcrumbs crumbs={[{ name: "Get a Quote", href: "/get-a-quote" }]} />
 
           <div className="mt-4 max-w-3xl">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Free Moving Estimate
             </span>
-            <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)]">
+            <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
               Request Your Adelaide Moving Quote
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+            <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed">
               Tell us what you&apos;re moving, where from, and where to. Include access details and any additional services you need so we can discuss your request.
             </p>
           </div>
@@ -63,7 +63,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
       </section>
 
       {/* 2. FORM & BENEFIT HIGHLIGHTS */}
-      <section className="py-16 sm:py-24 bg-white">
+      <section className="py-10 sm:py-12 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             {/* Form Left/Main */}
@@ -79,7 +79,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
             <div className="lg:col-span-4 space-y-6">
               {/* Direct Call Box */}
               <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 space-y-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                   Prefer to Talk?
                 </span>
                 <h3 className="text-xl font-bold text-[#0B2D5B]">
@@ -115,7 +115,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                     <span>2 Movers + Truck</span>
                     <span className="text-[#A63F00]">From $79 / 30 min</span>
                   </div>
-                  <span className="text-[11px] text-slate-500">Hourly reference: $158/hr</span>
+                  <span className="text-xs text-slate-500">Hourly reference: $158/hr</span>
                 </div>
 
                 <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-700">
@@ -123,10 +123,10 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                     <span>3 Movers + Truck</span>
                     <span className="text-[#A63F00]">From $99 / 30 min</span>
                   </div>
-                  <span className="text-[11px] text-slate-500">Hourly reference: $198/hr</span>
+                  <span className="text-xs text-slate-500">Hourly reference: $198/hr</span>
                 </div>
 
-                <p className="text-[11px] text-slate-500 leading-snug pt-1">
+                <p className="text-[13px] text-slate-500 leading-snug pt-1">
                   {business.pricing.disclaimer}
                 </p>
               </div>

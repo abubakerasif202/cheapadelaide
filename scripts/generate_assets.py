@@ -1,6 +1,25 @@
 import os
+import random
 from collections import deque
 from PIL import Image, ImageDraw, ImageFont
+
+def remove_board_caption(truck):
+    """Paint out the brand board's 'VEHICLE BRANDING (EXAMPLE)' caption.
+
+    Each affected row is refilled by interpolating the clean road pixels on
+    either side, plus light seeded grain so the patch doesn't read as flat.
+    """
+    rng = random.Random(7)
+    px = truck.load()
+    x0, x1, y0, y1 = 12, 188, 237, 257
+    for y in range(y0, y1):
+        left = [sum(px[x, y][c] for x in range(x0 - 6, x0)) / 6 for c in range(3)]
+        right = [sum(px[x, y][c] for x in range(x1, x1 + 6)) / 6 for c in range(3)]
+        for x in range(x0, x1):
+            t = (x - x0) / (x1 - x0)
+            noise = rng.gauss(0, 1.6)
+            rgb = tuple(int(max(0, min(255, left[c] * (1 - t) + right[c] * t + noise))) for c in range(3))
+            px[x, y] = rgb + px[x, y][3:]
 
 def main():
     board_path = 'C:/Users/abuba/cheapadelaide/logopack.png'
@@ -159,6 +178,7 @@ def main():
 
     # 7. HERO VEHICLE TRUCK
     truck_raw = board.crop((0, 755, 620, 1024))
+    remove_board_caption(truck_raw)
     truck_raw.save(f'{out_dir}/hero-truck.png')
     truck_raw.save(f'{out_dir}/hero-truck.webp', format='WEBP', quality=90)
 

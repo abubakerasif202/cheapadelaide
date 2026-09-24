@@ -57,7 +57,7 @@ export default function ServiceAreasPage() {
           <Breadcrumbs crumbs={[{ name: "Service Areas", href: "/service-areas" }]} />
 
           <div className="mt-4 max-w-3xl text-left">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Greater Adelaide & Beyond
             </span>
             <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)]">
@@ -79,7 +79,7 @@ export default function ServiceAreasPage() {
                 <MapPin className="h-6 w-6" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                   Depot Location
                 </span>
                 <h3 className="text-lg font-bold text-[#0B2D5B]">
@@ -106,7 +106,7 @@ export default function ServiceAreasPage() {
       <section className="py-16 sm:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12 text-left">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Regional Coverage
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
@@ -147,7 +147,7 @@ export default function ServiceAreasPage() {
                     </p>
 
                     <div className="mt-5 border-t border-slate-100 pt-4">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-2">
                         Key Suburb Hubs:
                       </span>
                       <div className="flex flex-wrap gap-1.5">
@@ -170,7 +170,7 @@ export default function ServiceAreasPage() {
                     {guideLink && (
                       <Link
                         href={guideLink.href}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF6A00] hover:text-[#E63900] transition pt-1"
+                        className="inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B] transition"
                       >
                         <BookOpen className="h-3.5 w-3.5" />
                         <span>{guideLink.label}</span>
@@ -189,7 +189,7 @@ export default function ServiceAreasPage() {
       <section className="py-16 sm:py-24 bg-slate-50 border-y border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl text-left mb-12">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Interstate Routes
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
@@ -219,14 +219,14 @@ export default function ServiceAreasPage() {
                 <div className="mt-6 pt-4 border-t border-slate-100 space-y-2">
                   <Link
                     href="/services/interstate-removals"
-                    className="flex items-center justify-between text-xs font-bold text-[#FF6A00] hover:underline"
+                    className="flex min-h-11 items-center justify-between text-xs font-bold text-[#A63F00] hover:underline"
                   >
                     <span>Interstate Details</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
                   <Link
                     href="/blog/cheap-backloading-adelaide-guide"
-                    className="flex items-center justify-between text-[11px] font-medium text-slate-500 hover:text-[#0B2D5B]"
+                    className="flex min-h-11 items-center justify-between text-xs font-medium text-slate-500 hover:text-[#0B2D5B]"
                   >
                     <span>Backloading Guide</span>
                     <ArrowRight className="h-3 w-3" />

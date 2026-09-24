@@ -296,12 +296,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {relatedServicesData.length > 0 && (
               <div className="ca-card ca-card--compact">
                 <h3 className="ca-aside-label">Adelaide Moving Services</h3>
-                <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 2 }}>
                   {relatedServicesData.map((srv) => (
                     <Link
                       key={srv.slug}
                       href={`/services/${srv.slug}`}
-                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 13, fontWeight: 700, color: "var(--navy-900)" }}
+                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 32, fontSize: 13, fontWeight: 700, color: "var(--navy-900)" }}
                     >
                       <span>{srv.title}</span>
                       <span className="ca-caption" style={{ fontWeight: 400 }}>

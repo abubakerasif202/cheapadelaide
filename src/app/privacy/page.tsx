@@ -42,7 +42,7 @@ export default function PrivacyPage() {
               1. Introduction & Operator Notice
             </h2>
             <p>
-              Cheap Adelaide Removalist respects your privacy. This Privacy Policy describes how we handle the personal information collected through our website (<Link href="/" className="text-[#FF6A00] underline [overflow-wrap:anywhere]">{business.domain}</Link>).
+              Cheap Adelaide Removalist respects your privacy. This Privacy Policy describes how we handle the personal information collected through our website (<Link href="/" className="text-[#A63F00] underline [overflow-wrap:anywhere]">{business.domain}</Link>).
             </p>
             <p className="mt-2">
               {business.operatorNotice} Our operations depot is situated at {business.location.fullAddress}.
@@ -100,8 +100,8 @@ export default function PrivacyPage() {
             </p>
             <div className="mt-3 rounded-2xl bg-slate-50 p-5 border border-slate-200 text-xs sm:text-sm text-slate-700 space-y-1">
               <p><strong>{business.name}</strong></p>
-              <p>Email: <a href={`mailto:${business.contact.email}`} className="text-[#FF6A00] underline">{business.contact.email}</a></p>
-              <p>Phone: <a href={business.contact.primaryPhoneHref} className="text-[#FF6A00] underline">{business.contact.primaryPhone}</a></p>
+              <p>Email: <a href={`mailto:${business.contact.email}`} className="text-[#A63F00] underline">{business.contact.email}</a></p>
+              <p>Phone: <a href={business.contact.primaryPhoneHref} className="text-[#A63F00] underline">{business.contact.primaryPhone}</a></p>
               <p>Address: {business.location.fullAddress}</p>
             </div>
           </div>

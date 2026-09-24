@@ -165,7 +165,7 @@ export function QuoteForm({
           Tell Us About Your Move
         </h3>
         <p className="ca-small">
-          Fields marked with <span style={{ color: "var(--orange-600)", fontWeight: 700 }}>*</span> are required. Submission is handled by our
+          Fields marked with <span style={{ color: "#C2410C", fontWeight: 700 }}>*</span> are required. Submission is handled by our
           online form provider; see our privacy policy for details.
         </p>
       </div>

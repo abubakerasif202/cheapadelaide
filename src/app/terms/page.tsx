@@ -42,7 +42,7 @@ export default function TermsPage() {
               1. Acceptance of Terms
             </h2>
             <p>
-              By accessing the website of Cheap Adelaide Removalist (<Link href="/" className="text-[#FF6A00] underline [overflow-wrap:anywhere]">{business.domain}</Link>) or submitting an online enquiry, you agree to comply with these terms.
+              By accessing the website of Cheap Adelaide Removalist (<Link href="/" className="text-[#A63F00] underline [overflow-wrap:anywhere]">{business.domain}</Link>) or submitting an online enquiry, you agree to comply with these terms.
             </p>
             <p className="mt-2">
               {business.operatorNotice}
@@ -95,8 +95,8 @@ export default function TermsPage() {
             <div className="mt-3 rounded-2xl bg-slate-50 p-5 border border-slate-200 text-xs sm:text-sm text-slate-700 space-y-1">
               <p><strong>{business.name}</strong></p>
               <p>Operations Base: {business.location.fullAddress}</p>
-              <p>Primary Phone: <a href={business.contact.primaryPhoneHref} className="text-[#FF6A00] underline">{business.contact.primaryPhone}</a></p>
-              <p>Email: <a href={`mailto:${business.contact.email}`} className="text-[#FF6A00] underline">{business.contact.email}</a></p>
+              <p>Primary Phone: <a href={business.contact.primaryPhoneHref} className="text-[#A63F00] underline">{business.contact.primaryPhone}</a></p>
+              <p>Email: <a href={`mailto:${business.contact.email}`} className="text-[#A63F00] underline">{business.contact.email}</a></p>
             </div>
           </div>
         </div>

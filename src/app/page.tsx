@@ -57,7 +57,7 @@ export default function HomePage() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FF6A00] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF6A00]" />
                 </span>
-                <span>Adelaide Specialist Removals • Open Daily</span>
+                <span>Adelaide Removals • Open Daily</span>
               </div>
 
               <h1 className="text-4xl font-extrabold tracking-tighter text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] leading-[1.03]">
@@ -83,7 +83,7 @@ export default function HomePage() {
 
                 <a
                   href={business.contact.primaryPhoneHref}
-                  className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all hover:bg-white/15 active:scale-[0.98]"
+                  className="hidden md:inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all hover:bg-white/15 active:scale-[0.98]"
                 >
                   <Phone className="h-5 w-5 text-[#FF6A00]" />
                   <span>Call {business.contact.primaryPhone}</span>
@@ -92,7 +92,7 @@ export default function HomePage() {
 
               {/* Quick Pricing Badge Strip with Diffusion Shadows */}
               <div className="pt-6 border-t border-white/10">
-                <div className="grid grid-cols-2 gap-3 max-w-lg">
+                <div className="grid grid-cols-1 gap-3 max-w-lg sm:grid-cols-2">
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF6A00] text-xs font-mono font-bold text-[#071933]">
                       2P
@@ -101,7 +101,7 @@ export default function HomePage() {
                       <div className="text-xs font-bold leading-tight text-white">
                         2 Movers + Truck
                       </div>
-                      <div className="text-[11px] leading-tight text-slate-300">
+                      <div className="text-xs leading-tight text-slate-300">
                         From <strong className="text-orange-300 font-mono">$79</strong> / 30 min{" "}
                         <span className="text-slate-400 font-mono">($158/hr)</span>
                       </div>
@@ -116,14 +116,14 @@ export default function HomePage() {
                       <div className="text-xs font-bold leading-tight text-white">
                         3 Movers + Truck
                       </div>
-                      <div className="text-[11px] leading-tight text-slate-300">
+                      <div className="text-xs leading-tight text-slate-300">
                         From <strong className="text-orange-300 font-mono">$99</strong> / 30 min{" "}
                         <span className="text-slate-400 font-mono">($198/hr)</span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <p className="mt-2.5 text-[11px] text-slate-400">
+                <p className="mt-2.5 text-[13px] text-slate-400">
                   {business.pricing.disclaimer}
                 </p>
               </div>
@@ -148,7 +148,7 @@ export default function HomePage() {
                         <MapPin className="h-3.5 w-3.5 text-[#FF6A00]" />
                         Adelaide Metro & Regional SA
                       </span>
-                      <span className="rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-[10px] uppercase text-[#071933]">
+                      <span className="rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-xs uppercase text-[#071933]">
                         Active Crew
                       </span>
                     </div>
@@ -180,7 +180,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-8">
             <div className="text-left">
-              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                 Verified Services
               </span>
               <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)] tracking-tight">
@@ -192,7 +192,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/services"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-[#E63900] transition active:scale-[0.98]"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#A63F00] hover:text-[#0B2D5B] transition active:scale-[0.98]"
             >
               <span>Explore All 8 Services</span>
               <ArrowRight className="h-4 w-4" />
@@ -212,7 +212,7 @@ export default function HomePage() {
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-[#FF6A00] transition group-hover:bg-[#FF6A00] group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-lg font-bold text-[#0B2D5B] group-hover:text-[#FF6A00] transition-colors tracking-tight">
+                    <h3 className="mt-5 text-lg font-bold text-[#0B2D5B] group-hover:text-[#A63F00] transition-colors tracking-tight">
                       {service.title}
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
@@ -236,7 +236,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-8 mb-12">
             <div className="text-left">
-              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                 Bento Architecture
               </span>
               <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)] tracking-tight">
@@ -248,7 +248,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#0B2D5B] hover:text-[#FF6A00] transition"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#0B2D5B] hover:text-[#A63F00] transition"
             >
               <span>Full Pricing Breakdown</span>
               <ArrowRight className="h-4 w-4" />
@@ -264,7 +264,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-8 mb-12">
             <div className="text-left">
-              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                 Clear Workflow
               </span>
               <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)] tracking-tight">
@@ -274,7 +274,7 @@ export default function HomePage() {
                 A predictable four-phase sequence from initial quotation through to final key handover.
               </p>
             </div>
-            <span className="text-xs font-semibold text-slate-400">
+            <span className="text-xs font-semibold text-slate-500">
               Reliable Local Moving Protocol
             </span>
           </div>
@@ -380,7 +380,7 @@ export default function HomePage() {
               <div className="pt-2">
                 <Link
                   href="/services/office-removals"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-white transition"
+                  className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-white transition"
                 >
                   <span>Explore Office & Commercial Moving</span>
                   <ArrowRight className="h-4 w-4" />
@@ -399,7 +399,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-8 mb-12">
             <div className="text-left">
-              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+              <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                 Common Questions
               </span>
               <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)] tracking-tight">
@@ -411,7 +411,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/faq"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-[#E63900] transition active:scale-[0.98]"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#A63F00] hover:text-[#0B2D5B] transition active:scale-[0.98]"
             >
               <span>View All Questions & Answers</span>
               <ArrowRight className="h-4 w-4" />

@@ -61,7 +61,7 @@ export default function ServicesPage() {
           <Breadcrumbs crumbs={[{ name: "Services", href: "/services" }]} />
 
           <div className="mt-4 max-w-3xl">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Adelaide Removals Solutions
             </span>
             <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)]">
@@ -103,7 +103,7 @@ export default function ServicesPage() {
                     </p>
 
                     <div className="mt-6 space-y-2 border-t border-slate-100 pt-5">
-                      <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                      <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                         Key Inclusions:
                       </span>
                       <ul className="space-y-2 text-xs sm:text-sm text-slate-700">
@@ -120,7 +120,7 @@ export default function ServicesPage() {
                   <div className="mt-8 pt-5 border-t border-slate-100 flex items-center justify-between">
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-bold text-[#FF6A00] hover:text-[#E63900] transition"
+                      className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#A63F00] hover:text-[#0B2D5B] transition"
                     >
                       <span>Read Full Guide & FAQs</span>
                       <ArrowRight className="h-4 w-4" />

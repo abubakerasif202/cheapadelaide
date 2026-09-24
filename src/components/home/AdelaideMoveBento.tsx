@@ -61,7 +61,7 @@ export function AdelaideMoveBento() {
         <div className="relative overflow-hidden rounded-[2.5rem] border border-slate-200/80 bg-white p-7 sm:p-10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all hover:border-[#FF6A00]/40 lg:col-span-8 flex flex-col justify-between">
           <div>
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/70 bg-orange-50/80 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/70 bg-orange-50/80 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                 <Sparkles className="h-3.5 w-3.5" />
                 <span>Move Sizer & Crew Allocator</span>
               </div>
@@ -96,7 +96,7 @@ export function AdelaideMoveBento() {
             <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-12 md:items-center">
               {/* Left Column: Live Numbers */}
               <div className="md:col-span-6 space-y-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Recommended Configuration
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0B2D5B] tracking-tight">
@@ -114,7 +114,7 @@ export function AdelaideMoveBento() {
                     <span className="text-xs sm:text-sm font-semibold text-slate-500">
                       / 30 min
                     </span>
-                    <span className="ml-2 rounded-lg bg-orange-50 px-2.5 py-1 text-xs font-bold text-[#FF6A00] font-mono">
+                    <span className="ml-2 rounded-lg bg-orange-50 px-2.5 py-1 text-xs font-bold text-[#A63F00] font-mono">
                       ${currentCalc.hourlyRef}/hr ref
                     </span>
                   </div>
@@ -167,7 +167,7 @@ export function AdelaideMoveBento() {
                 </span>
                 <span>Active Dispatch</span>
               </span>
-              <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-mono text-slate-300 border border-white/10">
+              <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-mono text-slate-300 border border-white/10">
                 Elizabeth Vale Base
               </span>
             </div>
@@ -204,7 +204,7 @@ export function AdelaideMoveBento() {
           <div className="mt-8 pt-4 border-t border-white/10">
             <Link
               href="/service-areas"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-orange-300 hover:text-white transition"
+              className="inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-orange-300 hover:text-white transition"
             >
               <span>View full metropolitan zones</span>
               <ChevronRight className="h-3.5 w-3.5" />
@@ -259,7 +259,7 @@ export function AdelaideMoveBento() {
           <div className="mt-6 pt-4 border-t border-slate-100">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0B2D5B] hover:text-[#FF6A00] transition"
+              className="inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#0B2D5B] hover:text-[#A63F00] transition"
             >
               <span>Explore our transparent pricing policy</span>
               <ArrowRight className="h-3.5 w-3.5" />
@@ -272,7 +272,7 @@ export function AdelaideMoveBento() {
           <div>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                   Adelaide Metro Navigation
                 </span>
                 <h3 className="mt-1 text-2xl font-bold text-[#0B2D5B] font-[family-name:var(--font-heading)]">
@@ -295,7 +295,7 @@ export function AdelaideMoveBento() {
                 </p>
                 <Link
                   href="/blog/moving-adelaide-cbd-apartment-guide"
-                  className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#FF6A00] hover:text-[#E63900]"
+                  className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B]"
                 >
                   <span>CBD Apartment Guide</span>
                   <ChevronRight className="h-3 w-3" />
@@ -312,7 +312,7 @@ export function AdelaideMoveBento() {
                 </p>
                 <Link
                   href="/blog/moving-to-adelaide-hills-removals-guide"
-                  className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#FF6A00] hover:text-[#E63900]"
+                  className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B]"
                 >
                   <span>Hills Moving Guide</span>
                   <ChevronRight className="h-3 w-3" />
@@ -329,7 +329,7 @@ export function AdelaideMoveBento() {
                 </p>
                 <Link
                   href="/service-areas"
-                  className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#FF6A00] hover:text-[#E63900]"
+                  className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B]"
                 >
                   <span>Northern Suburbs Coverage</span>
                   <ChevronRight className="h-3 w-3" />
@@ -346,7 +346,7 @@ export function AdelaideMoveBento() {
                 </p>
                 <Link
                   href="/services/house-removals"
-                  className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#FF6A00] hover:text-[#E63900]"
+                  className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B]"
                 >
                   <span>Residential House Moves</span>
                   <ChevronRight className="h-3 w-3" />
@@ -359,7 +359,7 @@ export function AdelaideMoveBento() {
             <span>Operated from Elizabeth Vale SA | HF Removals Adelaide shared base</span>
             <Link
               href="/blog"
-              className="inline-flex items-center gap-1.5 font-bold text-[#0B2D5B] hover:text-[#FF6A00]"
+              className="inline-flex min-h-11 items-center gap-1.5 font-bold text-[#0B2D5B] hover:text-[#A63F00]"
             >
               <span>Explore All Adelaide Guides & Insights</span>
               <ArrowRight className="h-3.5 w-3.5" />

@@ -124,7 +124,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                 <span>Adelaide Specialist Removals</span>
               </div>
               <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)] leading-tight">
@@ -158,7 +158,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     <Icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold uppercase text-slate-400">
+                    <h3 className="text-sm font-bold uppercase text-slate-500">
                       Starting Rate
                     </h3>
                     <p className="text-lg font-extrabold text-[#0B2D5B]">
@@ -183,7 +183,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </div>
 
                 <div className="pt-2">
-                  <p className="text-[11px] text-slate-500 italic">
+                  <p className="text-[13px] text-slate-500 italic">
                     {business.pricing.disclaimer}
                   </p>
                 </div>
@@ -200,7 +200,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             {/* Overview Copy */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                   Service Overview
                 </span>
                 <h2 className="mt-2 text-2xl font-bold text-[#0B2D5B] sm:text-3xl font-[family-name:var(--font-heading)]">
@@ -253,7 +253,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <ul className="space-y-2 text-xs text-amber-950">
                   {service.accessConsiderations.map((note, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <span className="text-amber-500 font-bold">•</span>
+                      <span aria-hidden="true" className="text-amber-500 font-bold">•</span>
                       <span>{note}</span>
                     </li>
                   ))}
@@ -268,7 +268,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       <section className="py-16 sm:py-20 bg-slate-50 border-y border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl text-center mb-12">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Step-by-Step
             </span>
             <h2 className="mt-3 text-2xl font-bold text-[#0B2D5B] sm:text-3xl font-[family-name:var(--font-heading)]">
@@ -286,7 +286,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between"
               >
                 <div>
-                  <span className="text-2xl font-extrabold text-[#FF6A00] font-[family-name:var(--font-heading)]">
+                  <span className="text-2xl font-extrabold text-[#A63F00] font-[family-name:var(--font-heading)]">
                     Step {step.step}
                   </span>
                   <h3 className="mt-3 text-base font-bold text-[#0B2D5B]">
@@ -306,7 +306,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       <section className="py-16 sm:py-20 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Questions Answered
             </span>
             <h2 className="mt-3 text-2xl font-bold text-[#0B2D5B] sm:text-3xl font-[family-name:var(--font-heading)]">
@@ -343,13 +343,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-[#FF6A00]">
                       <RelIcon className="h-5 w-5" />
                     </div>
-                    <h4 className="mt-4 text-base font-bold text-[#0B2D5B] group-hover:text-[#FF6A00] transition-colors">
+                    <h4 className="mt-4 text-base font-bold text-[#0B2D5B] group-hover:text-[#A63F00] transition-colors">
                       {rel.title}
                     </h4>
                     <p className="mt-1 text-xs text-slate-500 line-clamp-2">
                       {rel.shortDescription}
                     </p>
-                    <div className="mt-4 flex items-center gap-1.5 text-xs font-bold text-[#FF6A00]">
+                    <div className="mt-4 flex items-center gap-1.5 text-xs font-bold text-[#A63F00]">
                       <span>Learn more</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </div>

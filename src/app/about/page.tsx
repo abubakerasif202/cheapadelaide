@@ -31,7 +31,7 @@ export default function AboutPage() {
           <Breadcrumbs crumbs={[{ name: "About", href: "/about" }]} />
 
           <div className="mt-4 max-w-3xl">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Our Operation
             </span>
             <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)]">
@@ -50,7 +50,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                   Core Philosophy
                 </span>
                 <h2 className="mt-2 text-2xl font-bold text-[#0B2D5B] sm:text-3xl font-[family-name:var(--font-heading)]">
@@ -100,7 +100,7 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-6 space-y-4">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                     <ShieldCheck className="h-4 w-4" />
                     <span>Operational Transparency</span>
                   </div>
@@ -124,7 +124,7 @@ export default function AboutPage() {
       <section className="py-16 sm:py-24 bg-slate-50 border-y border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
               Scope of Work
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
