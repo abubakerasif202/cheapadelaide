@@ -1,32 +1,32 @@
-import { FileText, PhoneCall, CalendarCheck, Truck } from "lucide-react";
+import { FileText, PhoneCall, CalendarCheck, Truck, ArrowRight } from "lucide-react";
 
 const steps = [
   {
     step: "01",
-    title: "Request a Quote",
+    title: "Request a Fast Quote",
     description:
-      "Share your move details through the online form or call us directly.",
+      "Submit your move details online or call our dispatch desk directly to get started.",
     icon: FileText,
   },
   {
     step: "02",
-    title: "Tell Us About Your Move",
+    title: "Scope Inventory & Access",
     description:
-      "Include your inventory, property access, pickup and delivery locations, and any additional service requests.",
+      "Share your suburb locations, furniture list, and access notes (lifts, stairs, driveways).",
     icon: PhoneCall,
   },
   {
     step: "03",
-    title: "Confirm the Plan",
+    title: "Confirm Crew & Timing",
     description:
-      "Discuss the move details and the available team options before confirming arrangements.",
+      "Choose 2 Movers ($79/30 min) or 3 Movers ($99/30 min) and lock in your scheduled arrival window.",
     icon: CalendarCheck,
   },
   {
     step: "04",
-    title: "Moving Day",
+    title: "Punctual Moving Day",
     description:
-      "The movers transport your belongings from the pickup location to the delivery address.",
+      "Our crew blanket-wraps, secures, and transports your belongings to your new address.",
     icon: Truck,
   },
 ];
@@ -40,19 +40,19 @@ export function ProcessTimeline() {
           return (
             <div
               key={item.step}
-              className="scroll-reveal relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#FF6A00]/40 hover:shadow-md"
+              className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white p-7 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] transition-all duration-200 hover:-translate-y-1 hover:border-[#FF6A00]/50 hover:shadow-lg"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-extrabold text-[#FF6A00] font-[family-name:var(--font-heading)]">
+                  <span className="font-mono text-3xl font-black text-[#FF6A00] tracking-tight">
                     {item.step}
                   </span>
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-[#FF6A00]">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-50/80 text-[#FF6A00] transition group-hover:bg-[#FF6A00] group-hover:text-white">
                     <Icon className="h-5 w-5" />
                   </div>
                 </div>
 
-                <h3 className="mt-4 text-lg font-bold text-[#0B2D5B]">
+                <h3 className="mt-5 text-lg font-bold text-[#0B2D5B] tracking-tight">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600">
@@ -60,10 +60,13 @@ export function ProcessTimeline() {
                 </p>
               </div>
 
-              {/* Connecting indicator */}
-              <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-[#0B2D5B]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#FF6A00]" />
-                <span>Step {idx + 1} of 4</span>
+              <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4 text-[11px] font-bold text-slate-400">
+                <span>Phase {idx + 1} of 4</span>
+                {idx < 3 ? (
+                  <ArrowRight className="h-3.5 w-3.5 text-slate-300 transition-transform group-hover:translate-x-1 group-hover:text-[#FF6A00]" />
+                ) : (
+                  <span className="text-[#FF6A00] font-semibold">Complete</span>
+                )}
               </div>
             </div>
           );

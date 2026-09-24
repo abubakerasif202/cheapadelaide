@@ -141,6 +141,13 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
               Service Areas
             </Link>
             <Link
+              href="/blog"
+              onClick={onClose}
+              className="rounded-lg px-3 py-2.5 text-base font-medium text-slate-800 hover:bg-slate-50 hover:text-[#FF6A00]"
+            >
+              Moving Guides
+            </Link>
+            <Link
               href="/about"
               onClick={onClose}
               className="rounded-lg px-3 py-2.5 text-base font-medium text-slate-800 hover:bg-slate-50 hover:text-[#FF6A00]"

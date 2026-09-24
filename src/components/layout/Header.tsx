@@ -119,6 +119,12 @@ export function Header() {
               Service Areas
             </Link>
             <Link
+              href="/blog"
+              className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
+            >
+              Guides
+            </Link>
+            <Link
               href="/about"
               className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
             >

@@ -109,6 +109,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="text-slate-300 transition hover:text-[#FF6A00]">
+                  Moving Guides & Tips
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-slate-300 transition hover:text-[#FF6A00]">
                   About Our Operation
                 </Link>

@@ -63,6 +63,10 @@ export const navigation = {
       href: "/service-areas",
     },
     {
+      title: "Guides",
+      href: "/blog",
+    },
+    {
       title: "About",
       href: "/about",
     },
