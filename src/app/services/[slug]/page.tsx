@@ -19,7 +19,12 @@ import {
 } from "lucide-react";
 import { services } from "@/data/services";
 import { business } from "@/config/business";
-import { constructMetadata } from "@/config/seo";
+import {
+  constructMetadata,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateServiceSchema,
+} from "@/config/seo";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { FAQAccordion } from "@/components/common/FAQAccordion";
 import { QuoteForm } from "@/components/common/QuoteForm";
@@ -78,8 +83,35 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const Icon = serviceIcons[service.slug] || Truck;
   const related = services.filter((s) => service.relatedServices.includes(s.slug));
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Services", item: "/services" },
+    { name: service.title, item: `/services/${service.slug}` },
+  ]);
+
+  const serviceSchema = generateServiceSchema(service);
+
+  const faqSchema =
+    service.faqs && service.faqs.length > 0
+      ? generateFAQSchema(service.faqs)
+      : null;
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       {/* 1. HERO & BREADCRUMBS */}
       <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

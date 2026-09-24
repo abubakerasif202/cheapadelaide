@@ -3,7 +3,7 @@ import { Phone, Clock, CheckCircle2 } from "lucide-react";
 import { business } from "@/config/business";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { QuoteForm } from "@/components/common/QuoteForm";
-import { constructMetadata } from "@/config/seo";
+import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
   title: "Get a Free Moving Quote Adelaide | Cheap Adelaide Removalist",
@@ -32,8 +32,17 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
   if (serviceParam.includes("furniture")) defaultMoveType = "Furniture";
   if (serviceParam.includes("interstate")) defaultMoveType = "Interstate";
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Get a Quote", item: "/get-a-quote" },
+  ]);
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* 1. HERO */}
       <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

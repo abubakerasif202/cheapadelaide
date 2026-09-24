@@ -4,7 +4,8 @@ import { ArrowRight, Check, Home, Building2, Armchair, Briefcase, Store, Package
 import { services } from "@/data/services";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { CTASection } from "@/components/common/CTASection";
-import { constructMetadata } from "@/config/seo";
+import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
+import { business } from "@/config/business";
 
 export const metadata: Metadata = constructMetadata({
   title: "Removal Services Adelaide | Cheap Adelaide Removalist",
@@ -25,8 +26,35 @@ const serviceIcons: Record<string, React.ElementType> = {
 };
 
 export default function ServicesPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Services", item: "/services" },
+  ]);
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Adelaide Removalist Services",
+    description: "Professional removals and transport services across Greater Adelaide.",
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: service.title,
+      description: service.shortDescription,
+      url: `${business.domain}/services/${service.slug}`,
+    })),
+  };
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       {/* Page Header */}
       <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

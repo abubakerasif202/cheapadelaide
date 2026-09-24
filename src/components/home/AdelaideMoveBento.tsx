@@ -177,7 +177,7 @@ export function AdelaideMoveBento() {
             </h3>
 
             <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Operating out of 20 Prunus Ave, Elizabeth Vale SA 5112 with direct arterial transit via Main North Road and the Northern Expressway.
+              Operating out of 26 Knowles Road, Elizabeth Vale SA 5112 with direct arterial transit via Main North Road and the Northern Expressway.
             </p>
 
             {/* Travel Latency Matrix */}

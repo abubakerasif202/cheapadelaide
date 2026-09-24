@@ -42,9 +42,20 @@ export function constructMetadata({
       : `${title} | ${business.name}`
     : `${business.name} | Affordable Adelaide Movers`;
 
-  const canonicalUrl = canonical
-    ? `${business.domain}${canonical.startsWith("/") ? canonical : `/${canonical}`}`
-    : `${business.domain}/`;
+  let canonicalUrl: string = business.domain;
+  if (canonical) {
+    if (canonical.startsWith("http")) {
+      canonicalUrl = canonical;
+    } else {
+      const cleanPath =
+        canonical === "/"
+          ? ""
+          : canonical.startsWith("/")
+          ? canonical
+          : `/${canonical}`;
+      canonicalUrl = `${business.domain}${cleanPath}`;
+    }
+  }
 
   return {
     title: pageTitle,
@@ -102,10 +113,16 @@ export function generateMovingCompanySchema() {
     "@context": "https://schema.org",
     "@type": "MovingCompany",
     name: business.name,
-    image: `${business.domain}/brand/logo-primary.png`,
+    legalName: business.name,
+    description: siteConfig.description,
+    image: `${business.domain}/brand/hero-truck.webp`,
+    logo: `${business.domain}/brand/logo-horizontal.png`,
     url: business.domain,
     telephone: business.contact.primaryPhone,
     email: business.contact.email,
+    priceRange: "$$ (From $79/30 min)",
+    currenciesAccepted: "AUD",
+    paymentAccepted: "Cash, Credit Card, Direct Debit, Bank Transfer, EFTPOS",
     address: {
       "@type": "PostalAddress",
       streetAddress: business.location.street,
@@ -113,6 +130,11 @@ export function generateMovingCompanySchema() {
       addressRegion: business.location.state,
       postalCode: business.location.postcode,
       addressCountry: "AU",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: -34.7508,
+      longitude: 138.6811,
     },
     openingHoursSpecification: [
       {
@@ -130,10 +152,72 @@ export function generateMovingCompanySchema() {
         closes: "20:00",
       },
     ],
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: "Adelaide, South Australia",
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Adelaide",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "Greater Adelaide, South Australia",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "Adelaide Hills, South Australia",
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "South Australia",
+      },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Adelaide Moving Services and Rates",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "2 Movers + Truck Removals",
+            description: "2 movers with truck suitable for 1-2 bedroom apartments and unit relocations in Adelaide.",
+          },
+          price: "79",
+          priceCurrency: "AUD",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: "79",
+            priceCurrency: "AUD",
+            unitText: "per 30 minutes",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "3 Movers + Truck Removals",
+            description: "3 movers with truck suitable for 3-4 bedroom houses and larger commercial moves across Adelaide.",
+          },
+          price: "99",
+          priceCurrency: "AUD",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: "99",
+            priceCurrency: "AUD",
+            unitText: "per 30 minutes",
+          },
+        },
+      ],
     },
+  };
+}
+
+export function generateWebSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: business.name,
+    url: business.domain,
+    description: siteConfig.description,
   };
 }
 
@@ -143,14 +227,24 @@ export function generateBreadcrumbSchema(
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((crumb, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      name: crumb.name,
-      item: crumb.item.startsWith("http")
-        ? crumb.item
-        : `${business.domain}${crumb.item}`,
-    })),
+    itemListElement: items.map((crumb, idx) => {
+      let resolvedUrl = crumb.item;
+      if (!crumb.item.startsWith("http")) {
+        const clean =
+          crumb.item === "/"
+            ? ""
+            : crumb.item.startsWith("/")
+            ? crumb.item
+            : `/${crumb.item}`;
+        resolvedUrl = `${business.domain}${clean}`;
+      }
+      return {
+        "@type": "ListItem",
+        position: idx + 1,
+        name: crumb.name,
+        item: resolvedUrl,
+      };
+    }),
   };
 }
 
@@ -166,5 +260,43 @@ export function generateFAQSchema(faqs: { question: string; answer: string }[]) 
         text: faq.answer,
       },
     })),
+  };
+}
+
+export function generateServiceSchema(service: {
+  title: string;
+  shortDescription: string;
+  slug: string;
+  startingRate?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${service.title} Adelaide`,
+    serviceType: service.title,
+    description: service.shortDescription,
+    provider: {
+      "@type": "MovingCompany",
+      name: business.name,
+      url: business.domain,
+      telephone: business.contact.primaryPhone,
+    },
+    areaServed: {
+      "@type": "City",
+      name: "Adelaide",
+    },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "AUD",
+      price: "79",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: "79",
+        priceCurrency: "AUD",
+        unitText: "per 30 minutes",
+      },
+      availability: "https://schema.org/InStock",
+      url: `${business.domain}/services/${service.slug}`,
+    },
   };
 }

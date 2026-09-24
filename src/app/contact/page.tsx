@@ -1,174 +1,121 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock, ShieldCheck } from "lucide-react";
 import { business } from "@/config/business";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { QuoteForm } from "@/components/common/QuoteForm";
-import { constructMetadata } from "@/config/seo";
+import { ContactMethod, OperatorNotice } from "@/components/marketing";
+import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
   title: "Contact Us & Adelaide Depot | Cheap Adelaide Removalist",
   description:
-    "Contact Cheap Adelaide Removalist. Phone 0491 704 136, email admin@hfremovalsadelaide.com.au, operations base at 20 Prunus Ave, Elizabeth Vale SA. Open 7 days.",
+    "Contact Cheap Adelaide Removalist. Phone 0491 704 136, email admin@cheapadelaideremovalist.com.au, operations base at 26 Knowles Road, Elizabeth Vale SA. Open 7 days.",
   canonical: "/contact",
 });
 
 export default function ContactPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Contact", item: "/contact" },
+  ]);
+
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Contact Cheap Adelaide Removalist",
+    url: `${business.domain}/contact`,
+    mainEntity: {
+      "@type": "MovingCompany",
+      name: business.name,
+      telephone: business.contact.primaryPhone,
+      email: business.contact.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: business.location.street,
+        addressLocality: business.location.suburb,
+        addressRegion: business.location.state,
+        postalCode: business.location.postcode,
+        addressCountry: "AU",
+      },
+    },
+  };
+
   return (
     <div className="flex flex-col">
-      {/* 1. HERO */}
-      <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }} />
+
+      {/* Hero */}
+      <section className="ca-section" style={{ background: "var(--paper)", borderBottom: "1px solid var(--border-default)", paddingBlock: 48 }}>
+        <div className="ca-container">
           <Breadcrumbs crumbs={[{ name: "Contact", href: "/contact" }]} />
 
-          <div className="mt-4 max-w-3xl">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-              Direct Contact
-            </span>
-            <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)]">
+          <div style={{ marginTop: 16, maxWidth: 720 }}>
+            <span className="ca-badge ca-badge--accent">Direct Contact</span>
+            <h1 className="ca-h1" style={{ marginTop: 12 }}>
               Get in Touch with Our Adelaide Team
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Have an enquiry about your upcoming move? Call our dispatch line directly, send an email, or fill out the online form below.
+            <p className="ca-lead" style={{ marginTop: 16 }}>
+              Have an enquiry about your upcoming move? Call our dispatch line directly, send an email, or fill out the
+              online form below.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. CONTACT DETAILS & DEPOT INFO */}
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Contact Details & Depot Info */}
+      <section className="ca-section">
+        <div className="ca-container">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-            {/* Contact Cards Left */}
-            <div className="lg:col-span-5 space-y-6">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                  Depot & Communication
-                </span>
-                <h2 className="mt-2 text-2xl font-bold text-[#0B2D5B]">
-                  Business & Dispatch Information
-                </h2>
-              </div>
-
-              {/* Primary Phone */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-[#FF6A00]">
-                  <Phone className="h-6 w-6" />
-                </div>
+            {/* Contact Cards */}
+            <div className="lg:col-span-5" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Primary Phone (Direct Line)
-                  </span>
-                  <p className="mt-1 text-xl font-bold text-[#0B2D5B]">
-                    <a
-                      href={business.contact.primaryPhoneHref}
-                      className="hover:text-[#FF6A00] transition"
-                    >
-                      {business.contact.primaryPhone}
-                    </a>
-                  </p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    Call during our listed contact hours
-                  </p>
+                  <span className="ca-eyebrow">Depot & Communication</span>
+                  <h2 className="ca-h2" style={{ marginTop: 8 }}>
+                    Business & Dispatch Information
+                  </h2>
                 </div>
-              </div>
 
-              {/* Secondary Phone */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-[#0B2D5B]">
-                  <Phone className="h-6 w-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Secondary Phone
-                  </span>
-                  <p className="mt-1 text-xl font-bold text-[#0B2D5B]">
-                    <a
-                      href={business.contact.secondaryPhoneHref}
-                      className="hover:text-[#FF6A00] transition"
-                    >
-                      {business.contact.secondaryPhone}
-                    </a>
-                  </p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    Alternative operational line
-                  </p>
-                </div>
-              </div>
+                <ContactMethod
+                  icon="phone"
+                  label="Primary Phone (Direct Line)"
+                  value={business.contact.primaryPhone}
+                  href={business.contact.primaryPhoneHref}
+                  note="Call during our listed contact hours"
+                  emphasis
+                />
+                <ContactMethod
+                  icon="phone"
+                  label="Secondary Phone"
+                  value={business.contact.secondaryPhone}
+                  href={business.contact.secondaryPhoneHref}
+                  note="Alternative operational line"
+                  tone="navy"
+                />
+                <ContactMethod
+                  icon="mail"
+                  label="Email Address"
+                  value={business.contact.email}
+                  href={`mailto:${business.contact.email}`}
+                  note="Written quotes, commercial floor plans & invoicing"
+                />
+                <ContactMethod
+                  icon="map-pin"
+                  label="Operations Base"
+                  value={`${business.location.street}, ${business.location.suburb} ${business.location.state} ${business.location.postcode}`}
+                  note="Business address"
+                  tone="navy"
+                />
+                <ContactMethod
+                  icon="clock"
+                  label="Public Operating Hours"
+                  value={business.hours}
+                  note="Monday to Sunday including public holidays by booking"
+                />
 
-              {/* Email */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-[#FF6A00]">
-                  <Mail className="h-6 w-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Email Address
-                  </span>
-                  <p className="mt-1 text-base font-bold text-[#0B2D5B]">
-                    <a
-                      href={`mailto:${business.contact.email}`}
-                      className="hover:text-[#FF6A00] transition break-all"
-                    >
-                      {business.contact.email}
-                    </a>
-                  </p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    Written quotes, commercial floor plans & invoicing
-                  </p>
-                </div>
-              </div>
-
-              {/* Operations Base Address */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-[#0B2D5B]">
-                  <MapPin className="h-6 w-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Operations Base
-                  </span>
-                  <p className="mt-1 text-base font-bold text-[#0B2D5B]">
-                    {business.location.street}
-                    <br />
-                    {business.location.suburb} {business.location.state} {business.location.postcode}
-                  </p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    Business address
-                  </p>
-                </div>
-              </div>
-
-              {/* Operating Hours */}
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-[#FF6A00]">
-                  <Clock className="h-6 w-6" />
-                </div>
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    Public Operating Hours
-                  </span>
-                  <p className="mt-1 text-base font-bold text-[#0B2D5B]">
-                    {business.hours}
-                  </p>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    Monday to Sunday including public holidays by booking
-                  </p>
-                </div>
-              </div>
-
-              {/* Operator Notice Box */}
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-xs text-slate-600 space-y-1.5">
-                <div className="flex items-center gap-2 font-semibold text-[#0B2D5B]">
-                  <ShieldCheck className="h-4 w-4 text-[#FF6A00]" />
-                  <span>Operator Notice</span>
-                </div>
-                <p className="leading-relaxed">
-                  {business.operatorNotice}
-                </p>
-              </div>
+                <OperatorNotice title="Operator Notice" action={null} />
             </div>
 
-            {/* Quote Form Right */}
+            {/* Quote Form */}
             <div className="lg:col-span-7">
               <QuoteForm sourcePage="Contact Page" />
             </div>

@@ -4,7 +4,7 @@ import { ShieldCheck, Check } from "lucide-react";
 import { business } from "@/config/business";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { CTASection } from "@/components/common/CTASection";
-import { constructMetadata } from "@/config/seo";
+import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
   title: "About Us | Cheap Adelaide Removalist",
@@ -14,8 +14,17 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function AboutPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "About", item: "/about" },
+  ]);
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* 1. HERO */}
       <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

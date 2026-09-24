@@ -4,7 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
-import { constructMetadata, generateMovingCompanySchema } from "@/config/seo";
+import { constructMetadata, generateMovingCompanySchema, generateWebSiteSchema } from "@/config/seo";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -44,6 +44,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(generateMovingCompanySchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateWebSiteSchema()),
           }}
         />
       </head>

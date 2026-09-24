@@ -3,203 +3,153 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, ChevronDown, Menu, ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { business } from "@/config/business";
 import { navigation } from "@/config/navigation";
+import { Icon, Button } from "@/components/core";
 import { MobileMenu } from "./MobileMenu";
 
+function isCurrent(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+}
+
 export function Header() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const suppressServicesFocusRef = useRef(false);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const services = navigation.mainNav[0].children ?? [];
+
   return (
     <>
-      <header
-        className={`sticky top-0 z-40 w-full transition-all duration-200 ${
-          isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-2.5"
-            : "bg-white border-b border-slate-100 py-3.5"
-        }`}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Brand Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-3 transition-opacity hover:opacity-95"
-            aria-label="Cheap Adelaide Removalist - Home"
-          >
-            <Image
-              src="/brand/logo-horizontal.png"
-              alt="Cheap Adelaide Removalist"
-              width={240}
-              height={56}
-              className="h-10 sm:h-11 w-auto object-contain"
-              priority
-            />
+      <header className={"ca-header" + (isScrolled ? " ca-header--scrolled" : "")}>
+        <div className="ca-container ca-header__row">
+          <Link href="/" className="ca-header__logo" aria-label={`${business.name} – Home`}>
+            <Image src="/brand/logo-horizontal.png" alt={business.name} width={240} height={56} priority />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1" aria-label="Main Navigation">
-            {/* Services with Dropdown */}
+          <nav className="ca-nav" aria-label="Main navigation">
             <div
-              className="relative"
-              onMouseEnter={() => setServicesDropdownOpen(true)}
-              onMouseLeave={() => setServicesDropdownOpen(false)}
-              onFocus={() => setServicesDropdownOpen(true)}
+              className="ca-nav__item"
+              data-open={servicesOpen}
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
               onBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setServicesDropdownOpen(false);
+                if (!event.currentTarget.contains(event.relatedTarget)) setServicesOpen(false);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  suppressServicesFocusRef.current = true;
+                  event.currentTarget.querySelector<HTMLElement>(".ca-nav__link")?.focus();
+                  setServicesOpen(false);
+                  requestAnimationFrame(() => { suppressServicesFocusRef.current = false; });
+                }
               }}
             >
               <Link
                 href="/services"
-                aria-controls="desktop-services-menu"
-                className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-                aria-expanded={servicesDropdownOpen}
+                className="ca-nav__link"
+                aria-expanded={servicesOpen}
+                aria-controls="services-dropdown"
+                aria-current={isCurrent(pathname, "/services") ? "page" : undefined}
+                onFocus={() => { if (!suppressServicesFocusRef.current) setServicesOpen(true); }}
+                onKeyDown={(event) => {
+                  if (event.key === "ArrowDown") {
+                    event.preventDefault();
+                    setServicesOpen(true);
+                    requestAnimationFrame(() => document.querySelector<HTMLElement>("#services-dropdown a")?.focus());
+                  }
+                }}
               >
-                <span>Services</span>
-                <ChevronDown className="h-4 w-4 text-slate-400 transition-transform group-hover:rotate-180" />
+                Services
+                <Icon name="chevron-down" size={16} />
               </Link>
-
-              {servicesDropdownOpen && (
-                <div id="desktop-services-menu" className="absolute left-0 top-full pt-2 w-80 z-50">
-                  <div className="rounded-2xl bg-white p-3 shadow-xl border border-slate-100 ring-1 ring-black/5">
-                    <div className="grid grid-cols-1 gap-1">
-                      {navigation.mainNav[0].children?.map((service) => (
-                        <Link
-                          key={service.href}
-                          href={service.href}
-                          onClick={() => setServicesDropdownOpen(false)}
-                          className="group flex flex-col rounded-xl p-2.5 transition hover:bg-slate-50"
-                        >
-                          <span className="text-sm font-semibold text-[#0B2D5B] group-hover:text-[#FF6A00]">
-                            {service.title}
-                          </span>
-                          <span className="text-xs text-slate-500 line-clamp-1">
-                            {service.description}
-                          </span>
-                        </Link>
-                      ))}
-                      <div className="border-t border-slate-100 pt-2 mt-1">
-                        <Link
-                          href="/services"
-                          onClick={() => setServicesDropdownOpen(false)}
-                          className="flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs font-bold text-[#FF6A00] hover:bg-orange-50"
-                        >
-                          <span>View All Services</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
-                      </div>
-                    </div>
+              {servicesOpen ? (
+                <div id="services-dropdown" className="ca-dropdown">
+                  <div className="ca-dropdown__panel">
+                    {services.map((service) => (
+                      <Link
+                        key={service.href}
+                        href={service.href}
+                        onClick={() => setServicesOpen(false)}
+                        className="ca-dropdown__item"
+                      >
+                        <div>
+                          <strong>{service.title}</strong>
+                          <span>{service.description}</span>
+                        </div>
+                      </Link>
+                    ))}
+                    <Link href="/services" onClick={() => setServicesOpen(false)} className="ca-dropdown__all">
+                      <span>View All Services</span>
+                      <Icon name="arrow-right" size={14} />
+                    </Link>
                   </div>
                 </div>
-              )}
+              ) : null}
             </div>
 
-            <Link
-              href="/pricing"
-              className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="/service-areas"
-              className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-            >
-              Service Areas
-            </Link>
-            <Link
-              href="/blog"
-              className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-            >
-              Guides
-            </Link>
-            <Link
-              href="/about"
-              className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-            >
-              About
-            </Link>
-            <Link
-              href="/faq"
-              className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-            >
-              FAQ
-            </Link>
-            <Link
-              href="/contact"
-              className="px-3 py-2 text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-            >
-              Contact
-            </Link>
+            {navigation.mainNav.slice(1).map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="ca-nav__link"
+                aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+              >
+                {item.title}
+              </Link>
+            ))}
           </nav>
 
-          {/* Right Header Actions */}
-          <div className="hidden sm:flex items-center gap-4">
-            <a
-              href={business.contact.primaryPhoneHref}
-              className="flex items-center gap-2 text-sm font-bold text-[#0B2D5B] transition hover:text-[#FF6A00]"
-            >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-[#FF6A00]">
-                <Phone className="h-4 w-4" />
-              </div>
-              <div className="text-left">
-                <span className="block text-[10px] font-medium uppercase tracking-wider text-slate-500">
-                  Direct Line
-                </span>
-                <span>{business.contact.primaryPhone}</span>
-              </div>
+          <div className="ca-header__actions">
+            <a href={business.contact.primaryPhoneHref} className="ca-phone ca-phone--hide-md">
+              <span className="ca-phone__icon">
+                <Icon name="phone" size={16} />
+              </span>
+              <span>
+                <span className="ca-phone__label">Direct Line</span>
+                {business.contact.primaryPhone}
+              </span>
             </a>
-
-            <Link
-              href="/get-a-quote"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#FF6A00] px-5 py-2.5 text-sm font-bold text-[#071933] shadow-md shadow-orange-500/20 transition hover:bg-orange-300 active:scale-[0.98]"
-            >
-              <span>Get a Free Quote</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <Button href="/get-a-quote" size="sm" trailingIcon="arrow-right">
+              Get a Free Quote
+            </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="ca-header__mobile">
             <a
               href={business.contact.primaryPhoneHref}
-              className="flex sm:hidden h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-[#FF6A00]"
-              aria-label="Call Direct Line"
+              className="ca-iconbtn ca-iconbtn--accent ca-iconbtn--sm-hide"
+              aria-label={`Call ${business.contact.primaryPhone}`}
             >
-              <Phone className="h-5 w-5" />
+              <Icon name="phone" size={20} />
             </a>
             <button
               ref={menuTriggerRef}
               type="button"
-              onClick={() => setMobileMenuOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50"
+              className="ca-iconbtn"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label="Open main menu"
+              onClick={() => setMobileMenuOpen(true)}
             >
-              <Menu className="h-5 w-5" />
+              <Icon name="menu" size={20} />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      <MobileMenu
-        isOpen={mobileMenuOpen}
-        onClose={closeMobileMenu}
-        triggerRef={menuTriggerRef}
-      />
+      <MobileMenu isOpen={mobileMenuOpen} onClose={closeMobileMenu} triggerRef={menuTriggerRef} />
     </>
   );
 }

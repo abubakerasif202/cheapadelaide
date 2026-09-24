@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ChevronRight, Home } from "lucide-react";
 import { generateBreadcrumbSchema } from "@/config/seo";
+import { Icon } from "@/components/core";
 
 export interface Crumb {
   name: string;
@@ -23,38 +23,28 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
         }}
       />
 
-      <nav
-        aria-label="Breadcrumb"
-        className="flex items-center space-x-2 text-xs font-medium text-slate-500 py-3"
-      >
-        <Link
-          href="/"
-          className="flex items-center gap-1 transition hover:text-[#FF6A00]"
-        >
-          <Home className="h-3.5 w-3.5" />
-          <span>Home</span>
-        </Link>
-
-        {crumbs.map((crumb, idx) => {
-          const isLast = idx === crumbs.length - 1;
-          return (
-            <div key={crumb.href} className="flex items-center space-x-2">
-              <ChevronRight className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-              {isLast ? (
-                <span className="font-semibold text-[#0B2D5B]" aria-current="page">
-                  {crumb.name}
-                </span>
-              ) : (
-                <Link
-                  href={crumb.href}
-                  className="transition hover:text-[#FF6A00]"
-                >
-                  {crumb.name}
-                </Link>
-              )}
-            </div>
-          );
-        })}
+      <nav aria-label="Breadcrumb">
+        <ol className="ca-crumbs">
+          <li>
+            <Link href="/">
+              <Icon name="home" size={14} />
+              <span>Home</span>
+            </Link>
+          </li>
+          {crumbs.map((crumb, idx) => {
+            const isLast = idx === crumbs.length - 1;
+            return (
+              <li key={`${crumb.href}-${idx}`}>
+                <Icon name="chevron-right" size={14} className="ca-icon--sep" />
+                {isLast ? (
+                  <span aria-current="page">{crumb.name}</span>
+                ) : (
+                  <Link href={crumb.href}>{crumb.name}</Link>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </nav>
     </>
   );

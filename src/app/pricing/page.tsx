@@ -8,7 +8,11 @@ import { PricingCards } from "@/components/common/PricingCards";
 import { FAQAccordion } from "@/components/common/FAQAccordion";
 import { QuoteForm } from "@/components/common/QuoteForm";
 import { CTASection } from "@/components/common/CTASection";
-import { constructMetadata } from "@/config/seo";
+import {
+  constructMetadata,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+} from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
   title: "Removalist Pricing & Rates Adelaide | Cheap Adelaide Removalist",
@@ -22,8 +26,64 @@ export default function PricingPage() {
     (f) => f.category === "pricing" || f.id === "request-quote" || f.id === "info-needed"
   );
 
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Pricing", item: "/pricing" },
+  ]);
+
+  const faqSchema = generateFAQSchema(pricingFaqs);
+
+  const pricingSchema = {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: "Adelaide Removalist Rates & Pricing",
+    description: "Transparent starting hourly and 30-minute rates for professional moving teams in Adelaide.",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        name: "2 Movers + Truck",
+        price: "79",
+        priceCurrency: "AUD",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: "79",
+          priceCurrency: "AUD",
+          unitText: "per 30 minutes",
+        },
+        description: "2 movers with truck suitable for 1-2 bedroom apartments and unit relocations in Adelaide.",
+        url: `${business.domain}/pricing`,
+      },
+      {
+        "@type": "Offer",
+        name: "3 Movers + Truck",
+        price: "99",
+        priceCurrency: "AUD",
+        priceSpecification: {
+          "@type": "UnitPriceSpecification",
+          price: "99",
+          priceCurrency: "AUD",
+          unitText: "per 30 minutes",
+        },
+        description: "3 movers with truck suitable for 3-4 bedroom houses and larger commercial moves across Adelaide.",
+        url: `${business.domain}/pricing`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingSchema) }}
+      />
       {/* 1. HERO */}
       <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

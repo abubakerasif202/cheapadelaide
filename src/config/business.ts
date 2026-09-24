@@ -11,16 +11,16 @@ export const business = {
     primaryPhoneHref: "tel:+61491704136",
     secondaryPhone: "0493 092 539",
     secondaryPhoneHref: "tel:+61493092539",
-    email: "admin@hfremovalsadelaide.com.au",
+    email: "admin@cheapadelaideremovalist.com.au",
   },
 
   location: {
-    street: "20 Prunus Ave",
+    street: "26 Knowles Road",
     suburb: "Elizabeth Vale",
     state: "SA",
     postcode: "5112",
     country: "Australia",
-    fullAddress: "20 Prunus Ave, Elizabeth Vale SA 5112, Australia",
+    fullAddress: "26 Knowles Road, Elizabeth Vale SA 5112, Australia",
   },
 
   hours: "7:00 am – 8:00 pm daily",

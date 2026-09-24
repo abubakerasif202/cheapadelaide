@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { business } from "@/config/business";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
-import { constructMetadata } from "@/config/seo";
+import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
   title: "Privacy Policy | Cheap Adelaide Removalist",
@@ -12,8 +12,17 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function PrivacyPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", item: "/" },
+    { name: "Privacy Policy", item: "/privacy" },
+  ]);
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <section className="bg-slate-50 border-b border-slate-200/80 py-12 lg:py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Breadcrumbs crumbs={[{ name: "Privacy Policy", href: "/privacy" }]} />

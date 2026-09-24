@@ -1,25 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Clock,
-  Calendar,
-  Sparkles,
-  CheckCircle2,
-  AlertTriangle,
-  Info,
-  Phone,
-  ShieldCheck,
-  ChevronRight,
-  HelpCircle,
-} from "lucide-react";
 import { blogPosts } from "@/data/blog";
 import { services } from "@/data/services";
 import { business } from "@/config/business";
 import { constructMetadata, generateBreadcrumbSchema, generateFAQSchema } from "@/config/seo";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { CTASection } from "@/components/common/CTASection";
+import { AnswerCapsule, Callout, QuoteAside, TableOfContents } from "@/components/content";
+import { CostTable } from "@/components/pricing";
+import { FAQAccordion } from "@/components/common/FAQAccordion";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -31,9 +21,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
 
@@ -52,6 +40,14 @@ export async function generateMetadata({
   });
 }
 
+function slugifyQuestion(question: string, index: number): string {
+  const base = question
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+  return base ? `${base}-${index}` : `faq-${index}`;
+}
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
@@ -60,17 +56,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  // Related articles data
-  const relatedArticlesData = blogPosts.filter((p) =>
-    post.relatedArticles.includes(p.slug)
-  );
+  const relatedArticlesData = blogPosts.filter((p) => post.relatedArticles.includes(p.slug));
+  const relatedServicesData = services.filter((s) => post.relatedServices.includes(s.slug));
 
-  // Related services data
-  const relatedServicesData = services.filter((s) =>
-    post.relatedServices.includes(s.slug)
-  );
+  const faqItems = post.faqs.map((faq, idx) => ({
+    id: slugifyQuestion(faq.question, idx),
+    question: faq.question,
+    answer: faq.answer,
+  }));
 
-  // JSON-LD Article Schema
+  const tocItems = post.sections.map((section) => ({ id: section.h2Id, label: section.h2 }));
+
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -105,64 +101,39 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     { name: post.title, item: `/blog/${post.slug}` },
   ]);
 
-  const faqSchema =
-    post.faqs.length > 0 ? generateFAQSchema(post.faqs) : null;
+  const faqSchema = post.faqs.length > 0 ? generateFAQSchema(post.faqs) : null;
 
   return (
     <div className="flex flex-col bg-white">
       {/* Schemas */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }} />
+      {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
 
       {/* Header & Breadcrumbs */}
-      <section className="bg-slate-50 border-b border-slate-200/80 py-10 lg:py-14">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="ca-pagehero">
+        <div className="ca-container">
           <Breadcrumbs
             crumbs={[
               { name: "Moving Guides", href: "/blog" },
-              { name: post.category, href: "/blog" },
               { name: post.title, href: `/blog/${post.slug}` },
             ]}
           />
 
-          <div className="mt-6 max-w-4xl">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                {post.category}
-              </span>
-              {post.isPillar && (
-                <span className="rounded-full bg-[#0B2D5B] px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
-                  Pillar Master Guide
-                </span>
-              )}
-              <span className="flex items-center gap-1 text-xs text-slate-500">
-                <Clock className="h-3.5 w-3.5" />
-                <span>{post.readTime}</span>
-              </span>
-              <span className="flex items-center gap-1 text-xs text-slate-500">
-                <Calendar className="h-3.5 w-3.5" />
-                <span>Published Sept 2026</span>
-              </span>
+          <div style={{ marginTop: 16, maxWidth: 880 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12 }}>
+              <span className="ca-badge ca-badge--accent">{post.category}</span>
+              {post.isPillar && <span className="ca-badge ca-badge--navy">Pillar Master Guide</span>}
+              <span className="ca-caption">{post.readTime}</span>
+              <span className="ca-caption">Published Sept 2026</span>
             </div>
 
             {/* Exactly ONE H1 tag on the page */}
-            <h1 className="mt-4 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)] leading-tight">
+            <h1 className="ca-h1" style={{ marginTop: 16 }}>
               {post.title}
             </h1>
 
-            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl">
+            <p className="ca-lead" style={{ marginTop: 16, maxWidth: 720 }}>
               {post.summary}
             </p>
           </div>
@@ -170,313 +141,149 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </section>
 
       {/* Main Content & Sidebar Layout */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* Main Article Body (8 cols) */}
-          <article className="lg:col-span-8">
+      <div className="ca-container" style={{ paddingBlock: 64 }}>
+        <div className="ca-article">
+          {/* Main Article Body */}
+          <article className="ca-prose">
             {/* AEO Direct Answer Capsule (Target for AI Engine Snippets) */}
             {post.aeoDirectAnswer && (
-              <div className="mb-10 rounded-2xl border-2 border-orange-200 bg-orange-50/60 p-6 sm:p-8">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                  <Sparkles className="h-4 w-4" />
-                  <span>AI Direct Answer & Quick Summary</span>
-                </div>
-                <h2 className="mt-2 text-xl font-bold text-[#0B2D5B]">
-                  {post.aeoDirectAnswer.question}
-                </h2>
-                <p className="mt-3 text-sm sm:text-base text-slate-800 leading-relaxed font-medium">
-                  {post.aeoDirectAnswer.answer}
-                </p>
-
-                {post.aeoDirectAnswer.keyTakeaways && (
-                  <div className="mt-5 border-t border-orange-200/80 pt-4">
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-700">
-                      Key Takeaways:
-                    </span>
-                    <ul className="mt-2.5 space-y-2">
-                      {post.aeoDirectAnswer.keyTakeaways.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                          <CheckCircle2 className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+              <AnswerCapsule
+                question={post.aeoDirectAnswer.question}
+                answer={post.aeoDirectAnswer.answer}
+                takeaways={post.aeoDirectAnswer.keyTakeaways}
+              />
             )}
 
             {/* Article Sections */}
-            <div className="space-y-12">
-              {post.sections.map((section) => (
-                <section key={section.h2Id} id={section.h2Id} className="scroll-mt-24">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#0B2D5B] font-[family-name:var(--font-heading)]">
-                    {section.h2}
-                  </h2>
+            {post.sections.map((section) => (
+              <section key={section.h2Id} id={section.h2Id}>
+                <h2 className="ca-h2">{section.h2}</h2>
 
-                  {section.lead && (
-                    <p className="mt-3 text-base sm:text-lg font-medium text-slate-800 leading-relaxed">
-                      {section.lead}
-                    </p>
-                  )}
+                {section.lead && <p className="ca-prose__lead">{section.lead}</p>}
 
-                  <div className="mt-4 space-y-4 text-sm sm:text-base text-slate-700 leading-relaxed">
-                    {section.paragraphs.map((p, pIdx) => (
-                      <p key={pIdx}>{p}</p>
+                {section.paragraphs.map((p, pIdx) => (
+                  <p key={pIdx}>{p}</p>
+                ))}
+
+                {section.bullets && (
+                  <ul className="ca-dotlist" style={{ marginTop: 4 }}>
+                    {section.bullets.map((bullet, bIdx) => (
+                      <li key={bIdx}>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+
+                {section.table && (
+                  <CostTable headers={section.table.headers} rows={section.table.rows} caption={section.table.caption} />
+                )}
+
+                {section.callout && (
+                  <Callout type={section.callout.type} title={section.callout.title}>
+                    {section.callout.text}
+                  </Callout>
+                )}
+
+                {section.subsections && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                    {section.subsections.map((sub, sIdx) => (
+                      <div key={sIdx} className="ca-card ca-card--flat" style={{ gap: 12 }}>
+                        <h3 className="ca-h3" style={{ fontSize: 20 }}>
+                          {sub.h3}
+                        </h3>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                          {sub.paragraphs.map((subP, spIdx) => (
+                            <p key={spIdx} className="ca-small">
+                              {subP}
+                            </p>
+                          ))}
+                        </div>
+                        {sub.bullets && (
+                          <ul className="ca-dotlist">
+                            {sub.bullets.map((b, bIdx) => (
+                              <li key={bIdx} className="ca-small">
+                                {b}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     ))}
                   </div>
-
-                  {section.bullets && (
-                    <ul className="mt-4 space-y-2.5 text-sm sm:text-base text-slate-700">
-                      {section.bullets.map((bullet, bIdx) => (
-                        <li key={bIdx} className="flex items-start gap-2.5">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF6A00]" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {/* Responsive Table */}
-                  {section.table && (
-                    <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left text-xs sm:text-sm">
-                          <thead className="bg-[#0B2D5B] text-white font-semibold">
-                            <tr>
-                              {section.table.headers.map((h, hIdx) => (
-                                <th key={hIdx} className="px-4 py-3 sm:px-6 sm:py-3.5 whitespace-nowrap">
-                                  {h}
-                                </th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y divide-slate-100 bg-white">
-                            {section.table.rows.map((row, rIdx) => (
-                              <tr key={rIdx} className={rIdx % 2 === 0 ? "bg-white" : "bg-slate-50/60"}>
-                                {row.map((cell, cIdx) => (
-                                  <td key={cIdx} className="px-4 py-3 sm:px-6 sm:py-3.5 text-slate-700">
-                                    {cell}
-                                  </td>
-                                ))}
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                      {section.table.caption && (
-                        <div className="bg-slate-50 px-4 py-2 text-xs text-slate-500 italic border-t border-slate-100">
-                          {section.table.caption}
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Callout Box */}
-                  {section.callout && (
-                    <div
-                      className={`mt-6 rounded-2xl p-5 border ${
-                        section.callout.type === "tip"
-                          ? "bg-emerald-50/70 border-emerald-200 text-emerald-950"
-                          : section.callout.type === "warning"
-                          ? "bg-amber-50/70 border-amber-200 text-amber-950"
-                          : "bg-blue-50/70 border-blue-200 text-blue-950"
-                      }`}
-                    >
-                      <div className="flex items-center gap-2 font-bold text-sm">
-                        {section.callout.type === "tip" && <CheckCircle2 className="h-4 w-4 text-emerald-600" />}
-                        {section.callout.type === "warning" && <AlertTriangle className="h-4 w-4 text-amber-600" />}
-                        {section.callout.type === "info" && <Info className="h-4 w-4 text-blue-600" />}
-                        <span>{section.callout.title}</span>
-                      </div>
-                      <p className="mt-2 text-xs sm:text-sm leading-relaxed">
-                        {section.callout.text}
-                      </p>
-                    </div>
-                  )}
-
-                  {/* Subsections (H3) */}
-                  {section.subsections && (
-                    <div className="mt-8 space-y-6">
-                      {section.subsections.map((sub, sIdx) => (
-                        <div key={sIdx} className="rounded-2xl bg-slate-50 p-6 border border-slate-100">
-                          <h3 className="text-lg sm:text-xl font-bold text-[#0B2D5B]">
-                            {sub.h3}
-                          </h3>
-                          <div className="mt-2 space-y-3 text-sm text-slate-700">
-                            {sub.paragraphs.map((subP, spIdx) => (
-                              <p key={spIdx}>{subP}</p>
-                            ))}
-                          </div>
-                          {sub.bullets && (
-                            <ul className="mt-3 space-y-2 text-xs sm:text-sm text-slate-700">
-                              {sub.bullets.map((b, bIdx) => (
-                                <li key={bIdx} className="flex items-start gap-2">
-                                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF6A00]" />
-                                  <span>{b}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </section>
-              ))}
-            </div>
+                )}
+              </section>
+            ))}
 
             {/* In-Article FAQs */}
-            {post.faqs.length > 0 && (
-              <section className="mt-14 pt-10 border-t border-slate-200">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                  <HelpCircle className="h-4 w-4" />
-                  <span>Frequently Asked Questions</span>
-                </div>
-                <h2 className="mt-2 text-2xl font-bold text-[#0B2D5B]">
+            {faqItems.length > 0 && (
+              <section>
+                <span className="ca-eyebrow ca-eyebrow--rule">Frequently Asked Questions</span>
+                <h2 className="ca-h2" style={{ marginTop: 8 }}>
                   Common Questions About This Guide
                 </h2>
-
-                <div className="mt-6 space-y-4">
-                  {post.faqs.map((faq, idx) => (
-                    <div
-                      key={idx}
-                      className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-sm"
-                    >
-                      <h3 className="text-base sm:text-lg font-bold text-[#0B2D5B]">
-                        {faq.question}
-                      </h3>
-                      <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  ))}
+                <div style={{ marginTop: 16 }}>
+                  <FAQAccordion items={faqItems} />
                 </div>
               </section>
             )}
 
             {/* Operational Truth & Transparency Box */}
-            <div className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0B2D5B] text-white">
-                  <ShieldCheck className="h-5 w-5 text-[#FF6A00]" />
-                </div>
+            <div className="ca-notice">
+              <div className="ca-notice__main">
+                <span className="ca-icon-tile ca-icon-tile--navy" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+                  </svg>
+                </span>
                 <div>
-                  <h4 className="text-sm font-bold text-[#0B2D5B]">
+                  <h4 className="ca-h4" style={{ fontSize: 16 }}>
                     Cheap Adelaide Removalist Operational Standards
                   </h4>
-                  <p className="text-xs text-slate-500">
+                  <p className="ca-caption">
                     {business.location.fullAddress} • Open 7 Days: 7:00 am – 8:00 pm
                   </p>
                 </div>
               </div>
-              <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                {business.operatorNotice} All rate quotes are supplied with complete clarity. Starting rates begin from $79 per 30 minutes ($158/hr) for 2 movers and a truck, and $99 per 30 minutes ($198/hr) for 3 movers and a truck. Final pricing depends on move size, inventory, access, travel and any additional services required.
+              <p className="ca-small" style={{ color: "var(--text-muted)" }}>
+                {business.operatorNotice} All rate quotes are supplied with complete clarity. Starting rates begin from $79
+                per 30 minutes ($158/hr) for 2 movers and a truck, and $99 per 30 minutes ($198/hr) for 3 movers and a
+                truck. Final pricing depends on move size, inventory, access, travel and any additional services
+                required.
               </p>
             </div>
           </article>
 
-          {/* Sticky Sidebar (4 cols) */}
-          <aside className="lg:col-span-4 space-y-8">
-            {/* Quick Action Card */}
-            <div className="rounded-[2rem] border border-white/10 bg-[#0B2D5B] p-7 text-white shadow-[0_20px_40px_-15px_rgba(11,45,91,0.25)]">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                Instant Moving Estimate
-              </span>
-              <h3 className="mt-2 text-xl font-bold font-[family-name:var(--font-heading)] tracking-tight">
-                Book Adelaide Movers Today
-              </h3>
-              <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Transparent 30-minute rates with zero hidden stair surcharges. Share your move details to discuss an estimate.
-              </p>
+          {/* Sidebar */}
+          <aside className="ca-aside ca-aside--sticky">
+            <QuoteAside />
 
-              <div className="mt-5 space-y-3">
-                <div className="rounded-xl bg-white/10 p-3 text-xs border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-                  <div className="font-semibold text-white">2 Movers + Truck:</div>
-                  <div className="text-slate-300 font-mono">From $79 / 30 min ($158/hr)</div>
-                </div>
-                <div className="rounded-xl bg-white/10 p-3 text-xs border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-                  <div className="font-semibold text-white">3 Movers + Truck:</div>
-                  <div className="text-slate-300 font-mono">From $99 / 30 min ($198/hr)</div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-col gap-2.5">
-                <Link
-                  href="/get-a-quote"
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-4 py-3.5 text-xs sm:text-sm font-bold text-[#071933] shadow-md transition-all hover:bg-orange-300 active:scale-[0.98]"
-                >
-                  <span>Request a Free Quote</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <a
-                  href={business.contact.primaryPhoneHref}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3.5 text-xs sm:text-sm font-bold text-white transition-all hover:bg-white/20 active:scale-[0.98]"
-                >
-                  <Phone className="h-4 w-4 text-[#FF6A00]" />
-                  <span>Call {business.contact.primaryPhone}</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Table of Contents */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-[#0B2D5B]">
-                In This Guide
-              </h3>
-              <nav className="mt-4 flex flex-col space-y-2">
-                {post.sections.map((section) => (
-                  <a
-                    key={section.h2Id}
-                    href={`#${section.h2Id}`}
-                    className="flex items-center justify-between text-xs sm:text-sm text-slate-600 transition hover:text-[#FF6A00] py-1 border-b border-slate-50"
-                  >
-                    <span className="line-clamp-1">{section.h2}</span>
-                    <ChevronRight className="h-3 w-3 shrink-0 text-slate-400" />
-                  </a>
-                ))}
-              </nav>
-            </div>
+            {tocItems.length > 0 && <TableOfContents items={tocItems} />}
 
             {/* Pillar Connection (If not currently on pillar) */}
             {!post.isPillar && (
-              <div className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF6A00]">
-                  Core Topic Guide
-                </span>
-                <h4 className="mt-1 text-sm font-bold text-[#0B2D5B]">
+              <div className="ca-card ca-card--compact" style={{ borderColor: "var(--border-accent-soft)", background: "var(--orange-50)" }}>
+                <span className="ca-eyebrow">Core Topic Guide</span>
+                <h4 className="ca-h4" style={{ fontSize: 14, marginTop: 4 }}>
                   The Complete Guide to Cheap Removalists & Moving House in Adelaide
                 </h4>
-                <p className="mt-1.5 text-xs text-slate-600 leading-relaxed">
-                  Explore our pillar resource covering moving costs, team configurations, and council access across Greater Adelaide.
+                <p className="ca-caption" style={{ marginTop: 6 }}>
+                  Explore our pillar resource covering moving costs, team configurations, and council access across
+                  Greater Adelaide.
                 </p>
-                <Link
-                  href="/blog/cheap-removalists-adelaide-guide"
-                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#FF6A00] hover:text-[#E63900]"
-                >
-                  <span>Read Master Guide</span>
-                  <ArrowRight className="h-3 w-3" />
+                <Link href="/blog/cheap-removalists-adelaide-guide" className="ca-btn ca-btn--link" style={{ marginTop: 12 }}>
+                  Read Master Guide
                 </Link>
               </div>
             )}
 
             {/* Related Guides Cluster */}
             {relatedArticlesData.length > 0 && (
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#0B2D5B]">
-                  Related Moving Guides
-                </h3>
-                <div className="mt-4 space-y-3.5">
+              <div className="ca-card ca-card--compact">
+                <h3 className="ca-aside-label">Related Moving Guides</h3>
+                <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 14 }}>
                   {relatedArticlesData.map((related) => (
-                    <Link
-                      key={related.slug}
-                      href={`/blog/${related.slug}`}
-                      className="group block rounded-xl border border-slate-100 p-3 transition hover:border-[#FF6A00]/50 hover:bg-slate-50"
-                    >
-                      <span className="text-xs font-semibold text-slate-400">
-                        {related.category}
-                      </span>
-                      <h4 className="mt-0.5 text-xs sm:text-sm font-bold text-[#0B2D5B] group-hover:text-[#FF6A00] line-clamp-2">
+                    <Link key={related.slug} href={`/blog/${related.slug}`} className="ca-group" style={{ display: "block" }}>
+                      <span className="ca-caption">{related.category}</span>
+                      <h4 className="ca-h4 ca-card__title" style={{ fontSize: 14, marginTop: 2 }}>
                         {related.title}
                       </h4>
                     </Link>
@@ -487,19 +294,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Related Services */}
             {relatedServicesData.length > 0 && (
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#0B2D5B]">
-                  Adelaide Moving Services
-                </h3>
-                <div className="mt-4 space-y-2.5">
+              <div className="ca-card ca-card--compact">
+                <h3 className="ca-aside-label">Adelaide Moving Services</h3>
+                <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 10 }}>
                   {relatedServicesData.map((srv) => (
                     <Link
                       key={srv.slug}
                       href={`/services/${srv.slug}`}
-                      className="flex items-center justify-between text-xs sm:text-sm font-semibold text-[#0B2D5B] transition hover:text-[#FF6A00] py-1"
+                      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 13, fontWeight: 700, color: "var(--navy-900)" }}
                     >
                       <span>{srv.title}</span>
-                      <span className="text-xs font-normal text-slate-400">
+                      <span className="ca-caption" style={{ fontWeight: 400 }}>
                         {srv.startingRate.split("(")[0]}
                       </span>
                     </Link>
@@ -511,7 +316,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </div>
 
-      {/* Bottom CTA */}
       <CTASection />
     </div>
   );

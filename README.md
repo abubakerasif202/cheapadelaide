@@ -22,8 +22,8 @@ Cheap Adelaide Removalist is an Adelaide-focused moving service pairing value-dr
 - **Canonical Domain**: `https://www.cheapadelaideremovalist.com.au`
 - **Primary Phone**: `0491 704 136` (`tel:+61491704136`)
 - **Secondary Phone**: `0493 092 539` (`tel:+61493092539`)
-- **Email**: `admin@hfremovalsadelaide.com.au`
-- **Operations Base / Depot**: `20 Prunus Ave, Elizabeth Vale SA 5112, Australia`
+- **Email**: `admin@cheapadelaideremovalist.com.au`
+- **Operations Base / Depot**: `26 Knowles Road, Elizabeth Vale SA 5112, Australia`
 - **Hours**: 7:00 am – 8:00 pm daily (7 days)
 - **Primary Market**: Metropolitan Adelaide, South Australia
 - **Operator Relationship**: *"Cheap Adelaide Removalist is operated by the same local removals operation behind HF Removals Adelaide."*

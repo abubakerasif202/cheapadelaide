@@ -855,7 +855,7 @@ export const blogPosts: BlogPost[] = [
         callout: {
           type: "info",
           title: "Our Elizabeth Vale Operations Hub",
-          text: "Operating out of 20 Prunus Ave, Elizabeth Vale SA 5112, Cheap Adelaide Removalist maintains clear, upfront travel parameters for all metropolitan moves.",
+          text: "Operating out of 26 Knowles Road, Elizabeth Vale SA 5112, Cheap Adelaide Removalist maintains clear, upfront travel parameters for all metropolitan moves.",
         },
       },
     ],
