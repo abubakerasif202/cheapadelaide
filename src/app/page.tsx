@@ -68,7 +68,7 @@ export default function HomePage() {
               </h1>
 
               <p className="max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Straightforward moving services for homes, apartments, offices, and furniture across Greater Adelaide. Transparent rates from $79 per 30 minutes with zero hidden stair surcharges.
+                Straightforward moving services for homes, apartments, offices, and furniture across Greater Adelaide. Starting rates are $79 per 30 minutes for 2 movers and a truck; see the quote terms for your move.
               </p>
 
               {/* Tactile Action Buttons */}
@@ -136,7 +136,7 @@ export default function HomePage() {
                   <div className="relative aspect-[16/11] w-full bg-slate-900">
                     <Image
                       src="/brand/hero-truck.webp"
-                      alt="Concept 4 branded removal truck on an Adelaide road"
+                      alt="Removal truck used for Adelaide moving services"
                       fill
                       priority
                       className="object-cover"
@@ -149,7 +149,7 @@ export default function HomePage() {
                         Adelaide Metro & Regional SA
                       </span>
                       <span className="rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-xs uppercase text-[#071933]">
-                        Active Crew
+                        Adelaide Moving Team
                       </span>
                     </div>
                   </div>
@@ -165,7 +165,7 @@ export default function HomePage() {
                     </div>
                     <div className="flex items-center gap-3 text-xs text-slate-700">
                       <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0" />
-                      <span>Direct phone dispatch with zero automated bot delays</span>
+                        <span>Phone support during listed contact hours</span>
                     </div>
                   </div>
                 </div>
@@ -361,20 +361,20 @@ export default function HomePage() {
                 Workplace Relocations
               </h3>
               <p className="text-sm text-slate-300 leading-relaxed">
-                Minimise business downtime with structured after-hours or weekend office transfers across metropolitan Adelaide.
+                Discuss timing, item handling and access requirements for an office or commercial move in Adelaide.
               </p>
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300">
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF6A00]" />
-                  <span>Scheduled weekend or evening dispatch to avoid operational disruptions</span>
+                  <span>Share preferred dates and any building access windows</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF6A00]" />
-                  <span>Goods elevator protection curtains and loading dock clearances</span>
+                  <span>Confirm lift, loading dock and building requirements</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF6A00]" />
-                  <span>Systematic workstation labelling and electronics handling</span>
+                  <span>List workstations, equipment and other items to be moved</span>
                 </li>
               </ul>
               <div className="pt-2">

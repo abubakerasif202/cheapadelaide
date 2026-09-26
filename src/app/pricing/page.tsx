@@ -37,7 +37,7 @@ export default function PricingPage() {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
     name: "Adelaide Removalist Rates & Pricing",
-    description: "Transparent starting hourly and 30-minute rates for professional moving teams in Adelaide.",
+    description: "Published starting rates for moving teams in Adelaide. Final quote terms depend on the move details.",
     itemListElement: [
       {
         "@type": "Offer",
@@ -50,7 +50,7 @@ export default function PricingPage() {
           priceCurrency: "AUD",
           unitText: "per 30 minutes",
         },
-        description: "2 movers with truck suitable for 1-2 bedroom apartments and unit relocations in Adelaide.",
+        description: "Published starting rate for 2 movers and a truck. Confirm the applicable quote terms for the move.",
         url: `${business.domain}/pricing`,
       },
       {
@@ -64,7 +64,7 @@ export default function PricingPage() {
           priceCurrency: "AUD",
           unitText: "per 30 minutes",
         },
-        description: "3 movers with truck suitable for 3-4 bedroom houses and larger commercial moves across Adelaide.",
+        description: "Published starting rate for 3 movers and a truck. Confirm the applicable quote terms for the move.",
         url: `${business.domain}/pricing`,
       },
     ],
@@ -154,10 +154,10 @@ export default function PricingPage() {
               </div>
               <div className="space-y-1">
                 <h4 className="text-sm font-bold text-[#0B2D5B]">
-                  No Unverified Surcharges
+                  Confirm the full quote
                 </h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
-                  We don&apos;t invent unexpected fees on the day. Tell us what you need in advance and we&apos;ll explain all details clearly upfront.
+                  Share your inventory, route and access details in advance. Confirm the applicable travel, access and additional-service charges before booking.
                 </p>
               </div>
             </div>

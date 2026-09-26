@@ -8,10 +8,10 @@ export interface ProcessStep {
 }
 
 const DEFAULT_STEPS: ProcessStep[] = [
-  { step: "01", title: "Request a Fast Quote", description: "Submit your move details online or call our dispatch desk directly to get started.", icon: "file-text" },
+  { step: "01", title: "Request a Quote", description: "Submit your move details online or call to get started.", icon: "file-text" },
   { step: "02", title: "Scope Inventory & Access", description: "Share your suburb locations, furniture list, and access notes (lifts, stairs, driveways).", icon: "phone-call" },
-  { step: "03", title: "Confirm Crew & Timing", description: "Choose 2 Movers ($79/30 min) or 3 Movers ($99/30 min) and lock in your scheduled arrival window.", icon: "calendar-check" },
-  { step: "04", title: "Punctual Moving Day", description: "Our crew blanket-wraps, secures, and transports your belongings to your new address.", icon: "truck" },
+  { step: "03", title: "Confirm Crew & Timing", description: "Discuss the team option, quote terms and availability for your preferred date.", icon: "calendar-check" },
+  { step: "04", title: "Moving Day", description: "The agreed items are loaded and transported to the delivery address discussed for your move.", icon: "truck" },
 ];
 
 export interface ProcessTimelineProps {

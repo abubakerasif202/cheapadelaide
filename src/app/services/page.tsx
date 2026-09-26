@@ -127,7 +127,7 @@ export default function ServicesPage() {
                     </Link>
 
                     <Link
-                      href={`/get-a-quote?type=${service.title}`}
+                      href={`/get-a-quote?type=${encodeURIComponent(service.title)}`}
                       className="rounded-xl bg-[#0B2D5B] px-4 py-2 text-xs font-bold text-white hover:bg-[#071933] transition"
                     >
                       Get Quote

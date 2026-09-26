@@ -101,12 +101,12 @@ export const services: ServiceItem[] = [
     title: "Apartment Removals",
     seoTitle: "Apartment Removalists Adelaide | Cheap Adelaide Removalist",
     metaDescription:
-      "Specialist apartment removals in Adelaide CBD and suburbs. Lift bookings, tight corridor navigation, and basement height clearance management.",
+      "Apartment removal services in Adelaide. Share lift, stair, parking and loading-area details when requesting a moving quote.",
     shortDescription:
       "Navigating lifts, stairs, tight hallways, and loading dock bookings across Adelaide CBD and metro apartment buildings.",
     heroHeadline: "Efficient Apartment Moves in Adelaide",
     heroSubheadline:
-      "Experienced apartment removalists who understand lift reservations, building protocols, narrow stairwells, and multi-level logistical challenges.",
+      "Apartment moves can involve lift reservations, building rules, narrow stairwells and other access requirements. Share these details when requesting a quote.",
     startingRate: "From $79 / 30 min ($158/hr)",
     overview: [
       "Moving in or out of an apartment building requires specific planning that standard house moves don't encounter: lift bookings, shared foyer rules, narrow door frames, and loading dock height limits.",
@@ -121,7 +121,7 @@ export const services: ServiceItem[] = [
     ],
     whoItSuits: [
       "Residents moving into or out of Adelaide CBD high-rises and suburban walk-ups",
-      "Apartment dwellers with strict 2-hour or 3-hour lift booking slots",
+      "Apartment residents with building lift or loading-area booking requirements",
       "Tenants in properties without elevator access needing stair carry support",
       "Young professionals, couples, and students transitioning between rentals",
     ],
@@ -148,7 +148,7 @@ export const services: ServiceItem[] = [
       },
     ],
     accessConsiderations: [
-      "Clear height of basement parking or designated loading bays (e.g. 2.8m vs 3.5m+)",
+      "Any stated height restrictions for basement parking or designated loading bays",
       "Lift dimension constraints and whether protective lift covers are supplied by building management",
       "Number of flights if moving via stairs in walk-up complexes",
       "Proximity of loading bay to lift foyer and security swipe protocols",
@@ -254,15 +254,15 @@ export const services: ServiceItem[] = [
     title: "Office Removals",
     seoTitle: "Office Removalists Adelaide | Cheap Adelaide Removalist",
     metaDescription:
-      "Reliable commercial office relocations across Adelaide. Desks, computers, filing systems, and meeting rooms moved with minimal business downtime.",
+      "Office removal services in Adelaide for desks, workstations, equipment, files and meeting-room furniture.",
     shortDescription:
-      "Keep business downtime to a minimum with structured office moving for workstations, IT equipment, files, and furniture.",
+      "Office moves scoped around your inventory, access requirements and preferred timing.",
     heroHeadline: "Adelaide Office Relocations",
     heroSubheadline:
       "Office moves for workstations, files, meeting tables, and other office furniture.",
     startingRate: "From $99 / 30 min ($198/hr)",
     overview: [
-      "When an office moves, downtime means lost productivity and revenue. Cheap Adelaide Removalist provides disciplined office relocations planned around your operational schedule.",
+      "Office moves can involve equipment, files, furniture, access restrictions and timing requirements. Share these details so the move scope can be discussed.",
       "Office moves can include desks, workstations, chairs, equipment, cartons, and meeting room furniture described in the enquiry.",
       "Share your item list, pickup and delivery locations, building access conditions, and any placement requirements.",
     ],
@@ -332,7 +332,7 @@ export const services: ServiceItem[] = [
     title: "Commercial Removals",
     seoTitle: "Commercial Removalists Adelaide | Cheap Adelaide Removalist",
     metaDescription:
-      "Affordable commercial moving services in Adelaide. Retail shops, storerooms, display fixtures, and light industrial transport handled professionally.",
+      "Commercial removal services in Adelaide for retail displays, stock, shelving and workplace equipment included in the agreed move scope.",
     shortDescription:
       "Moving retail spaces, hospitality stock, shop displays, and commercial equipment throughout Greater Adelaide.",
     heroHeadline: "Adelaide Commercial Removals",
@@ -410,7 +410,7 @@ export const services: ServiceItem[] = [
     title: "Packing & Unpacking",
     seoTitle: "Packing & Unpacking Services Adelaide | Cheap Adelaide Removalist",
     metaDescription:
-      "Professional packing and unpacking services in Adelaide. Quality boxes, bubble wrap, paper wrapping, and systematic room-by-room boxing.",
+      "Packing and unpacking services in Adelaide. Share the items, rooms and packing materials required when requesting a quote.",
     shortDescription:
       "Packing and unpacking assistance for household moves in Adelaide.",
     heroHeadline: "Packing & Unpacking in Adelaide",
@@ -486,7 +486,7 @@ export const services: ServiceItem[] = [
     title: "Interstate Removals",
     seoTitle: "Interstate Removalists Adelaide | Cheap Adelaide Removalist",
     metaDescription:
-      "Reliable interstate removals from Adelaide to Melbourne, Sydney, Brisbane, Canberra, and regional centres. Direct and shared options available.",
+      "Interstate removal enquiries from Adelaide. Share your destination, inventory and dates to confirm route availability and moving options.",
     shortDescription:
       "Interstate moving enquiries for Adelaide and destinations including Melbourne, Sydney, Brisbane and Canberra.",
     heroHeadline: "Interstate Removals From Adelaide",
@@ -615,7 +615,7 @@ export const services: ServiceItem[] = [
     ],
     faqs: [
       {
-        question: "How does backloading save so much money?",
+        question: "How does backloading work?",
         answer:
           "Backloading uses available space on a vehicle travelling a compatible route. Ask whether it is available and request the price for your move.",
       },

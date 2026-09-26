@@ -10,11 +10,8 @@ interface SizeConfig {
   id: string;
   rate: number;
   hourly: number;
-  hours: string;
-  est: string;
-  capacity: string;
   bestFor: string;
-  inclusions: string[];
+  quoteDetails: string[];
 }
 
 const DATA: Record<"unit" | "house", SizeConfig> = {
@@ -22,35 +19,19 @@ const DATA: Record<"unit" | "house", SizeConfig> = {
     label: "1–2 Bed Unit",
     team: "2 Movers + Truck",
     id: "two-movers",
-    rate: 79,
-    hourly: 158,
-    hours: "2.5 – 3.5 hrs",
-    est: "$395 – $553",
-    capacity: "20 – 25 m³ (approx 3T)",
-    bestFor: "Studios, 1–2 bedroom units, townhouses & modest apartments",
-    inclusions: [
-      "2 experienced professional removalists",
-      "Enclosed pantech truck with tail-lift",
-      "Quilted furniture blankets & ratchet ties",
-      "Zero stair surcharges",
-    ],
+    rate: business.pricing.twoMovers.thirtyMinutes,
+    hourly: business.pricing.twoMovers.hourlyReference,
+    bestFor: "For smaller moves such as units or apartments. Share your inventory and access details to discuss team size.",
+    quoteDetails: ["Items to be moved", "Pickup and delivery suburbs", "Date and access details"],
   },
   house: {
     label: "3–4 Bed House",
     team: "3 Movers + Truck",
     id: "three-movers",
-    rate: 99,
-    hourly: 198,
-    hours: "3.5 – 5.5 hrs",
-    est: "$693 – $1,089",
-    capacity: "35 – 45 m³ (approx 6T)",
-    bestFor: "3–4 bedroom suburban homes, two-storey residences & large inventories",
-    inclusions: [
-      "3 experienced professional removalists",
-      "Larger volume truck for single-trip capacity",
-      "Continuous loading & stacking efficiency",
-      "Reduces total moving time by up to 35%",
-    ],
+    rate: business.pricing.threeMovers.thirtyMinutes,
+    hourly: business.pricing.threeMovers.hourlyReference,
+    bestFor: "For larger moves such as multi-bedroom homes. Share your inventory and access details to discuss team size.",
+    quoteDetails: ["Items to be moved", "Pickup and delivery suburbs", "Date and access details"],
   },
 };
 
@@ -77,7 +58,7 @@ export function MoveSizer({ defaultSize = "unit" }: MoveSizerProps) {
       <div className="ca-grid ca-grid--2" style={{ marginTop: 32, alignItems: "center", gap: 32 }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <span className="ca-eyebrow" style={{ color: "var(--text-muted)" }}>
-            Recommended Configuration
+            Team option
           </span>
           <h3 className="ca-h2" style={{ fontSize: "clamp(1.5rem,1.3rem + 1vw,1.875rem)" }}>
             {config.team}
@@ -98,19 +79,15 @@ export function MoveSizer({ defaultSize = "unit" }: MoveSizerProps) {
             </span>
           </div>
           <p className="ca-caption">
-            Typical duration: <strong className="ca-num" style={{ color: "var(--slate-800)" }}>{config.hours}</strong> (Est.{" "}
-            <strong className="ca-num" style={{ color: "var(--navy-900)" }}>{config.est}</strong>)
+            Starting rate only. Request a quote for your move details.
           </p>
         </div>
         <div className="ca-card ca-card--flat ca-card--compact" style={{ gap: 12 }}>
           <div className="ca-kv" style={{ paddingTop: 0, borderBottom: "1px solid var(--border-default)", paddingBottom: 12 }}>
-            <span style={{ fontWeight: 700, color: "var(--navy-900)" }}>Truck Capacity</span>
-            <span className="ca-num" style={{ fontWeight: 700, color: "var(--slate-700)" }}>
-              {config.capacity}
-            </span>
+            <span style={{ fontWeight: 700, color: "var(--navy-900)" }}>Details to include in your quote</span>
           </div>
           <ul className="ca-checklist">
-            {config.inclusions.map((item) => (
+            {config.quoteDetails.map((item) => (
               <li key={item} style={{ fontSize: 13 }}>
                 <Icon name="check-circle-2" size={16} />
                 {item}
@@ -124,7 +101,7 @@ export function MoveSizer({ defaultSize = "unit" }: MoveSizerProps) {
           {business.pricing.disclaimer}
         </span>
         <Button href={`/get-a-quote?team=${config.id}`} trailingIcon="arrow-right">
-          Lock In This Configuration
+          Request This Team Option
         </Button>
       </div>
     </div>

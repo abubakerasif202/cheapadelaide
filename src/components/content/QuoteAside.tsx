@@ -11,7 +11,7 @@ export interface QuoteAsideProps {
 export function QuoteAside({
   eyebrow = "Instant Moving Estimate",
   title = "Book Adelaide Movers Today",
-  text = "Transparent 30-minute rates with zero hidden stair surcharges. Share your move details to discuss an estimate.",
+  text = "Published starting rates use 30-minute increments. Share your move details to confirm the applicable quote terms.",
 }: QuoteAsideProps) {
   return (
     <div className="ca-tile ca-tile--navy ca-on-dark" style={{ padding: 28, borderRadius: "var(--radius-tile)", gap: 0 }}>

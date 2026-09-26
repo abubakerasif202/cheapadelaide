@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { generateBreadcrumbSchema } from "@/config/seo";
 import { Icon } from "@/components/core";
 
 export interface Crumb {
@@ -8,21 +7,8 @@ export interface Crumb {
 }
 
 export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
-  const schemaItems = [
-    { name: "Home", item: "/" },
-    ...crumbs.map((c) => ({ name: c.name, item: c.href })),
-  ];
-
   return (
     <>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateBreadcrumbSchema(schemaItems)),
-        }}
-      />
-
       <nav aria-label="Breadcrumb">
         <ol className="ca-crumbs">
           <li>

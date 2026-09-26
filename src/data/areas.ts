@@ -19,7 +19,7 @@ export const adelaideRegions: RegionArea[] = [
     id: "northern-suburbs",
     name: "Northern Suburbs & Playford",
     description:
-      "Rapidly growing residential estates, family homes, and industrial transport corridors across northern Adelaide.",
+      "Residential areas and industrial locations across northern Adelaide.",
     keyHubs: ["Elizabeth Vale", "Salisbury", "Mawson Lakes", "Golden Grove", "Munno Para", "Gawler"],
     serviceNotes: "Send your pickup and delivery suburbs to discuss availability for this area.",
   },

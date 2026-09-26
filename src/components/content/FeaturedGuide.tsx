@@ -6,8 +6,6 @@ export interface FeaturedGuideProps {
   title: string;
   summary: string;
   readTime?: string;
-  updated?: string;
-  rateNote?: string;
   href?: string;
   artSrc?: string;
 }
@@ -17,8 +15,6 @@ export function FeaturedGuide({
   title,
   summary,
   readTime,
-  updated = "Updated Sept 2026",
-  rateNote = "2 Movers from $79 / 30 min",
   href = "#",
   artSrc,
 }: FeaturedGuideProps) {
@@ -44,17 +40,6 @@ export function FeaturedGuide({
               <Icon name="clock" size={16} />
               {readTime}
             </span>
-          ) : null}
-          {updated ? (
-            <span>
-              <Icon name="calendar" size={16} />
-              {updated}
-            </span>
-          ) : null}
-          {rateNote ? (
-            <Badge variant="inverse" quiet style={{ fontFamily: "var(--font-mono)", color: "#fff", fontWeight: 500 }}>
-              {rateNote}
-            </Badge>
           ) : null}
         </div>
         <Button href={href} trailingIcon="arrow-right" className="mt-2">

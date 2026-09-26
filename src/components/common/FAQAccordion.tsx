@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Icon } from "@/components/core";
-import { generateFAQSchema } from "@/config/seo";
 
 export interface FAQItem {
   id: string;
@@ -19,14 +18,6 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
 
   return (
     <div className="ca-faq">
-      {/* Schema generation */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(generateFAQSchema(items)),
-        }}
-      />
-
       {items.map((item) => {
         const isOpen = openId === item.id;
         return (

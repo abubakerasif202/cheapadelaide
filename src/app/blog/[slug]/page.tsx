@@ -57,7 +57,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const relatedArticlesData = blogPosts.filter((p) => post.relatedArticles.includes(p.slug));
-  const relatedServicesData = services.filter((s) => post.relatedServices.includes(s.slug));
+  const utilityPages: Record<string, { title: string; href: string }> = {
+    pricing: { title: "Removalist Pricing", href: "/pricing" },
+    faq: { title: "Moving FAQs", href: "/faq" },
+    contact: { title: "Contact Us", href: "/contact" },
+  };
+  const relatedServicesData: { slug: string; title: string; href: string; startingRate?: string }[] =
+    post.relatedServices.flatMap((slug) => {
+      const service = services.find((item) => item.slug === slug);
+      if (service) return [{ slug, title: service.title, href: `/services/${slug}`, startingRate: service.startingRate }];
+      const page = utilityPages[slug];
+      return page ? [{ slug, ...page }] : [];
+    });
 
   const faqItems = post.faqs.map((faq, idx) => ({
     id: slugifyQuestion(faq.question, idx),
@@ -125,7 +136,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span className="ca-badge ca-badge--accent">{post.category}</span>
               {post.isPillar && <span className="ca-badge ca-badge--navy">Pillar Master Guide</span>}
               <span className="ca-caption">{post.readTime}</span>
-              <span className="ca-caption">Published Sept 2026</span>
+              <time className="ca-caption" dateTime={post.publishDate}>
+                Published {new Date(`${post.publishDate}T12:00:00`).toLocaleDateString("en-AU", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                  timeZone: "Australia/Adelaide",
+                })}
+              </time>
             </div>
 
             {/* Exactly ONE H1 tag on the page */}
@@ -295,17 +313,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Related Services */}
             {relatedServicesData.length > 0 && (
               <div className="ca-card ca-card--compact">
-                <h3 className="ca-aside-label">Adelaide Moving Services</h3>
+                <h3 className="ca-aside-label">Related Services &amp; Pages</h3>
                 <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 2 }}>
                   {relatedServicesData.map((srv) => (
                     <Link
                       key={srv.slug}
-                      href={`/services/${srv.slug}`}
+                      href={srv.href}
                       style={{ display: "flex", alignItems: "center", justifyContent: "space-between", minHeight: 32, fontSize: 13, fontWeight: 700, color: "var(--navy-900)" }}
                     >
                       <span>{srv.title}</span>
                       <span className="ca-caption" style={{ fontWeight: 400 }}>
-                        {srv.startingRate.split("(")[0]}
+                        {srv.startingRate?.split("(")[0] ?? ""}
                       </span>
                     </Link>
                   ))}

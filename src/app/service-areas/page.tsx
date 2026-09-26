@@ -10,7 +10,7 @@ import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 export const metadata: Metadata = constructMetadata({
   title: "Service Areas Adelaide | Cheap Adelaide Removalist",
   description:
-    "We provide house, apartment, and office moving services across Greater Adelaide, Adelaide Hills, regional South Australia, and interstate routes.",
+    "See Adelaide suburbs and regional routes to ask about for a house, apartment or office move. Availability depends on your locations and date.",
   canonical: "/service-areas",
 });
 
@@ -24,7 +24,7 @@ export default function ServiceAreasPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Adelaide Removalist Service Areas & Regions",
-    description: "Metropolitan and regional areas serviced by Cheap Adelaide Removalist from Elizabeth Vale depot.",
+    description: "Adelaide areas customers can enquire about. Confirm route and date availability before booking.",
     itemListElement: adelaideRegions.map((region, idx) => ({
       "@type": "ListItem",
       position: idx + 1,
@@ -120,12 +120,12 @@ export default function ServiceAreasPage() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {adelaideRegions.map((region) => {
               const guideLink =
-                region.id === "central"
+                region.id === "adelaide-cbd-inner"
                   ? {
                       href: "/blog/moving-adelaide-cbd-apartment-guide",
                       label: "Read CBD Apartment Moving Guide",
                     }
-                  : region.id === "hills"
+                : region.id === "adelaide-hills-regional"
                   ? {
                       href: "/blog/moving-to-adelaide-hills-removals-guide",
                       label: "Read Adelaide Hills Moving Guide",

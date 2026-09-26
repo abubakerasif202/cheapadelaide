@@ -11,7 +11,7 @@ import { business } from "@/config/business";
 export const metadata: Metadata = constructMetadata({
   title: "Adelaide Moving Guides & Cost Advice | Cheap Adelaide Removalist",
   description:
-    "Expert moving guides, rate benchmarks, truck sizing charts, and local Adelaide relocation advice. Transparent rates from $79/30 min.",
+    "Practical Adelaide moving guides covering removalist rates, planning, packing, truck sizing and common moving questions.",
   canonical: "/blog",
 });
 
@@ -27,7 +27,7 @@ export default function BlogIndexPage() {
     "@type": "CollectionPage",
     name: "Adelaide Moving Guides & Removalist Cost Hub",
     description:
-      "Comprehensive moving guides, pricing analyses, and logistics resources for Greater Adelaide.",
+      "Practical moving guides covering Adelaide move planning, published starting rates and common moving questions.",
     url: `${business.domain}/blog`,
     publisher: {
       "@type": "MovingCompany",

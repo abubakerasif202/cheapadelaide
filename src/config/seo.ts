@@ -5,22 +5,9 @@ export const siteConfig = {
   name: business.name,
   domain: business.domain,
   description:
-    "Affordable Adelaide removalists for house, apartment, office, furniture and interstate moves. View starting rates and request a moving quote.",
+    "Affordable removalists in Adelaide for home, apartment, office and furniture moves. Compare starting rates and request a quote.",
   ogImage: `${business.domain}/brand/og-image.jpg`,
   locale: "en_AU",
-  keywords: [
-    "cheap removalists Adelaide",
-    "cheap Adelaide removalist",
-    "affordable removalists Adelaide",
-    "Adelaide removalists",
-    "Adelaide movers",
-    "house removalists Adelaide",
-    "apartment removalists Adelaide",
-    "office removalists Adelaide",
-    "furniture removalists Adelaide",
-    "interstate removals Adelaide",
-    "backloading Adelaide",
-  ],
 };
 
 export function constructMetadata({
@@ -36,11 +23,7 @@ export function constructMetadata({
   ogImage?: string;
   noIndex?: boolean;
 } = {}): Metadata {
-  const pageTitle = title
-    ? title.toLowerCase().includes(business.name.toLowerCase())
-      ? title
-      : `${title} | ${business.name}`
-    : `${business.name} | Affordable Adelaide Movers`;
+  const pageTitle = title ?? "Affordable Adelaide Removalists | Cheap Adelaide Removalist";
 
   let canonicalUrl: string = business.domain;
   if (canonical) {
@@ -60,7 +43,6 @@ export function constructMetadata({
   return {
     title: pageTitle,
     description,
-    keywords: siteConfig.keywords,
     metadataBase: new URL(business.domain),
     alternates: {
       canonical: canonicalUrl,
@@ -77,7 +59,7 @@ export function constructMetadata({
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${business.name} - Concept 4 Brand Identity`,
+          alt: `${business.name} removalist services in Adelaide`,
         },
       ],
     },
@@ -113,16 +95,12 @@ export function generateMovingCompanySchema() {
     "@context": "https://schema.org",
     "@type": "MovingCompany",
     name: business.name,
-    legalName: business.name,
     description: siteConfig.description,
     image: `${business.domain}/brand/hero-truck.webp`,
     logo: `${business.domain}/brand/logo-horizontal.png`,
     url: business.domain,
     telephone: business.contact.primaryPhone,
     email: business.contact.email,
-    priceRange: "$$ (From $79/30 min)",
-    currenciesAccepted: "AUD",
-    paymentAccepted: "Cash, Credit Card, Direct Debit, Bank Transfer, EFTPOS",
     address: {
       "@type": "PostalAddress",
       streetAddress: business.location.street,
@@ -131,27 +109,6 @@ export function generateMovingCompanySchema() {
       postalCode: business.location.postcode,
       addressCountry: "AU",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: -34.7508,
-      longitude: 138.6811,
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "07:00",
-        closes: "20:00",
-      },
-    ],
     areaServed: [
       {
         "@type": "City",
@@ -161,53 +118,7 @@ export function generateMovingCompanySchema() {
         "@type": "AdministrativeArea",
         name: "Greater Adelaide, South Australia",
       },
-      {
-        "@type": "AdministrativeArea",
-        name: "Adelaide Hills, South Australia",
-      },
-      {
-        "@type": "AdministrativeArea",
-        name: "South Australia",
-      },
     ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Adelaide Moving Services and Rates",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "2 Movers + Truck Removals",
-            description: "2 movers with truck suitable for 1-2 bedroom apartments and unit relocations in Adelaide.",
-          },
-          price: "79",
-          priceCurrency: "AUD",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: "79",
-            priceCurrency: "AUD",
-            unitText: "per 30 minutes",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "3 Movers + Truck Removals",
-            description: "3 movers with truck suitable for 3-4 bedroom houses and larger commercial moves across Adelaide.",
-          },
-          price: "99",
-          priceCurrency: "AUD",
-          priceSpecification: {
-            "@type": "UnitPriceSpecification",
-            price: "99",
-            priceCurrency: "AUD",
-            unitText: "per 30 minutes",
-          },
-        },
-      ],
-    },
   };
 }
 
@@ -285,18 +196,6 @@ export function generateServiceSchema(service: {
       "@type": "City",
       name: "Adelaide",
     },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "AUD",
-      price: "79",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "79",
-        priceCurrency: "AUD",
-        unitText: "per 30 minutes",
-      },
-      availability: "https://schema.org/InStock",
-      url: `${business.domain}/services/${service.slug}`,
-    },
+    url: `${business.domain}/services/${service.slug}`,
   };
 }

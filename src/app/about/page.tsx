@@ -73,7 +73,7 @@ export default function AboutPage() {
                 <ul className="space-y-2 text-sm text-slate-700">
                   <li className="flex items-start gap-2.5">
                     <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
-                    <span><strong>Transparent Starting Rates:</strong> $79 / 30 min (2 movers) and $99 / 30 min (3 movers) with clear 30-min billing.</span>
+                    <span><strong>Published Starting Rates:</strong> $79 per 30 minutes (2 movers) and $99 per 30 minutes (3 movers). Confirm the billing and quote terms for your move.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
@@ -139,25 +139,25 @@ export default function AboutPage() {
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h3 className="font-bold text-[#0B2D5B] text-lg">House Removals</h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600">
-                1 to 4+ bedroom residential relocations with 2 or 3 mover crews.
+                Residential moves for homes of different sizes, with the 2 or 3 mover team options listed in our pricing.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h3 className="font-bold text-[#0B2D5B] text-lg">Apartments & Lifts</h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600">
-                High-rise lift reservations, dock access, and walk-up stairs across metro Adelaide.
+                Apartment moves planned around lift, loading-area and stair access details provided by the customer.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h3 className="font-bold text-[#0B2D5B] text-lg">Workplaces & Offices</h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600">
-                Commercial desks, IT boxes, and retail stock moved with minimal downtime.
+                Office and workplace moves scoped around the items, access and timing requirements provided.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <h3 className="font-bold text-[#0B2D5B] text-lg">Interstate Transport</h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600">
-                Direct trucks and economical backloading to Melbourne, Sydney, and Brisbane.
+                Ask us about interstate moves and backloading options, including route and date availability.
               </p>
             </div>
           </div>
