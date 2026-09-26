@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 /**
- * Collects one day of Search Console performance data and upserts it into
- * BigQuery. Safe to re-run for the same date (see lib/bigquery.ts upsertDay).
+ * MANUAL / BACKFILL / DIAGNOSTIC UTILITY — not the primary production
+ * pipeline. The primary architecture is Search Console's official Bulk Data
+ * Export, which Google writes directly into BigQuery on its own daily
+ * schedule (see GOOGLE_CLOUD_SEO_SETUP.md). This script exists for:
+ *   - historical dates from before the native export was activated
+ *   - cross-checking the native export against an independent source
+ *   - manual recovery if a native export day is missing/delayed
+ *
+ * Collects one day of Search Console performance data via the API and
+ * upserts it into our own legacy table (seo_monitoring.search_console_daily).
+ * Safe to re-run for the same date (see lib/bigquery.ts upsertDay).
  *
  * Usage:
  *   npm run seo:collect -- --date 2026-09-25

@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /**
+ * PRIMARY use case for this now: pulling history from BEFORE the native
+ * Bulk Data Export was activated (Google's export does not retroactively
+ * backfill — see GOOGLE_CLOUD_SEO_SETUP.md). Also useful for manual
+ * recovery of specific gaps in the native export.
+ *
  * Backfills a date range, one day at a time, reusing the same idempotent
- * upsert as collect.ts. Search Console typically retains ~16 months of data.
+ * upsert as collect.ts, into our legacy table
+ * (seo_monitoring.search_console_daily). Search Console's API typically
+ * retains ~16 months of data.
  *
  * Usage:
  *   npm run seo:backfill -- --start 2026-08-01 --end 2026-09-25

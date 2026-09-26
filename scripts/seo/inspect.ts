@@ -3,6 +3,11 @@
  * Reports Google's indexing/crawl state for a single URL via the Search
  * Console URL Inspection API. Read-only — does not request indexing.
  *
+ * This stays a standalone diagnostic tool regardless of which pipeline
+ * (native Bulk Data Export or the legacy API collector) is the current
+ * source for performance data — URL Inspection is a separate API with no
+ * bulk-export equivalent.
+ *
  * Usage:
  *   npm run seo:inspect -- --url https://www.cheapadelaideremovalist.com.au/service-areas/adelaide-cbd-inner-metro
  */

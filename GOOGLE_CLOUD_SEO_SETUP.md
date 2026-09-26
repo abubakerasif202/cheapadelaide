@@ -1,23 +1,52 @@
 # Google Cloud SEO Data Pipeline — Setup & Operations
 
-Architecture: **Google Search Console API → Google Cloud (BigQuery) → SQL
-reports.** No third-party Search Console connectors, no "GSC Wizard," no
-ChatGPT plugins — this is first-party Google infrastructure end to end.
+**Primary architecture:**
 
 ```
-Search Console (official API)
-        │
-        ▼
-scripts/seo/collect.ts  (Node/TypeScript, run locally or scheduled)
-        │
-        ▼
-BigQuery  hf-search-console-ab-2026.seo_monitoring.search_console_daily
-        │
-        ▼
-scripts/seo/sql/reports.sql  (top queries, top pages, CTR, cannibalisation, ...)
+Google Search
+     │
+     ▼
+Search Console — official Bulk Data Export (Google-managed, daily)
+     │
+     ▼
+BigQuery  hf-search-console-ab-2026.searchconsole.*   (Google creates these tables)
+     │
+     ▼
+scripts/seo/sql/reports.sql — PRIMARY section
 ```
 
-## 1. What already exists (audited, not assumed)
+**Secondary / backfill architecture** (kept, not removed — see §5):
+
+```
+Search Console — official API (searchanalytics.query)
+     │
+     ▼
+scripts/seo/collect.ts / backfill.ts   (manual, run on demand)
+     │
+     ▼
+BigQuery  hf-search-console-ab-2026.seo_monitoring.search_console_daily  (LEGACY table)
+     │
+     ▼
+scripts/seo/sql/reports.sql — LEGACY section
+```
+
+No GSC Wizard. No ChatGPT Search Console plugin. No third-party connector.
+Every step above is Google's own infrastructure, activated and operated
+through Search Console's own settings and this business's own Google Cloud
+project.
+
+## 1. Why native export replaced the custom collector as primary
+
+The previous version of this pipeline used a custom TypeScript collector
+calling the Search Console API on a schedule. Google's **Bulk Data Export**
+does the same job natively — Google writes the data into BigQuery itself,
+daily, with no code to run, no Cloud Run job to maintain, no service-account
+credentials to rotate, and no failure mode where a scheduled job silently
+stops running. For an ongoing production pipeline this is simpler, cheaper to
+operate, and has one less thing that can break. The custom collector remains
+for the three things native export genuinely cannot do (§5).
+
+## 2. What already exists (audited, not assumed)
 
 Running `gcloud auth list` / `gcloud config list` / `gcloud projects list`
 found an existing project already scoped to this business — **do not create a
@@ -27,87 +56,210 @@ new project.**
 |---|---|
 | Project ID | `hf-search-console-ab-2026` |
 | Project number | `161826315730` |
-| Region used for BigQuery | `australia-southeast1` |
+| Region used for BigQuery (legacy table) | `australia-southeast1` |
 | Active gcloud account | `abubakerasif202@gmail.com` |
 | Also credentialed | `Admin@hfremovalsadelaide.com.au`, `abubakarasif2002@gmail.com` |
-| Billing | **NOT enabled** on this project (see §6 — this is the one real blocker) |
+| Billing | **NOT enabled** — native export requires this, see §4 |
 
 APIs already enabled on the project (checked with `gcloud services list
---enabled` before touching anything): `bigquery.googleapis.com`,
-`searchconsole.googleapis.com`, plus several BigQuery sub-APIs, IAM/logging
-basics. No new APIs needed to be enabled for this pipeline.
+--enabled` before touching anything, both times this pipeline was built):
+`bigquery.googleapis.com`, `bigquerystorage.googleapis.com`,
+`searchconsole.googleapis.com`, plus several other BigQuery sub-APIs and
+IAM/logging basics. These are exactly what native export needs — no new APIs
+required.
 
-## 2. What this task created
+## 3. IAM for Google's native export identity
 
-- **Service account:** `seo-monitor@hf-search-console-ab-2026.iam.gserviceaccount.com`
-  — created with `gcloud iam service-accounts create`. No key file was downloaded
-  or committed anywhere.
-- **IAM roles granted** (least privilege, not Owner/Editor):
-  - `roles/bigquery.dataEditor` — write access to datasets/tables only
-  - `roles/bigquery.jobUser` — permission to run load/query jobs
-- **BigQuery dataset:** `seo_monitoring` in `australia-southeast1`
-- **BigQuery table:** `search_console_daily` — partitioned by `date` (DAY),
-  clustered by `page, query`. Schema:
+Per Google's own current documentation (verified live via
+`support.google.com/webmasters/answer/12917675`, not from memory), Search
+Console's Bulk Data Export runs as a fixed system identity and needs exactly
+two IAM roles on the destination project:
 
-  | field | type | notes |
-  |---|---|---|
-  | `date` | DATE | required, partition key |
-  | `query` | STRING | nullable — some rows have no query dimension |
-  | `page` | STRING | nullable |
-  | `country` | STRING | ISO-3 lowercase (Search Console format, e.g. `aus`) |
-  | `device` | STRING | `DESKTOP` / `MOBILE` / `TABLET` |
-  | `clicks` | INTEGER | |
-  | `impressions` | INTEGER | |
-  | `ctr` | FLOAT | as returned by the API (0–1, not a percentage) |
-  | `position` | FLOAT | average position for that row's dimension combo |
-  | `site_url` | STRING | which Search Console property this came from |
-  | `row_key` | STRING | required — sha256 of the row's identifying fields, for future de-duplication tooling |
-  | `loaded_at` | TIMESTAMP | required — when the collector wrote this row |
+- **Service account:** `search-console-data-export@system.gserviceaccount.com`
+  — this is Google's own identity, not one this project created.
+- **Roles required:** `roles/bigquery.jobUser` and `roles/bigquery.dataEditor`
+  — nothing broader.
 
-- **Collector scripts** under `scripts/seo/` (TypeScript, run via `tsx` — no
-  compiled build step needed):
-  - `collect.ts` — one day
-  - `backfill.ts` — a date range
-  - `inspect.ts` — read-only URL Inspection lookup
-  - `lib/searchConsole.ts`, `lib/bigquery.ts`, `lib/config.ts`
+**Already granted** as part of this task:
 
-**This entire pipeline was end-to-end tested against the real project** — a
-synthetic day of data was written, verified with a live BigQuery `SELECT`,
-re-run to confirm idempotency (2 rows in, run twice, still 2 rows), then the
-test partition was cleared out. No test data remains in the table.
+```bash
+gcloud projects add-iam-policy-binding hf-search-console-ab-2026 \
+  --member="serviceAccount:search-console-data-export@system.gserviceaccount.com" \
+  --role="roles/bigquery.jobUser"
 
-## 3. IMPORTANT: IAM access ≠ Search Console access
+gcloud projects add-iam-policy-binding hf-search-console-ab-2026 \
+  --member="serviceAccount:search-console-data-export@system.gserviceaccount.com" \
+  --role="roles/bigquery.dataEditor"
+```
 
-Granting a service account (or your own Google account) IAM roles on the
-**Google Cloud project** does **not** give it any access to **Search Console
-data**. Those are two separate permission systems:
+Both bindings succeeded without billing being enabled — IAM grants aren't
+gated by billing, only the export's actual data writes are (§4).
 
-- **Google Cloud IAM** controls who can use BigQuery, Cloud Run, etc. — set
-  via `gcloud`/the Cloud Console.
-- **Search Console property permissions** control who/what can *read the
-  site's search data* — set inside [Search Console itself](https://search.google.com/search-console),
-  under **Settings → Users and permissions**.
+**This alone is not enough.** As with the legacy collector, **Cloud IAM
+access ≠ Search Console access.** You still must activate the export from
+inside Search Console itself (§6) — no `gcloud` command does that part.
 
-**You (the owner) must manually add the collector's identity as a Search
-Console user before `collect.ts` can read any data.** There is no API or
-`gcloud` command that grants this — it has to be done in the Search Console
-UI by someone who already has Owner access on the property.
+## 4. Billing — required for native export, unlike the legacy collector
 
-### For local/manual runs (recommended to start)
-Add your own Google account (the one you'll run `gcloud auth
-application-default login` as) as a **Full user** (read access is enough) on
-the `https://www.cheapadelaideremovalist.com.au/` property in Search Console.
+Google's documentation states plainly: *"You must set up a Google Cloud
+project with billing and enable BigQuery."* This is a **hard requirement**
+for Bulk Data Export — there is no sandbox/no-billing path the way the legacy
+collector's load-job workaround found for itself.
 
-### For scheduled/automated runs (once you're ready to automate)
-Add `seo-monitor@hf-search-console-ab-2026.iam.gserviceaccount.com` as a user
-on the same property in Search Console, the same way.
+Current status: **billing is not linked** to `hf-search-console-ab-2026`.
 
-## 4. Running the collector locally
+**Owner action required** — link the existing open billing account already on
+this Google login (found via `gcloud billing accounts list`, not created for
+this task):
+
+```bash
+gcloud billing projects link hf-search-console-ab-2026 \
+  --billing-account=011B17-693F64-529C29   # "My Billing Account 2"
+```
+
+Or in Console: **hf-search-console-ab-2026 → Billing → Link a billing account.**
+
+**On cost:** BigQuery has an always-free monthly tier (1 TB queried, 10 GB
+active storage). A single small site's daily Search Console export is
+extremely unlikely to exceed that in query volume, and storage for a few
+years of daily rows for one property is measured in low hundreds of MB, not
+GB. That said, **this is not a guarantee of $0** — actual cost depends on how
+much ad-hoc querying happens against the data (e.g. if a BI tool re-scans the
+full table repeatedly instead of using date filters). Set the budget alert in
+§10 so any real cost is visible immediately rather than assumed away.
+
+## 5. What the legacy custom collector is for now
+
+**Not deleted.** `seo_monitoring.search_console_daily` and
+`scripts/seo/collect.ts` / `backfill.ts` / `inspect.ts` remain in the repo,
+clearly re-labeled in their own doc comments. Ongoing role:
+
+| Script | New role |
+|---|---|
+| `collect.ts` | Manual/diagnostic — pull a specific day on demand, not a scheduled job |
+| `backfill.ts` | **Primary remaining use**: native export does not retroactively backfill history from before it was activated. Use this to pull that gap once, via the Search Console API directly. |
+| `inspect.ts` | Unchanged — URL Inspection has no bulk-export equivalent at all, so this stays a standalone diagnostic tool regardless of which pipeline is primary. |
+
+**Do not run both pipelines as parallel ongoing sources for the same dates.**
+Once native export is live, treat it as the source of truth going forward;
+only reach for the legacy table for dates before the export started, or to
+spot-check the native export against an independent source if something
+looks wrong.
+
+The legacy table's `defaultTableExpirationMs` was set to 60 days
+automatically when it was created without billing (BigQuery sandbox
+behavior). If you want the legacy backfill data to persist alongside the new
+native tables for later comparison, either link billing (§4 — which also
+removes this expiration) or copy the backfilled rows into a table without
+partition expiration before the 60-day window closes.
+
+## 6. Owner action: activate the native export
+
+This is a Search Console UI action — no API or `gcloud` command does this
+part. Exact steps, verified against Google's current help documentation:
+
+1. **Google Cloud Console** → confirm you're on `hf-search-console-ab-2026` →
+   confirm billing is linked (§4) → confirm BigQuery API is enabled (already
+   done, §2) → confirm the two IAM bindings from §3 are present (already
+   done).
+2. Go to **[Search Console](https://search.google.com/search-console)** →
+   select the `https://www.cheapadelaideremovalist.com.au/` property →
+   **Settings → Bulk data export**.
+3. **Cloud project ID:** `hf-search-console-ab-2026`
+4. **Dataset name:** Google's default is `searchconsole`. You can customize
+   it, but **the dataset name always starts with the string `searchconsole`**
+   even when customized — don't fight this, just accept the default unless
+   you have a specific reason not to (it keeps `reports.sql` matching the
+   default without edits).
+5. **Location:** choose an Australian BigQuery location if offered/supported
+   for this dataset (e.g. `australia-southeast1`, matching the legacy table's
+   region for consistency). **Google explicitly warns this cannot be easily
+   changed later once exports have begun** — get it right the first time.
+6. Save/confirm the export configuration.
+
+## 7. What Google creates — do not create these tables yourself
+
+Google creates and writes to these tables itself once the export is active.
+Do not manually create a same-named dataset/table — let the export do it, so
+the schema exactly matches what Google's writer expects.
+
+| Table | Grain | Key fields |
+|---|---|---|
+| `searchdata_site_impression` | one row per property × query × country × search_type × device × date | `data_date`, `site_url`, `query`, `is_anonymized_query`, `country`, `search_type`, `device`, `impressions`, `clicks`, `sum_top_position` |
+| `searchdata_url_impression` | as above, plus per-URL | all of the above, plus `url`, `is_anonymized_discover`, several `is_<search_appearance_type>` booleans, and `sum_position` (replaces `sum_top_position`) |
+| `ExportLog` | one row per successful daily export | `agenda`, `namespace`, `data_date`, `epoch_version`, `publish_time` — **only successful exports appear here**; a missing date means that day's export failed, not that there was no data |
+
+**Position is zero-based in these tables, and rows are not pre-aggregated.**
+Google's documented formula for a human-readable (1-based) average position:
+
+```
+SUM(sum_position) / SUM(impressions) + 1        -- searchdata_url_impression
+SUM(sum_top_position) / SUM(impressions) + 1     -- searchdata_site_impression
+```
+
+**Never `AVG()` a row-level position column directly** — the data isn't
+compressed/pre-aggregated, so a naive `AVG(sum_position)` across rows with
+different impression counts will be wrong. Always weight by impressions using
+the `SUM(...)/SUM(impressions)` pattern above. This is already implemented
+correctly in `scripts/seo/sql/reports.sql`'s PRIMARY section — the legacy
+section uses a different formula (§ below) because the legacy table's
+`position` field is already 1-based, not zero-based.
+
+## 8. Timing
+
+- **First export:** up to 48 hours after successful configuration (Google's
+  documented figure — plan around this, don't assume same-day data).
+- **Ongoing exports:** once per day, not necessarily at the same time across
+  the two tables.
+- **Retries:** transitory errors retry immediately; non-transitory errors
+  wait until the next scheduled export and keep retrying for about a week.
+- **No automatic historical backfill** — data from before the export was
+  activated is not backfilled by Google. Use `scripts/seo/backfill.ts`
+  against the Search Console API for that gap (§5).
+- Check `ExportLog` (query 9 in `reports.sql`) to confirm exports are
+  actually landing, rather than assuming silence means success.
+
+## 9. Secrets
+
+- No service account key was created or downloaded for either pipeline.
+  Native export uses Google's own system identity with no key material on
+  this side at all. The legacy collector uses your own `gcloud auth
+  application-default login` session for local/manual runs.
+- `.env.local` and all `.env*` files except `.env.example` are already
+  gitignored (pre-existing repo convention). `.env.example` holds placeholders
+  only.
+- If any future automation genuinely needs a downloadable key, it must go
+  through **Secret Manager**, never `.env`, Git, or a `NEXT_PUBLIC_` variable.
+  The frontend never touches any of this — these are standalone Node scripts,
+  entirely separate from the Next.js build.
+
+## 10. Cost control checklist
+
+- [ ] Link billing (§4) — required before native export can be activated at all.
+- [ ] Set a budget alert once billing is linked: Console → **Billing →
+      Budgets & alerts** → create a small alert (e.g. $5 AUD/month) on
+      `hf-search-console-ab-2026`. (The `gcloud billing budgets create` CLI
+      needs a JSON filter payload — the Console UI is the faster path for a
+      one-off alert like this.)
+- [x] Native export runs once/day by design — no scheduling decision to make
+      or get wrong on this side.
+- [x] No Cloud Run/Cloud Scheduler deployed or recommended as the ongoing
+      pipeline — removed from this document (see §1). Don't stand up compute
+      infrastructure to reproduce a feature Google already runs for free
+      (beyond the storage/query cost) as part of the platform.
+- [x] Both native tables are date-partitioned by Google — reporting queries
+      that filter on a date range only scan the partitions they need.
+- [ ] Once billing is enabled, decide a retention policy consciously (e.g.
+      `bq update --time_partitioning_expiration`). For this business, keep
+      history — 30/60/90-day comparisons, seasonality, and year-over-year
+      trend analysis are exactly what a removalist business's SEO benefits
+      from, and native export gives no reason to aggressively expire data the
+      way the billing-less legacy table's default did.
+
+## 11. Running the legacy collector (backfill / manual / diagnostic only)
 
 ```bash
 # One-time: authenticate your own Google account for local use.
-# This grants the collector's Application Default Credentials, scoped to
-# BigQuery + Search Console read-only — nothing else.
 gcloud auth application-default login \
   --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly
 
@@ -115,17 +267,12 @@ gcloud auth application-default login \
 cp .env.example .env.local
 #   GOOGLE_CLOUD_PROJECT_ID=hf-search-console-ab-2026
 #   SEARCH_CONSOLE_SITE_URL=https://www.cheapadelaideremovalist.com.au/
-#   (the rest have sensible defaults already in .env.example)
 
-# Collect the last complete day (Search Console data is usually 2-3 days
-# behind real-time, so the collector defaults to "2 days ago").
-npm run seo:collect
-
-# Collect a specific day.
-npm run seo:collect -- --date 2026-09-25
-
-# Backfill a range (Search Console typically retains ~16 months).
+# Backfill history from before native export was activated.
 npm run seo:backfill -- --start 2026-08-01 --end 2026-09-25
+
+# Pull one specific day manually (diagnostic/recovery only — not scheduled).
+npm run seo:collect -- --date 2026-09-25
 
 # Check indexing/crawl state for one URL (read-only, does not request indexing).
 npm run seo:inspect -- --url https://www.cheapadelaideremovalist.com.au/service-areas/adelaide-cbd-inner-metro
@@ -133,132 +280,29 @@ npm run seo:inspect -- --url https://www.cheapadelaideremovalist.com.au/service-
 
 `GOOGLE_CLOUD_PROJECT_ID` and `SEARCH_CONSOLE_SITE_URL` are required; the
 script fails fast with a clear error naming the missing variable if either is
-unset.
+unset. You (or the identity you authenticate as) must be added as a Search
+Console user on the property first — Cloud IAM access does not grant this
+(§3 applies here too).
 
-## 5. Idempotency — how re-running is made safe
+### Idempotency (legacy collector only — native export is Google's own concern)
 
-BigQuery **DML** (`DELETE`, `MERGE`, `UPDATE`) is rejected outright on a
-project without billing enabled ("DML queries are not allowed in the free
-tier" — confirmed by an actual failed request during this setup). A naive
-`DELETE WHERE date = ...` then `INSERT` approach would simply not work here.
+BigQuery DML (`DELETE`/`MERGE`/`UPDATE`) is rejected outright on this project
+without billing ("DML queries are not allowed in the free tier" — confirmed
+by an actual failed request while building this). So `upsertDay()` in
+`lib/bigquery.ts` instead runs a **load job** with `writeDisposition:
+WRITE_TRUNCATE` targeted at the date's partition decorator
+(`search_console_daily$20260925`), atomically replacing just that day's data.
+Re-running the same `--date` twice produces exactly the same rows, not
+duplicates — verified live (2 rows in, re-run, still exactly 2 rows).
 
-Instead, `upsertDay()` in `lib/bigquery.ts` runs a **load job** with
-`writeDisposition: WRITE_TRUNCATE` targeted at the date's **partition
-decorator** (`search_console_daily$20260925`). Load jobs are not restricted
-the same way DML is, and `WRITE_TRUNCATE` against a specific partition
-atomically replaces only that day's data — nothing else in the table is
-touched. Re-running the same `--date` twice produces exactly the same rows,
-not duplicates. **This was verified live** (see §2).
-
-## 6. The one real limitation: billing is not enabled
-
-BigQuery's free "sandbox" mode (no billing account) is what makes everything
-in this document work **today** — no cost, no owner action needed to try it.
-It has two consequences worth knowing about:
-
-1. **Tables auto-expire after 60 days** (`defaultTableExpirationMs` /
-   `defaultPartitionExpirationMs` = 5,184,000,000 ms, applied automatically
-   when the dataset was created without billing). For a monitoring pipeline
-   meant to support month-over-month and longer comparisons, this is a real
-   problem — data collected today will be gone in ~60 days unless billing is
-   enabled before then.
-2. **DML stays unavailable** — not a blocker for this collector (it's
-   designed around load jobs specifically because of this), but it would
-   block writing any BigQuery scheduled query, MERGE-based dedup job, or
-   similar tooling you might want to add later.
-3. **Cloud Run / Cloud Scheduler cannot be deployed** without billing — those
-   products require an active billing account regardless of actual usage
-   cost. The automation recipe in §7 is written and ready, but cannot be
-   deployed until this is resolved.
-
-**Owner action required:** link the existing open billing account
-(`My Billing Account 2`, ID `011B17-693F64-529C29`, already on this Google
-account — found via `gcloud billing accounts list`, not created for this
-task) to `hf-search-console-ab-2026`:
-
-```bash
-gcloud billing projects link hf-search-console-ab-2026 \
-  --billing-account=011B17-693F64-529C29
-```
-
-Expected cost for a business this size: effectively **$0/month** — BigQuery's
-always-free tier (1 TB queried/month, 10 GB storage/month) comfortably covers
-daily Search Console exports for one site. Set a budget alert anyway (§9)
-so nothing surprises you.
-
-## 7. Automation (ready to deploy once billing is enabled)
-
-Recommended shape: **Cloud Scheduler → Cloud Run job**, not Cloud Functions —
-the collector already runs as a small, self-contained Node script with no
-HTTP server needed, and Cloud Run jobs (not services) are built for exactly
-this "run to completion, on a schedule" pattern.
-
-```bash
-# 1. Build and deploy as a Cloud Run job (from the repo root).
-gcloud run jobs deploy seo-collector \
-  --source=. \
-  --region=australia-southeast1 \
-  --service-account=seo-monitor@hf-search-console-ab-2026.iam.gserviceaccount.com \
-  --set-env-vars="GOOGLE_CLOUD_PROJECT_ID=hf-search-console-ab-2026,SEARCH_CONSOLE_SITE_URL=https://www.cheapadelaideremovalist.com.au/" \
-  --command="npx" \
-  --args="tsx,scripts/seo/collect.ts" \
-  --max-retries=1 \
-  --cpu=1 --memory=512Mi \
-  --task-timeout=300
-
-# 2. Schedule it daily, comfortably after Search Console data is likely final
-# (mid-morning UTC covers the "2 days ago" default with margin).
-gcloud scheduler jobs create http seo-collector-daily \
-  --location=australia-southeast1 \
-  --schedule="0 9 * * *" \
-  --uri="https://australia-southeast1-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/hf-search-console-ab-2026/jobs/seo-collector:run" \
-  --http-method=POST \
-  --oauth-service-account-email=seo-monitor@hf-search-console-ab-2026.iam.gserviceaccount.com
-```
-
-You'll also need to grant the service account `roles/run.invoker` for the
-Scheduler → Cloud Run call to work, and confirm the service account has been
-added as a Search Console user (§3) *before* the first scheduled run — a
-missing property permission fails loudly (403) rather than silently.
-
-This was **not deployed** as part of this task — it requires billing (§6),
-which is an owner decision, not something to enable unilaterally.
-
-## 8. Secrets
-
-- No service account key was created or downloaded. Local runs use your own
-  `gcloud auth application-default login` session; the Cloud Run deployment
-  in §7 uses the service account's *runtime identity* (no key file at all).
-- If a deployment path genuinely needs a downloadable key (it shouldn't, per
-  above), it must go through **Secret Manager**, never into `.env`, Git, or a
-  `NEXT_PUBLIC_` variable. This app's frontend never touches any of this —
-  the collector is a standalone Node script, entirely separate from the
-  Next.js build.
-- `.env.local` and all `.env*` files except `.env.example` are already
-  gitignored (pre-existing repo convention).
-
-## 9. Cost control checklist
-
-- [ ] Set a budget alert once billing is linked: `gcloud billing budgets
-      create --billing-account=011B17-693F64-529C29 --display-name="SEO
-      monitoring" --budget-amount=5AUD` (adjust threshold rules in Console —
-      the CLI budget API needs a JSON filter payload, easier to do this one
-      step in the Console UI: **Billing → Budgets & alerts**).
-- [x] One scheduled execution/day, not continuous — kept in the recipe above.
-- [x] Cloud Run job resources kept minimal (`--cpu=1 --memory=512Mi`) — this
-      script does nothing CPU/memory-intensive.
-- [x] BigQuery table is partitioned by date — reporting queries that filter
-      on a date range only scan the partitions they need, not the whole table.
-- [ ] Once billing is enabled, decide a retention policy consciously (e.g.
-      `bq update --time_partitioning_expiration` for e.g. 400 days) rather
-      than leaving the default forever-retention that billing removes.
-
-## 10. Troubleshooting
+## 12. Troubleshooting
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| `403 insufficientPermissions` / `ACCESS_TOKEN_SCOPE_INSUFFICIENT` calling Search Console | Your ADC session wasn't granted the `webmasters.readonly` scope | Re-run the `gcloud auth application-default login --scopes=...` command in §4 |
-| `403 ... does not have permission to access site` | The Google identity you're running as hasn't been added in Search Console → Users and permissions | Complete §3 — this is a Search Console setting, not a Cloud IAM setting |
-| `403 ... Billing has not been enabled` on any BigQuery call | You're on a code path that needs DML (this collector shouldn't hit this — see §5) or something outside this pipeline attempted DML | Confirm you're using `upsertDay()` as shipped; if extending the pipeline, prefer load jobs over DML until billing is linked |
-| Table appears empty after ~60 days | Sandbox auto-expiration (§6) | Link billing before that window closes if you need longer retention |
+| No native export tables appear after 48+ hours | Export not actually activated, or billing wasn't linked when you tried | Re-check §4 and §6; the export setup screen in Search Console will show an error if billing/API prerequisites aren't met |
+| A date is missing from `ExportLog` | That day's export failed (retries for ~1 week, then gives up) | Cross-check with `scripts/seo/collect.ts --date <that-date>` as a manual fallback for that one day |
+| `403 ... Billing has not been enabled` from BigQuery | Billing genuinely isn't linked yet | Complete §4 — this blocks native export entirely, unlike the legacy collector |
+| Legacy collector: `403 insufficientPermissions` / `ACCESS_TOKEN_SCOPE_INSUFFICIENT` | Your ADC session wasn't granted the `webmasters.readonly` scope | Re-run the `gcloud auth application-default login --scopes=...` command in §11 |
+| Legacy collector: `403 ... does not have permission to access site` | The Google identity you're running as hasn't been added in Search Console → Users and permissions | This is a Search Console setting, not a Cloud IAM setting — see §3 |
+| Legacy table appears empty after ~60 days | Sandbox auto-expiration (no billing) | Link billing (§4) before that window closes if you need the legacy backfill to persist |
 | `Missing required environment variable` | `.env.local` not created/filled | `cp .env.example .env.local` and fill in the two required values |

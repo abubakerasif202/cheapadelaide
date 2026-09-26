@@ -8,23 +8,34 @@ created from speculation — only from evidence below.
 
 ## 0. Implementation platform: Google Cloud, first-party only
 
-The data pipeline behind this plan is:
+**Primary pipeline:**
 
-**Search Console (official API) → Google Cloud project `hf-search-console-ab-2026`
-→ BigQuery dataset `seo_monitoring` → SQL reports.**
+**Google Search → Search Console's official Bulk Data Export (Google-managed,
+daily) → Google Cloud project `hf-search-console-ab-2026` → BigQuery dataset
+`searchconsole` (Google-created tables `searchdata_site_impression`,
+`searchdata_url_impression`, `ExportLog`) → SQL reports.**
 
-Full setup, credentials, and operating instructions live in
+**Secondary pipeline** (backfill / manual / diagnostics only — not an ongoing
+parallel source): the custom API collector in `scripts/seo/` writes to the
+legacy `seo_monitoring.search_console_daily` table. It exists specifically for
+history from before native export was activated, manual recovery, and URL
+Inspection — see `GOOGLE_CLOUD_SEO_SETUP.md` §5 for exactly when to use it.
+
+Full setup, credentials, and operating instructions for both pipelines live in
 [`GOOGLE_CLOUD_SEO_SETUP.md`](./GOOGLE_CLOUD_SEO_SETUP.md) — read that before
-running anything below. Reusable report queries live in
+running anything below. Reusable report queries (both PRIMARY/native and
+LEGACY/custom, clearly labeled) live in
 [`scripts/seo/sql/reports.sql`](./scripts/seo/sql/reports.sql).
 
 This is explicitly **not** a GSC Wizard, ChatGPT Search Console plugin, or any
 other third-party connector — every step uses Google's own APIs and Google
-Cloud infrastructure that this business account already controls. Where a
+Cloud infrastructure that this business account already controls, and the
+primary path is Google's own managed export rather than any custom
+infrastructure this repo has to operate and monitor for failures. Where a
 metric below can be read directly in the Search Console UI, that's still the
 fastest path for a quick check; BigQuery is for anything needing history
 beyond what the UI shows, cross-dimension analysis (query × page × device ×
-date), or the specific report queries in §14 below.
+date), or the specific report queries below.
 
 ## 1. Google Search Console — what to watch
 
@@ -154,4 +165,7 @@ Always state which of the two you're looking at — they can disagree, and only 
 
 ## 11. First action after this deploys
 
-**Open Google Search Console → Sitemaps, and confirm `sitemap.xml` shows "Success" with the current URL count (37).** Then use the URL Inspection tool on the 6 new region pages to request indexing if they haven't been crawled yet. Everything else in this plan depends on data that only starts accumulating once GSC has actually crawled these URLs — so this is the one action that unblocks the rest of the measurement plan.
+Two independent first actions — do both, neither blocks the other:
+
+1. **Open Google Search Console → Sitemaps, and confirm `sitemap.xml` shows "Success" with the current URL count (37).** Then use the URL Inspection tool on the 6 new region pages to request indexing if they haven't been crawled yet. This is what unblocks *rankings/impressions data existing at all*.
+2. **Activate Bulk Data Export** per `GOOGLE_CLOUD_SEO_SETUP.md` §4 and §6 (link billing, then configure the export in Search Console with project `hf-search-console-ab-2026`). First export lands within 48 hours of activation, and does **not** backfill history from before activation — the sooner this is turned on, the less has to be recovered later via the legacy collector's backfill script.
