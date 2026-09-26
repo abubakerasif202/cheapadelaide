@@ -1,17 +1,7 @@
 export { CTASection } from "./CTASection";
 export type { CTASectionProps } from "./CTASection";
-export { Hero } from "./Hero";
-export type { HeroProps } from "./Hero";
-export { PageHero } from "./PageHero";
-export type { PageHeroProps } from "./PageHero";
-export { BentoGrid, BentoTile } from "./BentoGrid";
-export type { BentoGridProps, BentoTileProps } from "./BentoGrid";
 export { ProcessTimeline } from "./ProcessTimeline";
 export type { ProcessTimelineProps, ProcessStep } from "./ProcessTimeline";
-export { RegionCard } from "./RegionCard";
-export type { RegionCardProps } from "./RegionCard";
-export { ServiceCard } from "./ServiceCard";
-export type { ServiceCardProps } from "./ServiceCard";
 export { TrustCard } from "./TrustCard";
 export type { TrustCardProps } from "./TrustCard";
 export { ContactMethod } from "./ContactMethod";
