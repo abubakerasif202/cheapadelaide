@@ -167,6 +167,14 @@ export default function ServiceAreasPage() {
                     <p className="text-xs text-slate-500 italic">
                       {region.serviceNotes}
                     </p>
+                    <Link
+                      href={`/service-areas/${region.slug}`}
+                      className="inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B] transition"
+                    >
+                      <MapPin className="h-3.5 w-3.5" />
+                      <span>View {region.name} Area Page</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </Link>
                     {guideLink && (
                       <Link
                         href={guideLink.href}

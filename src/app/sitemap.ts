@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { business } from "@/config/business";
 import { services } from "@/data/services";
 import { blogPosts } from "@/data/blog";
+import { adelaideRegions } from "@/data/areas";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = business.domain;
@@ -36,5 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: post.isPillar ? 0.9 : 0.8,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
+  // Published service-area region pages
+  const areaRoutes = adelaideRegions.map((region) => ({
+    url: `${baseUrl}/service-areas/${region.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes];
 }
