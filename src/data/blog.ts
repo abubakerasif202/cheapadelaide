@@ -1060,7 +1060,7 @@ export const blogPosts: BlogPost[] = [
     tier: 3,
     category: "Specialist Removals",
     title: "How to Find Same-Day or Short-Notice Removalists in Adelaide",
-    seoTitle: "Last Minute Removalists Adelaide | Same-Day Emergency Moving",
+    seoTitle: "Finding Last-Minute Removalists in Adelaide | Moving Guide",
     metaDescription:
         "If you need to move at short notice in Adelaide, here are practical steps for contacting providers and checking availability and quote terms.",
     primaryKeyword: "last minute removalists adelaide",
