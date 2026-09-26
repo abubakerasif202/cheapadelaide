@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:collect": "tsx scripts/seo/collect.ts",
+    "seo:backfill": "tsx scripts/seo/backfill.ts",
+    "seo:inspect": "tsx scripts/seo/inspect.ts"
   },
   "dependencies": {
     "lucide-react": "^1.47.0",
@@ -15,13 +18,17 @@
     "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@google-cloud/bigquery": "^9.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
+    "google-auth-library": "^11.1.0",
+    "googleapis": "^182.0.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

@@ -6,6 +6,26 @@ internal linking, and technical/accessibility QA are complete and live
 handover from **building** to **measuring**. No further pages should be
 created from speculation — only from evidence below.
 
+## 0. Implementation platform: Google Cloud, first-party only
+
+The data pipeline behind this plan is:
+
+**Search Console (official API) → Google Cloud project `hf-search-console-ab-2026`
+→ BigQuery dataset `seo_monitoring` → SQL reports.**
+
+Full setup, credentials, and operating instructions live in
+[`GOOGLE_CLOUD_SEO_SETUP.md`](./GOOGLE_CLOUD_SEO_SETUP.md) — read that before
+running anything below. Reusable report queries live in
+[`scripts/seo/sql/reports.sql`](./scripts/seo/sql/reports.sql).
+
+This is explicitly **not** a GSC Wizard, ChatGPT Search Console plugin, or any
+other third-party connector — every step uses Google's own APIs and Google
+Cloud infrastructure that this business account already controls. Where a
+metric below can be read directly in the Search Console UI, that's still the
+fastest path for a quick check; BigQuery is for anything needing history
+beyond what the UI shows, cross-dimension analysis (query × page × device ×
+date), or the specific report queries in §14 below.
+
 ## 1. Google Search Console — what to watch
 
 Check weekly for the first month, then fortnightly:
@@ -76,6 +96,8 @@ When a page has **meaningful impressions** and a **reasonable average position**
 
 Never keyword-stuff a title to chase CTR. Never change more than a few titles at once — it destroys the ability to attribute any CTR change to a specific edit.
 
+> Query 3 in `scripts/seo/sql/reports.sql` ("Low-CTR opportunities") gives the raw page×query numbers to start from — it deliberately has no CTR threshold baked in, since "weak" only means something relative to that query's position.
+
 ## 6. Cannibalisation monitoring
 
 If two of our own pages start appearing for the same important commercial query (visible via Search Console's per-query page breakdown):
@@ -84,6 +106,8 @@ If two of our own pages start appearing for the same important commercial query 
 - Compare position and clicks: is one page clearly dominant and the other an occasional fluke? Usually not a real problem.
 - Only treat it as real cannibalisation if both pages are getting meaningful, sustained impressions for the *same* query with *similar* positions over multiple weeks.
 - If confirmed: strengthen internal links toward the intended canonical page, and/or adjust the weaker page's focus — don't redirect or delete based on one week of data, and never on a whim.
+
+> Query 5 in `scripts/seo/sql/reports.sql` ("Cannibalisation candidates") returns queries where more than one page clears 20+ combined impressions — a candidate list to review manually, not an automatic verdict.
 
 ## 7. Local SEO measurement (the six region pages)
 
@@ -94,6 +118,8 @@ Watch whether each region page starts earning impressions for:
 - the specific suburb names listed in its `keyHubs`
 
 **Do not create individual suburb pages** (e.g. a standalone Glenelg page) unless Search Console shows a specific suburb generating substantial, sustained query volume that the regional page isn't capturing — and even then, weigh that against the doorway-page risk this architecture was deliberately built to avoid.
+
+> Query 7 in `scripts/seo/sql/reports.sql` ("Regional SEO") filters straight to the six `/service-areas/*` pages.
 
 ## 8. Google Business Profile consistency
 
