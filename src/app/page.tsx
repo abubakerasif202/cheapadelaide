@@ -138,9 +138,9 @@ export default function HomePage() {
                       src="/brand/hero-truck.webp"
                       alt="Removal truck used for Adelaide moving services"
                       fill
-                      priority
+                      preload
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 500px"
+                      sizes="(min-width: 1280px) 479px, (min-width: 1024px) calc(41.667vw - 54.667px), (min-width: 640px) 448px, calc(100vw - 32px)"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071933]/80 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white">

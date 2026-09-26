@@ -91,11 +91,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
     author: {
       "@type": "Organization",
+      "@id": `${business.domain}/#moving-company`,
       name: business.name,
       url: business.domain,
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${business.domain}/#moving-company`,
       name: business.name,
       url: business.domain,
       logo: {

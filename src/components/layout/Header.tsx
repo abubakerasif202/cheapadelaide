@@ -35,7 +35,7 @@ export function Header() {
       <header className={"ca-header" + (isScrolled ? " ca-header--scrolled" : "")}>
         <div className="ca-container ca-header__row">
           <Link href="/" className="ca-header__logo" aria-label={`${business.name} – Home`}>
-            <Image src="/brand/logo-horizontal.png" alt={business.name} width={240} height={56} priority />
+            <Image src="/brand/logo-horizontal.png" alt={business.name} width={240} height={56} loading="lazy" />
           </Link>
 
           <nav className="ca-nav" aria-label="Main navigation">

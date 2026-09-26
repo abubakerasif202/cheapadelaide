@@ -94,6 +94,7 @@ export function generateMovingCompanySchema() {
   return {
     "@context": "https://schema.org",
     "@type": "MovingCompany",
+    "@id": `${business.domain}/#moving-company`,
     name: business.name,
     description: siteConfig.description,
     image: `${business.domain}/brand/hero-truck.webp`,
@@ -187,10 +188,7 @@ export function generateServiceSchema(service: {
     serviceType: service.title,
     description: service.shortDescription,
     provider: {
-      "@type": "MovingCompany",
-      name: business.name,
-      url: business.domain,
-      telephone: business.contact.primaryPhone,
+      "@id": `${business.domain}/#moving-company`,
     },
     areaServed: {
       "@type": "City",

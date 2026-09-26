@@ -24,18 +24,7 @@ export default function ContactPage() {
     name: "Contact Cheap Adelaide Removalist",
     url: `${business.domain}/contact`,
     mainEntity: {
-      "@type": "MovingCompany",
-      name: business.name,
-      telephone: business.contact.primaryPhone,
-      email: business.contact.email,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: business.location.street,
-        addressLocality: business.location.suburb,
-        addressRegion: business.location.state,
-        postalCode: business.location.postcode,
-        addressCountry: "AU",
-      },
+      "@id": `${business.domain}/#moving-company`,
     },
   };
 

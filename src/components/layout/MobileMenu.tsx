@@ -71,7 +71,7 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
       >
         <div className="ca-drawer__head">
           <Link href="/" onClick={dismiss}>
-            <Image src="/brand/logo-horizontal.png" alt={business.name} width={180} height={42} priority />
+            <Image src="/brand/logo-horizontal.png" alt={business.name} width={180} height={42} />
           </Link>
           <button type="button" className="ca-iconbtn" onClick={dismiss} aria-label="Close menu">
             <Icon name="x" size={20} />

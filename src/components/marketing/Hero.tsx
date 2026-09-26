@@ -74,7 +74,14 @@ export function Hero({
           {imageSrc ? (
             <div className="ca-hero__media">
               <div className="ca-hero__img">
-                <Image src={imageSrc} alt={imageAlt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" priority />
+                <Image
+                  src={imageSrc}
+                  alt={imageAlt}
+                  fill
+                  sizes="(min-width: 1280px) 479px, (min-width: 1024px) calc(41.667vw - 54.667px), (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
+                  className="object-cover"
+                  preload
+                />
                 {illustrative ? <span className="ca-media__tag">Illustrative image</span> : null}
                 <div className="ca-hero__caption">
                   <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>

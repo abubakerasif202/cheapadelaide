@@ -9,7 +9,7 @@ import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 export const metadata: Metadata = constructMetadata({
   title: "About Us | Cheap Adelaide Removalist",
   description:
-    "Learn about Cheap Adelaide Removalist: an affordable moving service backed by an established local Adelaide removals operation with transparent rates.",
+    "Learn about Cheap Adelaide Removalist, its Adelaide moving services, published starting rates and operating base in Elizabeth Vale.",
   canonical: "/about",
 });
 
@@ -38,7 +38,7 @@ export default function AboutPage() {
               About Cheap Adelaide Removalist
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              We provide affordable, well-organised moving services for Adelaide homes, apartments, and businesses, backed by an established local removals infrastructure.
+              We provide affordable, well-organised moving services for Adelaide homes, apartments, and businesses from our stated operating base in Elizabeth Vale.
             </p>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function AboutPage() {
                     alt="Cheap Adelaide Removalist Branded Moving Truck"
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 500px"
+                    sizes="(min-width: 1280px) 479px, (min-width: 1024px) calc(41.667vw - 54.667px), (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
                   />
                 </div>
                 <div className="p-6 space-y-4">
