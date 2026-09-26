@@ -63,7 +63,7 @@ export const adelaideRegions: RegionArea[] = [
       "Our operating base is at Elizabeth Vale, so moves starting or finishing in this area are a familiar route for our crews.",
       "Salisbury and Munno Para include a mix of established homes and newer estates, with driveway widths that vary block to block.",
       "Golden Grove and Mawson Lakes have many two-storey homes; let us know about internal stairs when describing furniture.",
-      "Gawler moves may involve a longer travel distance, which is factored into the time-based rate rather than a separate surcharge.",
+      "Gawler moves may involve a longer travel distance; share your pickup and delivery suburbs so this can be factored into your quote.",
     ],
     suitedFor: [
       "House removals within the northern suburbs and Playford council area",
@@ -79,7 +79,7 @@ export const adelaideRegions: RegionArea[] = [
       {
         question: "Do you charge extra for moves further out, like Gawler?",
         answer:
-          "Longer distances add to the time-based rate through travel. Share your pickup and delivery suburbs so this can be discussed when quoting.",
+          "Travel distance is one of the factors that can affect a quote. Share your pickup and delivery suburbs so this can be discussed when quoting.",
       },
     ],
   },
@@ -168,7 +168,7 @@ export const adelaideRegions: RegionArea[] = [
       "Blackwood and parts of Hallett Cove sit on hillier ground, so note any steps between the street and front door.",
       "Marion and Morphett Vale include large family homes; sharing room-by-room inventory helps with an accurate time estimate.",
       "Brighton's beachside streets can have similar parking considerations to the western coastal suburbs.",
-      "Noarlunga moves cover a longer stretch of the south, so travel time is part of the overall booking window.",
+      "Noarlunga moves cover a longer stretch of the south, so allow extra travel time when planning your preferred booking window.",
     ],
     suitedFor: [
       "Family house removals across Marion and Morphett Vale",
