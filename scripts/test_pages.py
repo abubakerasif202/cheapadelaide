@@ -82,7 +82,11 @@ for path, marker in [("/sitemap.xml", "<urlset"), ("/robots.txt", "Sitemap:")]:
             urls = [item.text for item in root.findall("{*}url/{*}loc")]
             valid = valid and len(urls) == len(set(urls)) and all("https://www.cheapadelaideremovalist.com.au" in url for url in urls)
             valid = valid and all(
-                f"https://www.cheapadelaideremovalist.com.au{route.rstrip('/')}" in urls
+                (
+                    "https://www.cheapadelaideremovalist.com.au/"
+                    if route == "/"
+                    else f"https://www.cheapadelaideremovalist.com.au{route.rstrip('/')}"
+                ) in urls
                 for route in ROUTES
             )
         else:
