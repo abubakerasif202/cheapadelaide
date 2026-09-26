@@ -656,7 +656,7 @@ textarea.ca-input { min-height: 96px; resize: vertical; }
 @media (min-width: 1024px) { .ca-footer__grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 .ca-footer__brand { display: flex; flex-direction: column; gap: 16px; max-width: 400px; }
 .ca-footer__brand img { height: 48px; width: auto; align-self: flex-start; }
-.ca-footer h4 { font-family: var(--font-heading); font-size: 13px; font-weight: var(--fw-bold); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--white); margin-bottom: 16px; }
+.ca-footer h4, .ca-footer__title { font-family: var(--font-heading); font-size: 13px; font-weight: var(--fw-bold); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--white); margin-bottom: 16px; }
 .ca-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: var(--fs-sm); }
 .ca-footer a:not(.ca-btn) { color: var(--slate-300); }
 .ca-footer a:not(.ca-btn):hover { color: var(--orange-500); }

@@ -23,9 +23,9 @@ export function Footer() {
         <div className="ca-container ca-footer__strip-row">
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <span className="ca-eyebrow">Ready to Book Your Adelaide Move?</span>
-            <h3 className="ca-h2" style={{ fontSize: "var(--fs-h3)" }}>
+            <p className="ca-h2 font-bold" style={{ fontSize: "var(--fs-h3)" }}>
               Discuss Your Adelaide Move With Us.
-            </h3>
+            </p>
             <p className="ca-small">2 Movers from $79 / 30 min • 3 Movers from $99 / 30 min • Open daily</p>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
@@ -61,7 +61,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4>Removals Services</h4>
+            <p className="ca-footer__title">Removals Services</p>
             <ul>
               {services.map((service) => (
                 <li key={service.href}>
@@ -72,7 +72,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4>Quick Links</h4>
+            <p className="ca-footer__title">Quick Links</p>
             <ul>
               {QUICK_LINKS.map(([title, href]) => (
                 <li key={href}>
@@ -88,7 +88,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4>Direct Contact</h4>
+            <p className="ca-footer__title">Direct Contact</p>
             <ul className="ca-footer__contact">
               <li>
                 <Icon name="phone" size={18} />

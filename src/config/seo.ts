@@ -102,6 +102,8 @@ export function generateMovingCompanySchema() {
     url: business.domain,
     telephone: business.contact.primaryPhone,
     email: business.contact.email,
+    priceRange: "$$",
+    currenciesAccepted: "AUD",
     address: {
       "@type": "PostalAddress",
       streetAddress: business.location.street,
@@ -110,6 +112,22 @@ export function generateMovingCompanySchema() {
       postalCode: business.location.postcode,
       addressCountry: "AU",
     },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "07:00",
+        closes: "20:00",
+      },
+    ],
     areaServed: [
       {
         "@type": "City",
@@ -127,9 +145,11 @@ export function generateWebSiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${business.domain}/#website`,
     name: business.name,
     url: business.domain,
     description: siteConfig.description,
+    inLanguage: "en-AU",
   };
 }
 

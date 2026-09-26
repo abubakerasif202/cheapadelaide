@@ -10,12 +10,14 @@ interface QuoteFormProps {
   defaultMoveType?: string;
   defaultTeam?: string;
   sourcePage?: string;
+  headingLevel?: "h2" | "h3";
 }
 
 export function QuoteForm({
   defaultMoveType = "House",
   defaultTeam = "Not Sure",
   sourcePage = "Quote Page",
+  headingLevel = "h3",
 }: QuoteFormProps) {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -157,13 +159,15 @@ export function QuoteForm({
     );
   }
 
+  const HeadingTag = headingLevel;
+
   return (
     <form onSubmit={handleSubmit} className="ca-form">
       <div className="ca-form__head">
         <span className="ca-badge ca-badge--accent">Quote Request</span>
-        <h3 className="ca-h2" style={{ fontSize: "var(--fs-h3)" }}>
+        <HeadingTag className="ca-h2" style={{ fontSize: "var(--fs-h3)" }}>
           Tell Us About Your Move
-        </h3>
+        </HeadingTag>
         <p className="ca-small">
           Fields marked with <span style={{ color: "#C2410C", fontWeight: 700 }}>*</span> are required. Submission is handled by our
           online form provider; see our privacy policy for details.

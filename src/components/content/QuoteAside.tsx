@@ -16,9 +16,9 @@ export function QuoteAside({
   return (
     <div className="ca-tile ca-tile--navy ca-on-dark" style={{ padding: 28, borderRadius: "var(--radius-tile)", gap: 0 }}>
       <span className="ca-eyebrow">{eyebrow}</span>
-      <h3 className="ca-h3" style={{ marginTop: 8, fontSize: 20 }}>
+      <p className="ca-h3 font-bold" style={{ marginTop: 8, fontSize: 20 }}>
         {title}
-      </h3>
+      </p>
       <p className="ca-small" style={{ marginTop: 8 }}>
         {text}
       </p>

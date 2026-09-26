@@ -72,6 +72,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                 defaultMoveType={defaultMoveType}
                 defaultTeam={defaultTeam}
                 sourcePage="Get A Quote Page"
+                headingLevel="h2"
               />
             </div>
 
@@ -107,9 +108,9 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
 
               {/* Rates Recap */}
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
-                <h4 className="text-sm font-bold uppercase tracking-wider text-[#0B2D5B]">
+                <p className="text-sm font-bold uppercase tracking-wider text-[#0B2D5B]">
                   Starting Rates Reference
-                </h4>
+                </p>
                 <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-700">
                   <div className="flex items-center justify-between font-bold text-[#0B2D5B]">
                     <span>2 Movers + Truck</span>
@@ -133,9 +134,9 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
 
               {/* Moving Inclusions */}
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm space-y-2.5 text-xs text-slate-600">
-                <h4 className="font-bold text-[#0B2D5B] text-sm mb-2">
+                <p className="font-bold text-[#0B2D5B] text-sm mb-2">
                   Before You Submit:
-                </h4>
+                </p>
                 <div className="flex items-start gap-2">
                     <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-[#A63F00] shrink-0 mt-0.5" />
                   <span>Include pickup and delivery suburbs</span>

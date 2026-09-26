@@ -15,7 +15,7 @@ export function PricingCards() {
             featured={plan.popular}
             icon={plan.id === "two-movers" ? "users" : "truck"}
             cta={plan.ctaText}
-            href={`/get-a-quote?team=${plan.id}`}
+            href="/get-a-quote"
           />
         ))}
       </div>

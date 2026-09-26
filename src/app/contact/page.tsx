@@ -106,7 +106,7 @@ export default function ContactPage() {
 
             {/* Quote Form */}
             <div className="lg:col-span-7">
-              <QuoteForm sourcePage="Contact Page" />
+              <QuoteForm sourcePage="Contact Page" headingLevel="h2" />
             </div>
           </div>
         </div>

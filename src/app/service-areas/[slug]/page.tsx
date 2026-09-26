@@ -203,9 +203,9 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
       {/* 3. RELATED SERVICES */}
       <section className="py-16 sm:py-20 bg-slate-50 border-y border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h3 className="text-xl font-bold text-[#0B2D5B] mb-8 text-center sm:text-left">
+          <h2 className="text-xl font-bold text-[#0B2D5B] mb-8 text-center sm:text-left">
             Services Available in {region.name}
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featuredServices.map((svc) => (
               <Link
@@ -213,14 +213,14 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
                 href={`/services/${svc.slug}`}
                 className="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#FF6A00] hover:shadow-md"
               >
-                <h4 className="text-base font-bold text-[#0B2D5B] group-hover:text-[#A63F00] transition-colors">
+                <h3 className="text-base font-bold text-[#0B2D5B] group-hover:text-[#A63F00] transition-colors">
                   {svc.title}
-                </h4>
+                </h3>
                 <p className="mt-1 text-xs text-slate-500 line-clamp-2">
                   {svc.shortDescription}
                 </p>
                 <div className="mt-4 flex items-center gap-1.5 text-xs font-bold text-[#A63F00]">
-                  <span>Learn more</span>
+                  <span>View {svc.title} Details</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </div>
               </Link>
@@ -255,9 +255,9 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
       {/* 5. NEARBY AREAS */}
       <section className="py-16 bg-slate-50 border-t border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h3 className="text-xl font-bold text-[#0B2D5B] mb-8 text-center sm:text-left">
+          <h2 className="text-xl font-bold text-[#0B2D5B] mb-8 text-center sm:text-left">
             Other Adelaide Service Areas
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {otherRegions.map((r) => (
               <Link
@@ -270,7 +270,7 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
                   <span>{r.name}</span>
                 </div>
                 <div className="mt-4 flex items-center gap-1.5 text-xs font-bold text-[#A63F00]">
-                  <span>View area</span>
+                  <span>View {r.name} Details</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </div>
               </Link>

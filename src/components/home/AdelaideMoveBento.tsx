@@ -83,9 +83,9 @@ export function AdelaideMoveBento() {
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
                   Team option
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0B2D5B] tracking-tight">
+                <p className="text-2xl sm:text-3xl font-extrabold text-[#0B2D5B] tracking-tight">
                   {currentCalc.team}
-                </h3>
+                </p>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {currentCalc.bestFor}
                 </p>
@@ -110,7 +110,7 @@ export function AdelaideMoveBento() {
 
               {/* Right Column: Quote details */}
               <div className="md:col-span-6 rounded-3xl bg-slate-50 p-6 border border-slate-100 space-y-3.5">
-                <h4 className="text-xs font-bold text-[#0B2D5B]">Details to include in your quote</h4>
+                <p className="text-xs font-bold text-[#0B2D5B]">Details to include in your quote</p>
                 <ul className="space-y-2 text-xs text-slate-600">
                   {currentCalc.quoteDetails.map((inc) => (
                     <li key={inc} className="flex items-start gap-2">
@@ -128,10 +128,10 @@ export function AdelaideMoveBento() {
               {business.pricing.disclaimer}
             </span>
             <Link
-              href={`/get-a-quote?team=${selectedHomeType === "unit" ? "two-movers" : "three-movers"}`}
+              href="/get-a-quote"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-6 py-3 text-xs sm:text-sm font-bold text-[#071933] shadow-md transition hover:bg-orange-300 active:scale-[0.98]"
             >
-              <span>Lock In This Configuration</span>
+              <span>Request Free Moving Quote</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -153,9 +153,9 @@ export function AdelaideMoveBento() {
               </span>
             </div>
 
-            <h3 className="mt-6 text-xl sm:text-2xl font-bold font-[family-name:var(--font-heading)] leading-snug">
+            <p className="mt-6 text-xl sm:text-2xl font-bold font-[family-name:var(--font-heading)] leading-snug">
               Based in Elizabeth Vale
-            </h3>
+            </p>
 
             <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
               {business.location.fullAddress}. Contact us with your pickup and delivery suburbs to discuss availability for your route and date.
@@ -171,7 +171,7 @@ export function AdelaideMoveBento() {
               href="/service-areas"
               className="inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-orange-300 hover:text-white transition"
             >
-              <span>View areas and routes</span>
+              <span>View Service Areas & Routes</span>
               <ChevronRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -188,9 +188,9 @@ export function AdelaideMoveBento() {
               <span>Consumer Protection</span>
             </div>
 
-            <h3 className="mt-4 text-xl sm:text-2xl font-bold text-[#0B2D5B] font-[family-name:var(--font-heading)]">
+            <p className="mt-4 text-xl sm:text-2xl font-bold text-[#0B2D5B] font-[family-name:var(--font-heading)]">
               Check the full quote terms
-            </h3>
+            </p>
 
             <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
               Ask which starting rates, travel charges and access conditions apply to your move before booking.
@@ -226,7 +226,7 @@ export function AdelaideMoveBento() {
               href="/pricing"
               className="inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#0B2D5B] hover:text-[#A63F00] transition"
             >
-              <span>Explore our transparent pricing policy</span>
+              <span>View Pricing & Rates</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -240,9 +240,9 @@ export function AdelaideMoveBento() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                   Moving around Adelaide
                 </span>
-                <h3 className="mt-1 text-2xl font-bold text-[#0B2D5B] font-[family-name:var(--font-heading)]">
+                <p className="mt-1 text-2xl font-bold text-[#0B2D5B] font-[family-name:var(--font-heading)]">
                   Plan for your pickup area and access
-                </h3>
+                </p>
               </div>
               <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 border border-slate-200 shrink-0">
                 Contact hours: {business.hours}

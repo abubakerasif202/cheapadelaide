@@ -255,9 +255,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </svg>
                 </span>
                 <div>
-                  <h4 className="ca-h4" style={{ fontSize: 16 }}>
+                  <p className="ca-h4 font-bold" style={{ fontSize: 16 }}>
                     Cheap Adelaide Removalist Operational Standards
-                  </h4>
+                  </p>
                   <p className="ca-caption">
                     {business.location.fullAddress} • Open 7 Days: 7:00 am – 8:00 pm
                   </p>
@@ -282,9 +282,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {!post.isPillar && (
               <div className="ca-card ca-card--compact" style={{ borderColor: "var(--border-accent-soft)", background: "var(--orange-50)" }}>
                 <span className="ca-eyebrow">Core Topic Guide</span>
-                <h4 className="ca-h4" style={{ fontSize: 14, marginTop: 4 }}>
+                <p className="ca-h4 font-bold" style={{ fontSize: 14, marginTop: 4 }}>
                   The Complete Guide to Cheap Removalists & Moving House in Adelaide
-                </h4>
+                </p>
                 <p className="ca-caption" style={{ marginTop: 6 }}>
                   Explore our pillar resource covering moving costs, team configurations, and council access across
                   Greater Adelaide.
@@ -298,14 +298,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Related Guides Cluster */}
             {relatedArticlesData.length > 0 && (
               <div className="ca-card ca-card--compact">
-                <h3 className="ca-aside-label">Related Moving Guides</h3>
+                <p className="ca-aside-label">Related Moving Guides</p>
                 <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 14 }}>
                   {relatedArticlesData.map((related) => (
                     <Link key={related.slug} href={`/blog/${related.slug}`} className="ca-group" style={{ display: "block" }}>
                       <span className="ca-caption">{related.category}</span>
-                      <h4 className="ca-h4 ca-card__title" style={{ fontSize: 14, marginTop: 2 }}>
+                      <p className="ca-h4 ca-card__title font-bold" style={{ fontSize: 14, marginTop: 2 }}>
                         {related.title}
-                      </h4>
+                      </p>
                     </Link>
                   ))}
                 </div>
@@ -315,7 +315,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {/* Related Services */}
             {relatedServicesData.length > 0 && (
               <div className="ca-card ca-card--compact">
-                <h3 className="ca-aside-label">Related Services &amp; Pages</h3>
+                <p className="ca-aside-label">Related Services &amp; Pages</p>
                 <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 2 }}>
                   {relatedServicesData.map((srv) => (
                     <Link

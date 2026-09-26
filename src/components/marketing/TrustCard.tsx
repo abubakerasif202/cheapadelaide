@@ -12,9 +12,9 @@ export function TrustCard({ icon, title, description, href }: TrustCardProps) {
   const body = (
     <>
       <IconTile name={icon} />
-      <h3 className="ca-h4" style={{ marginTop: 16 }}>
+      <p className="ca-h4" style={{ marginTop: 16, fontWeight: 700 }}>
         {title}
-      </h3>
+      </p>
       <p className="ca-small" style={{ marginTop: 6, overflowWrap: "anywhere" }}>
         {description}
       </p>

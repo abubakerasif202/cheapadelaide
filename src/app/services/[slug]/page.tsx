@@ -136,7 +136,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
-                  href={`/get-a-quote?service=${service.slug}`}
+                  href="/get-a-quote"
                   className="rounded-xl bg-[#FF6A00] px-6 py-3.5 text-sm font-bold text-[#071933] shadow-lg shadow-orange-500/20 transition hover:bg-orange-300"
                 >
                   Request a Free Quote
@@ -158,9 +158,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     <Icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold uppercase text-slate-500">
+                    <span className="text-sm font-bold uppercase text-slate-500 block">
                       Starting Rate
-                    </h3>
+                    </span>
                     <p className="text-lg font-extrabold text-[#0B2D5B]">
                       {service.startingRate}
                     </p>
@@ -328,9 +328,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {related.length > 0 && (
         <section className="py-16 bg-slate-50 border-t border-slate-200/80">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h3 className="text-xl font-bold text-[#0B2D5B] mb-8 text-center sm:text-left">
+            <h2 className="text-xl font-bold text-[#0B2D5B] mb-8 text-center sm:text-left">
               Related Removals Services in Adelaide
-            </h3>
+            </h2>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((rel) => {
                 const RelIcon = serviceIcons[rel.slug] || Truck;
@@ -343,14 +343,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-[#FF6A00]">
                       <RelIcon className="h-5 w-5" />
                     </div>
-                    <h4 className="mt-4 text-base font-bold text-[#0B2D5B] group-hover:text-[#A63F00] transition-colors">
+                    <h3 className="mt-4 text-base font-bold text-[#0B2D5B] group-hover:text-[#A63F00] transition-colors">
                       {rel.title}
-                    </h4>
+                    </h3>
                     <p className="mt-1 text-xs text-slate-500 line-clamp-2">
                       {rel.shortDescription}
                     </p>
                     <div className="mt-4 flex items-center gap-1.5 text-xs font-bold text-[#A63F00]">
-                      <span>Learn more</span>
+                      <span>View {rel.title} Details</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </div>
                   </Link>
@@ -364,6 +364,17 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {/* 6. QUOTE FORM BLOCK */}
       <section className="py-16 sm:py-24 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
+              Fast Quote Request
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
+              Request Your Free {service.title} Quote
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-slate-600">
+              Share your pickup and delivery suburbs, inventory details, and preferred move date.
+            </p>
+          </div>
           <QuoteForm
             defaultMoveType={service.title.split(" ")[0]}
             sourcePage={`Service Page: ${service.title}`}

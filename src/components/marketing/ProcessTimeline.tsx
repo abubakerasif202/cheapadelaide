@@ -27,9 +27,9 @@ export function ProcessTimeline({ steps = DEFAULT_STEPS }: ProcessTimelineProps)
             <span className="ca-step__num">{s.step}</span>
             {s.icon ? <IconTile name={s.icon} size="sm" hoverFill /> : null}
           </div>
-          <h3 className="ca-h4" style={{ marginTop: 20 }}>
+          <p className="ca-h4" style={{ marginTop: 20, fontWeight: 700 }}>
             {s.title}
-          </h3>
+          </p>
           <p className="ca-small" style={{ marginTop: 8 }}>
             {s.description}
           </p>

@@ -104,9 +104,9 @@ export default function AboutPage() {
                     <ShieldCheck className="h-4 w-4" />
                     <span>Operational Transparency</span>
                   </div>
-                  <h4 className="text-lg font-bold text-[#0B2D5B]">
+                  <p className="text-lg font-bold text-[#0B2D5B]">
                     Local Operations Depot
-                  </h4>
+                  </p>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     Our removals operation is based at {business.location.fullAddress}.
                   </p>

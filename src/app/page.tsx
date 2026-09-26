@@ -24,6 +24,7 @@ import { TrustSection } from "@/components/common/TrustSection";
 import { FAQAccordion } from "@/components/common/FAQAccordion";
 import { QuoteForm } from "@/components/common/QuoteForm";
 import { CTASection } from "@/components/common/CTASection";
+import { generateFAQSchema } from "@/config/seo";
 
 const serviceIcons: Record<string, React.ElementType> = {
   "house-removals": Home,
@@ -37,8 +38,14 @@ const serviceIcons: Record<string, React.ElementType> = {
 };
 
 export default function HomePage() {
+  const faqSchema = generateFAQSchema(generalFaqs);
+
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* 1. HERO SECTION (Asymmetric Split Screen with Liquid Glass) */}
       <section className="relative overflow-hidden bg-[#071933] py-12 text-white sm:py-16 lg:py-24">
         {/* Subtle geometric angle background */}
@@ -68,7 +75,7 @@ export default function HomePage() {
               </h1>
 
               <p className="max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Straightforward moving services for homes, apartments, offices, and furniture across Greater Adelaide. Starting rates are $79 per 30 minutes for 2 movers and a truck; see the quote terms for your move.
+                Straightforward moving services for homes, apartments, offices, and furniture across Greater Adelaide. When you need affordable Adelaide removalists without the runaround, our crews deliver published 30-minute rates from $79, experienced movers, and careful handling from start to finish.
               </p>
 
               {/* Tactile Action Buttons */}
@@ -187,14 +194,14 @@ export default function HomePage() {
                 Our Adelaide Removals Services
               </h2>
               <p className="mt-2 text-base text-slate-600 max-w-xl">
-                House, apartment, furniture, office, commercial, packing, and interstate moving services.
+                Affordable Adelaide removalists without the runaround for houses, apartments, furniture, offices, packing, and interstate relocations.
               </p>
             </div>
             <Link
               href="/services"
               className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#A63F00] hover:text-[#0B2D5B] transition active:scale-[0.98]"
             >
-              <span>Explore All 8 Services</span>
+              <span>View All Moving Services</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -203,28 +210,29 @@ export default function HomePage() {
             {services.map((service) => {
               const Icon = serviceIcons[service.slug] || Truck;
               return (
-                <Link
+                <div
                   key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white p-7 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] transition-all duration-200 hover:-translate-y-1 hover:border-[#FF6A00]/50 hover:shadow-lg active:scale-[0.98]"
+                  className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white p-7 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] transition-all duration-200 hover:-translate-y-1 hover:border-[#FF6A00]/50 hover:shadow-lg"
                 >
                   <div>
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-[#FF6A00] transition group-hover:bg-[#FF6A00] group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
                     <h3 className="mt-5 text-lg font-bold text-[#0B2D5B] group-hover:text-[#A63F00] transition-colors tracking-tight">
-                      {service.title}
+                      <Link href={`/services/${service.slug}`} className="before:absolute before:inset-0 focus:outline-none">
+                        {service.title}
+                      </Link>
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3">
                       {service.shortDescription}
                     </p>
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-bold text-[#0B2D5B]">
-                    <span>View Service Details</span>
+                  <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-bold text-[#0B2D5B]" aria-hidden="true">
+                    <span>Service Details & Pricing</span>
                     <ArrowRight className="h-4 w-4 text-[#FF6A00] transition-transform group-hover:translate-x-1" />
                   </div>
-                </Link>
+                </div>
               );
             })}
           </div>
@@ -413,7 +421,7 @@ export default function HomePage() {
               href="/faq"
               className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#A63F00] hover:text-[#0B2D5B] transition active:scale-[0.98]"
             >
-              <span>View All Questions & Answers</span>
+              <span>Browse All Moving FAQs</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -425,6 +433,17 @@ export default function HomePage() {
       {/* 8. QUOTE FORM SECTION */}
       <section id="quote-section" className="py-16 sm:py-24 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
+              Fast Quote Estimate
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
+              Request Your Free Adelaide Moving Quote
+            </h2>
+            <p className="mt-2 text-sm sm:text-base text-slate-600">
+              Tell us what you are moving and your locations for a transparent starting rate estimate without the runaround.
+            </p>
+          </div>
           <QuoteForm sourcePage="Homepage Quote Block" />
         </div>
       </section>

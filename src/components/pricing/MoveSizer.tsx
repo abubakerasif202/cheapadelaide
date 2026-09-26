@@ -100,7 +100,7 @@ export function MoveSizer({ defaultSize = "unit" }: MoveSizerProps) {
         <span className="ca-caption" style={{ fontStyle: "italic", maxWidth: 380 }}>
           {business.pricing.disclaimer}
         </span>
-        <Button href={`/get-a-quote?team=${config.id}`} trailingIcon="arrow-right">
+        <Button href="/get-a-quote" trailingIcon="arrow-right">
           Request This Team Option
         </Button>
       </div>

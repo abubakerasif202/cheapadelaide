@@ -140,9 +140,9 @@ export default function BlogIndexPage() {
                 <BookOpen size={20} />
               </span>
               <div>
-                <h4 className="ca-h4" style={{ fontSize: 16 }}>
+                <p className="ca-h4 font-bold" style={{ fontSize: 16 }}>
                   Direct Local Moving Operations in Elizabeth Vale SA
-                </h4>
+                </p>
                 <p className="ca-small" style={{ color: "var(--text-muted)", maxWidth: 640 }}>
                   {business.operatorNotice} Our operations base is situated at {business.location.fullAddress}. Open daily
                   7:00 am to 8:00 pm.

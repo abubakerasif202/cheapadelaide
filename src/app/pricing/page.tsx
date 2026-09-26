@@ -106,6 +106,17 @@ export default function PricingPage() {
       {/* 2. PRICING CARDS */}
       <section className="py-16 sm:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
+              Published Rates
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
+              Adelaide Moving Packages & Starting Rates
+            </h2>
+            <p className="mt-2 text-base text-slate-600 max-w-xl mx-auto">
+              Transparent rates billed in standard 30-minute increments with no hidden booking fees.
+            </p>
+          </div>
           <PricingCards />
         </div>
       </section>
@@ -153,9 +164,9 @@ export default function PricingPage() {
                 <Info className="h-5 w-5" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-sm font-bold text-[#0B2D5B]">
+                <p className="text-sm font-bold text-[#0B2D5B]">
                   Confirm the full quote
-                </h4>
+                </p>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Share your inventory, route and access details in advance. Confirm the applicable travel, access and additional-service charges before booking.
                 </p>

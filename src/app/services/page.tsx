@@ -96,7 +96,9 @@ export default function ServicesPage() {
                     </div>
 
                     <h2 className="mt-6 text-2xl font-bold text-[#0B2D5B]">
-                      {service.title}
+                      <Link href={`/services/${service.slug}`} className="hover:text-[#A63F00] transition-colors">
+                        {service.title}
+                      </Link>
                     </h2>
                     <p className="mt-3 text-sm text-slate-600 leading-relaxed">
                       {service.shortDescription}
@@ -122,12 +124,12 @@ export default function ServicesPage() {
                       href={`/services/${service.slug}`}
                       className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#A63F00] hover:text-[#0B2D5B] transition"
                     >
-                      <span>Read Full Guide & FAQs</span>
+                      <span>View {service.title} Details</span>
                       <ArrowRight className="h-4 w-4" />
                     </Link>
 
                     <Link
-                      href={`/get-a-quote?type=${encodeURIComponent(service.title)}`}
+                      href="/get-a-quote"
                       className="rounded-xl bg-[#0B2D5B] px-4 py-2 text-xs font-bold text-white hover:bg-[#071933] transition"
                     >
                       Get Quote
