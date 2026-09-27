@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { EmptyState } from "@/components/feedback";
 
 export const metadata: Metadata = {
-  title: "Page Not Found",
+  title: "Page Not Found | Cheap Adelaide Removalist",
   robots: { index: false, follow: true },
   alternates: {},
 };

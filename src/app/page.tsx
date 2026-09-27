@@ -150,12 +150,12 @@ export default function HomePage() {
                       sizes="(min-width: 1280px) 479px, (min-width: 1024px) calc(41.667vw - 54.667px), (min-width: 640px) 448px, calc(100vw - 32px)"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#071933]/80 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-white">
+                    <div className="absolute bottom-3 left-4 right-4 flex flex-wrap items-center justify-between gap-2 text-xs text-white">
                       <span className="font-semibold tracking-wide flex items-center gap-1.5">
                         <MapPin className="h-3.5 w-3.5 text-[#FF6A00]" />
                         Adelaide Metro & Regional SA
                       </span>
-                      <span className="rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-xs uppercase text-[#071933]">
+                      <span className="hidden whitespace-nowrap rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-xs uppercase text-[#071933] sm:inline-block">
                         Adelaide Moving Team
                       </span>
                     </div>
@@ -188,7 +188,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-8">
             <div className="text-left">
               <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
-                Verified Services
+                Moving Services
               </span>
               <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)] tracking-tight">
                 Our Adelaide Removals Services
@@ -245,13 +245,13 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 pb-8 mb-12">
             <div className="text-left">
               <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
-                Bento Architecture
+                Plan Your Move
               </span>
               <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)] tracking-tight">
-                Move Logistics & Pricing Engine
+                Choose Your Team & Plan the Details
               </h2>
               <p className="mt-2 text-base text-slate-600 max-w-xl">
-                Compare configuration models, assess realistic duration ranges, and inspect regional arterial coverage.
+                Compare the 2-mover and 3-mover starting rates, see what to include in your quote, and check access tips for your part of Adelaide.
               </p>
             </div>
             <Link
@@ -279,12 +279,16 @@ export default function HomePage() {
                 How Moving Works With Us
               </h2>
               <p className="mt-2 text-base text-slate-600 max-w-xl">
-                A predictable four-phase sequence from initial quotation through to final key handover.
+                Four clear steps from your first quote request to moving day.
               </p>
             </div>
-            <span className="text-xs font-semibold text-slate-500">
-              Reliable Local Moving Protocol
-            </span>
+            <Link
+              href="/get-a-quote"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#A63F00] hover:text-[#0B2D5B] transition active:scale-[0.98]"
+            >
+              <span>Start With a Free Quote</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
 
           <ProcessTimeline />
