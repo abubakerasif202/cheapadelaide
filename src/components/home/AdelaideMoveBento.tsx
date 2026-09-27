@@ -47,7 +47,7 @@ export function AdelaideMoveBento() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-orange-200/70 bg-orange-50/80 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                 <Sparkles className="h-3.5 w-3.5" />
-                <span>Move Sizer & Crew Allocator</span>
+                <span>Team Size Guide</span>
               </div>
 
               {/* Selector Pills */}
@@ -55,7 +55,8 @@ export function AdelaideMoveBento() {
                 <button
                   type="button"
                   onClick={() => setSelectedHomeType("unit")}
-                  className={`rounded-xl px-4 py-2 transition-all ${
+                  aria-pressed={selectedHomeType === "unit"}
+                  className={`min-h-11 rounded-xl px-4 py-2 transition-all ${
                     selectedHomeType === "unit"
                       ? "bg-[#0B2D5B] text-white shadow-sm"
                       : "text-slate-600 hover:text-slate-900"
@@ -66,7 +67,8 @@ export function AdelaideMoveBento() {
                 <button
                   type="button"
                   onClick={() => setSelectedHomeType("house")}
-                  className={`rounded-xl px-4 py-2 transition-all ${
+                  aria-pressed={selectedHomeType === "house"}
+                  className={`min-h-11 rounded-xl px-4 py-2 transition-all ${
                     selectedHomeType === "house"
                       ? "bg-[#0B2D5B] text-white shadow-sm"
                       : "text-slate-600 hover:text-slate-900"
@@ -185,7 +187,7 @@ export function AdelaideMoveBento() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-700">
               <ShieldCheck className="h-3.5 w-3.5 text-[#FF6A00]" />
-              <span>Consumer Protection</span>
+              <span>Before You Book</span>
             </div>
 
             <p className="mt-4 text-xl sm:text-2xl font-bold text-[#0B2D5B] font-[family-name:var(--font-heading)]">
@@ -200,8 +202,8 @@ export function AdelaideMoveBento() {
               <div className="flex items-start gap-3 rounded-2xl bg-slate-50 p-3 border border-slate-100">
                 <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0 mt-0.5" />
                 <div className="text-xs">
-                  <strong className="text-slate-800 block">No Stair Surcharges:</strong>
-                  <span className="text-slate-500">Billed only on standard elapsed time, not per flight.</span>
+                  <strong className="text-slate-800 block">Stairs &amp; access:</strong>
+                  <span className="text-slate-500">Ask how stairs, lifts and long carries affect the time and cost of your move.</span>
                 </div>
               </div>
               <div className="flex items-start gap-3 rounded-2xl bg-slate-50 p-3 border border-slate-100">
@@ -214,7 +216,7 @@ export function AdelaideMoveBento() {
               <div className="flex items-start gap-3 rounded-2xl bg-slate-50 p-3 border border-slate-100">
                 <CheckCircle2 className="h-4 w-4 text-[#FF6A00] shrink-0 mt-0.5" />
                 <div className="text-xs">
-                  <strong className="text-slate-800 block">Disclosed Travel Fees:</strong>
+                  <strong className="text-slate-800 block">Travel time:</strong>
                   <span className="text-slate-500">Ask how travel time or charges are handled for your route.</span>
                 </div>
               </div>
@@ -293,7 +295,7 @@ export function AdelaideMoveBento() {
                   These suburbs are listed as Adelaide service-area hubs. Contact us to confirm availability for your route and date.
                 </p>
                 <Link
-                  href="/service-areas"
+                  href="/service-areas/northern-suburbs-playford"
                   className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B]"
                 >
                   <span>Northern Suburbs Coverage</span>
@@ -310,10 +312,10 @@ export function AdelaideMoveBento() {
                   Share your suburbs and any stairs, parking or narrow-access details so the move requirements can be discussed.
                 </p>
                 <Link
-                  href="/services/house-removals"
+                  href="/service-areas"
                   className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-bold text-[#A63F00] hover:text-[#0B2D5B]"
                 >
-                  <span>Residential House Moves</span>
+                  <span>All Adelaide Service Areas</span>
                   <ChevronRight className="h-3 w-3" />
                 </Link>
               </div>

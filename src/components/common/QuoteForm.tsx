@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { business } from "@/config/business";
 import { Icon, Button } from "@/components/core";
 import { TextField, SelectField, ChoiceCard } from "@/components/forms";
@@ -38,6 +38,15 @@ export function QuoteForm({
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "unconfigured">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const submittingRef = useRef(false);
+  const feedbackRef = useRef<HTMLDivElement>(null);
+
+  // Move focus to the outcome so keyboard and screen-reader users land on it
+  // (the success view replaces the form, which would otherwise drop focus).
+  useEffect(() => {
+    if (status === "success" || status === "error" || status === "unconfigured") {
+      feedbackRef.current?.focus();
+    }
+  }, [status, errorMessage]);
 
   const moveTypeOptions = ["House", "Apartment", "Office", "Commercial", "Furniture", "Interstate", "Other"];
 
@@ -122,11 +131,11 @@ export function QuoteForm({
         setStatus("success");
       } else {
         setStatus("error");
-        setErrorMessage(result.message || "Submission failed. Please call us directly on 0491 704 136.");
+        setErrorMessage(result.message || `Submission failed. Please call us directly on ${business.contact.primaryPhone}.`);
       }
     } catch {
       setStatus("error");
-      setErrorMessage("Network error sending quote. Please call us directly on 0491 704 136.");
+      setErrorMessage(`Network error sending quote. Please call us directly on ${business.contact.primaryPhone}.`);
     } finally {
       submittingRef.current = false;
     }
@@ -134,7 +143,7 @@ export function QuoteForm({
 
   if (status === "success") {
     return (
-      <div role="status" aria-live="polite" className="ca-success">
+      <div ref={feedbackRef} tabIndex={-1} role="status" aria-live="polite" className="ca-success" style={{ outline: "none" }}>
         <div className="ca-success__icon">
           <Icon name="check-circle-2" size={32} />
         </div>
@@ -152,7 +161,7 @@ export function QuoteForm({
             <a href={business.contact.primaryPhoneHref} style={{ fontWeight: 700, color: "var(--orange-600)" }}>
               {business.contact.primaryPhone}
             </a>{" "}
-            (7:00 am – 8:00 pm Daily).
+            ({business.hours}).
           </p>
         </div>
       </div>
@@ -319,7 +328,7 @@ export function QuoteForm({
 
       {/* Unconfigured Web3Forms Notice */}
       {status === "unconfigured" && (
-        <div style={{ marginTop: 20 }}>
+        <div ref={feedbackRef} tabIndex={-1} style={{ marginTop: 20, outline: "none" }}>
           <Alert type="warning" title="Online web form is currently in direct dispatch mode.">
             <span>Connect with our local Adelaide moving coordinators immediately using either option below:</span>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 12 }}>
@@ -345,7 +354,7 @@ export function QuoteForm({
 
       {/* Error Message */}
       {status === "error" && (
-        <div style={{ marginTop: 20 }}>
+        <div ref={feedbackRef} tabIndex={-1} style={{ marginTop: 20, outline: "none" }}>
           <Alert type="error">
             <span>{errorMessage}</span>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 12 }}>

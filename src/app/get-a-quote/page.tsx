@@ -102,7 +102,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
 
                 <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
                   <Clock className="h-3.5 w-3.5 text-[#FF6A00]" />
-                  <span>Open 7:00 am – 8:00 pm, 7 Days</span>
+                  <span>Open {business.hours}</span>
                 </div>
               </div>
 
