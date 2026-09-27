@@ -102,7 +102,6 @@ export function generateMovingCompanySchema() {
     url: business.domain,
     telephone: business.contact.primaryPhone,
     email: business.contact.email,
-    priceRange: "$$",
     currenciesAccepted: "AUD",
     address: {
       "@type": "PostalAddress",

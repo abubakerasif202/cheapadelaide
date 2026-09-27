@@ -127,12 +127,12 @@ function auditStructuredData() {
   );
   record(
     cat,
-    "MovingCompany Opening Hours & Price Range",
+    "MovingCompany Opening Hours & Currency (No Arbitrary PriceRange)",
     Array.isArray(hours) &&
       hours.length === 1 &&
-      bizSchema.priceRange === "$$" &&
-      bizSchema.currenciesAccepted === "AUD",
-    "MovingCompany opening hours or priceRange missing"
+      bizSchema.currenciesAccepted === "AUD" &&
+      bizSchema.priceRange === undefined,
+    "MovingCompany opening hours, currency, or unverified priceRange issue"
   );
 
   // WebSite

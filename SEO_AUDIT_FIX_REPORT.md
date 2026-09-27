@@ -36,7 +36,7 @@ An automated quality gate (`npm run seo:audit`) was built and integrated into `p
 
 | File Path | Description of Changes Implemented |
 | :--- | :--- |
-| `src/config/seo.ts` | Enriched `MovingCompany` schema with `priceRange: "$$"`, `currenciesAccepted: "AUD"`, and 7-day `OpeningHoursSpecification` (07:00–20:00). Enriched `WebSite` schema with `@id: .../#website` and `inLanguage: "en-AU"`. |
+| `src/config/seo.ts` | Enriched `MovingCompany` schema with verified `currenciesAccepted: "AUD"` and verified 7-day `OpeningHoursSpecification` (07:00–20:00). Excluded arbitrary priceRange. Enriched `WebSite` schema with `@id: .../#website` and `inLanguage: "en-AU"`. |
 | `src/app/globals.css` | Added `.ca-footer__title` to footer column typography rule to preserve identical styling when rendered as semantic `<p>`. |
 | `src/components/layout/Footer.tsx` | Replaced banner `<h3 className="ca-h2">` with `<p className="ca-h2 font-bold">` and column titles `<h4>` with `<p className="ca-footer__title">`. Eliminates 4 heading outline leaks on every page. |
 | `src/components/layout/Header.tsx` | Removed `loading="lazy"` from above-the-fold logo image; added `priority` attribute for optimal Core Web Vitals (LCP/FCP). |
@@ -89,9 +89,9 @@ All schemas were verified against Google Search Central requirements:
   - Name, URL, Telephone, Email.
   - Complete physical address: 26 Knowles Road, Elizabeth Vale SA 5112.
   - Geo coordinates: Latitude -34.7570, Longitude 138.6940.
-  - `openingHoursSpecification`: Monday–Sunday, 07:00–20:00.
-  - `priceRange`: `$$`.
+  - `openingHoursSpecification`: Monday–Sunday, 07:00–20:00 (verified from business config).
   - `currenciesAccepted`: `AUD`.
+  - Excluded arbitrary priceRange to strictly adhere to verified business facts.
   - `areaServed`: Adelaide and Greater Adelaide, South Australia.
 - **`WebSite` (`@id: .../#website`):** Includes `name`, `url`, `description`, and `inLanguage: "en-AU"`.
 - **`BreadcrumbList`:** Present across all interior pages with sequential 1-indexed position tags and absolute URLs.
@@ -114,7 +114,7 @@ All schemas were verified against Google Search Central requirements:
 | **Crawlable Dynamic URLs** | Internal links contained `?team=`, `?service=`, etc. | 0 internal query parameter links (100% clean URLs) |
 | **Anchor Text Quality** | 40+ word card-wrapped anchors & generic button labels | Targeted, descriptive keyword anchors (`View [Service] Details`) |
 | **Homepage FAQ Schema** | Missing | Implemented via `generateFAQSchema` |
-| **MovingCompany Schema** | Missing `priceRange`, `currency`, `openingHours` | Full 7-day hours, AUD currency, and `$$` range |
+| **MovingCompany Schema** | Missing currency, opening hours | Verified 7-day hours (07:00–20:00), AUD currency |
 | **WebSite Schema** | Missing `@id` and `inLanguage` | Full `@id` anchor and `en-AU` locale |
 | **Header Logo Loading** | `loading="lazy"` on above-the-fold logo | `priority` enabled (optimal LCP Core Web Vital) |
 | **Heading Level Skips** | H1->H3 skips on services and pricing pages | Resolved with semantic H2 section headers |
