@@ -186,3 +186,28 @@ Total Checks: 30 | Passed: 30 | Failed: 0
 1. **Continuous Integration (CI):** Add `npm run seo:audit` to your pre-commit hooks or GitHub Actions pipeline to prevent SEO regressions when new pages or components are added.
 2. **Execute Off-Page Plan:** Follow `OFF_PAGE_SEO_ACTION_PLAN.md` to claim and verify Google Business Profile, Apple Business Connect, and high-authority Australian business directories.
 3. **Automate Post-Move Reviews:** Implement the post-move SMS review invitation workflow to steadily accumulate authentic 5-star Google reviews in the Adelaide market.
+
+---
+
+## 8. Production Deployment Verification
+
+| Verification Aspect | Result / Metric | Status |
+| :--- | :--- | :--- |
+| **Pushed Commit SHA** | `f818b91ab2fbc2b62971ad1cf246a27ffbf90b5e` (`f818b91`) | **VERIFIED** |
+| **GitHub Remote** | `origin/main` synchronized and clean | **VERIFIED / SYNCED** |
+| **Vercel Deployment** | `● Ready` (Deployment ID: `dpl_5WWScEc7zZhEbaC6MFizpQdW3eHW`) | **VERIFIED / READY** |
+| **Production Domain** | `https://www.cheapadelaideremovalist.com.au/` (DNS & Aliases intact) | **VERIFIED** |
+| **Live Smoke Tests (17 routes)** | 100% passed (16 valid routes returned 200, test route returned 404) | **PASS** |
+| **Live Homepage Headings** | Clean semantic outline (19 headings, 1 H1 only, reduced from ~36) | **PASS** |
+| **H1 Content Alignment** | "Without the Runaround" naturally supported in live copy | **PASS** |
+| **Live Structured Data (JSON-LD)**| MovingCompany, WebSite, FAQPage, Service, BreadcrumbList validated | **PASS** |
+| **NAP & Factual Schema Consistency**| Elizabeth Vale SA 5112, 7-day 07:00–20:00, AUD currency; arbitrary priceRange excluded | **PASS** |
+| **Live Robots.txt** | `Allow: /`, points to `https://www.cheapadelaideremovalist.com.au/sitemap.xml` | **PASS** |
+| **Live Sitemap.xml** | 37 clean canonical URLs (0 parameters, 0 hashes, 100% 200 OK) | **PASS** |
+| **Internal Link Crawl** | 37 pages crawled, 108 links discovered, 0 query-parameter links | **PASS** |
+| **Performance Probe** | Average TTFB 88ms; high fetchPriority preload active on header logo | **PASS** |
+| **Production Runtime Logs** | 100 recent production requests inspected: 0 errors, 0 exceptions, 0 404 assets | **PASS** |
+| **Local SEO Quality Gate** | `npm run seo:audit`: 30/30 checks passed | **PASS** |
+| **ESLint Status** | `npm run lint`: 0 errors, 0 warnings | **PASS** |
+| **Production Build** | `npm run build`: 42 static SSG routes + 1 dynamic route compiled | **PASS** |
+| **Remaining External Issue** | Backlink authority (0/4 on Seobility) remains an off-page task | **DOCUMENTED IN OFF-PAGE PLAN** |
