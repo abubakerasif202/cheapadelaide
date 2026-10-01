@@ -26,14 +26,14 @@ export function Footer() {
             <p className="ca-h2 font-bold" style={{ fontSize: "var(--fs-h3)" }}>
               Discuss Your Adelaide Move With Us.
             </p>
-            <p className="ca-small">2 Movers from $79 / 30 min • 3 Movers from $99 / 30 min • Open daily</p>
+            <p className="ca-small">2 movers from ${business.pricing.twoMovers.thirtyMinutes} / 30 min • 3 movers from ${business.pricing.threeMovers.thirtyMinutes} / 30 min • Open daily</p>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
             <Button variant="inverse" href={business.contact.primaryPhoneHref} leadingIcon="phone">
               {business.contact.primaryPhone}
             </Button>
             <Button href="/get-a-quote" trailingIcon="arrow-right">
-              Get a Free Quote
+              Get a Quote
             </Button>
           </div>
         </div>
@@ -54,9 +54,6 @@ export function Footer() {
                 <Icon name="shield-check" size={16} style={{ color: "var(--orange-500)" }} />
                 Operational Notice
               </div>
-              <p className="ca-caption" style={{ marginTop: 6 }}>
-                {business.operatorNotice}
-              </p>
             </div>
           </div>
 
@@ -81,7 +78,7 @@ export function Footer() {
               ))}
               <li>
                 <Link href="/get-a-quote" style={{ color: "var(--orange-500)", fontWeight: 600 }}>
-                  Request a Free Quote
+                  Request a Quote
                 </Link>
               </li>
             </ul>

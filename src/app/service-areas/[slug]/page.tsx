@@ -112,7 +112,9 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
                 Adelaide Service Area
               </span>
               <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)] leading-tight">
-                Removalists in {region.name}
+                {region.slug === "adelaide-hills-regional-sa"
+                  ? "Adelaide Hills Removalists"
+                  : `Removalists in ${region.name}`}
               </h1>
               <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
                 {region.description}
@@ -123,7 +125,7 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
                   href="/get-a-quote"
                   className="rounded-xl bg-[#FF6A00] px-6 py-3.5 text-sm font-bold text-[#071933] shadow-lg shadow-orange-500/20 transition hover:bg-orange-300"
                 >
-                  Request a Free Quote
+                  Request a Quote
                 </Link>
                 <a
                   href={business.contact.primaryPhoneHref}
@@ -179,6 +181,23 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
                   </li>
                 ))}
               </ul>
+              {region.slug === "adelaide-hills-regional-sa" && (
+                <div className="rounded-2xl border border-orange-200 bg-orange-50 p-5">
+                  <h3 className="text-base font-bold text-[#0B2D5B]">
+                    Planning a move in the Adelaide Hills?
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                    Read our guide to checking driveway slope, road width, vehicle clearance and turning space before requesting a quote.
+                  </p>
+                  <Link
+                    href="/blog/moving-to-adelaide-hills-removals-guide"
+                    className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-[#A63F00] underline"
+                  >
+                    Adelaide Hills moving and access guide
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="lg:col-span-5 space-y-6">

@@ -133,7 +133,7 @@ export function AdelaideMoveBento() {
               href="/get-a-quote"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-6 py-3 text-xs sm:text-sm font-bold text-[#071933] shadow-md transition hover:bg-orange-300 active:scale-[0.98]"
             >
-              <span>Request Free Moving Quote</span>
+              <span>Request a Moving Quote</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -323,7 +323,7 @@ export function AdelaideMoveBento() {
           </div>
 
           <div className="mt-6 pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
-            <span>Operated from Elizabeth Vale SA | HF Removals Adelaide shared base</span>
+            <span>Operations base: {business.location.suburb}, {business.location.state}</span>
             <Link
               href="/blog"
               className="inline-flex min-h-11 items-center gap-1.5 font-bold text-[#0B2D5B] hover:text-[#A63F00]"

@@ -122,7 +122,7 @@ export function Header() {
               </span>
             </a>
             <Button href="/get-a-quote" size="sm" trailingIcon="arrow-right">
-              Get a Free Quote
+              Get a Quote
             </Button>
           </div>
 

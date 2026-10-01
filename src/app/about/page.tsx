@@ -63,7 +63,7 @@ export default function AboutPage() {
               </p>
 
               <p className="text-base text-slate-600 leading-relaxed">
-                Our starting rates are $79 per 30 minutes for 2 Movers + Truck and $99 per 30 minutes for 3 Movers + Truck. Final pricing depends on move size, inventory, access, travel and any additional services required.
+                Our starting rates are ${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for {business.pricing.twoMovers.name} and ${business.pricing.threeMovers.thirtyMinutes} per 30 minutes for {business.pricing.threeMovers.name}. {business.pricing.disclaimer}
               </p>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 space-y-3">
@@ -73,7 +73,7 @@ export default function AboutPage() {
                 <ul className="space-y-2 text-sm text-slate-700">
                   <li className="flex items-start gap-2.5">
                     <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
-                    <span><strong>Published Starting Rates:</strong> $79 per 30 minutes (2 movers) and $99 per 30 minutes (3 movers). Confirm the billing and quote terms for your move.</span>
+                    <span><strong>Published Starting Rates:</strong> ${business.pricing.twoMovers.thirtyMinutes} per 30 minutes ({business.pricing.twoMovers.name}) and ${business.pricing.threeMovers.thirtyMinutes} per 30 minutes ({business.pricing.threeMovers.name}). Confirm the billing and quote terms for your move.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
@@ -81,7 +81,7 @@ export default function AboutPage() {
                   </li>
                   <li className="flex items-start gap-2.5">
                     <Check className="h-4 w-4 shrink-0 text-[#FF6A00] mt-0.5" />
-                    <span><strong>Direct Contact:</strong> Call 0491 704 136 during our listed hours.</span>
+                    <span><strong>Direct Contact:</strong> Call {business.contact.primaryPhone} during our listed hours.</span>
                   </li>
                 </ul>
               </div>

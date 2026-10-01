@@ -31,6 +31,7 @@ export default function BlogIndexPage() {
     url: `${business.domain}/blog`,
     publisher: {
       "@type": "MovingCompany",
+      "@id": `${business.domain}/#moving-company`,
       name: business.name,
       url: business.domain,
     },
@@ -144,8 +145,7 @@ export default function BlogIndexPage() {
                   Direct Local Moving Operations in Elizabeth Vale SA
                 </p>
                 <p className="ca-small" style={{ color: "var(--text-muted)", maxWidth: 640 }}>
-                  {business.operatorNotice} Our operations base is situated at {business.location.fullAddress}. Open daily
-                  7:00 am to 8:00 pm.
+                  Our listed operations base is {business.location.fullAddress}. Contact hours are {business.hours}.
                 </p>
               </div>
             </div>

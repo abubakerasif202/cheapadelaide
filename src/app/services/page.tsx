@@ -145,7 +145,7 @@ export default function ServicesPage() {
       {/* CTA */}
       <CTASection
         title="Ready to Discuss Your Move with Adelaide Locals?"
-        subtitle="Call 0491 704 136 during our listed hours or send an online enquiry."
+        subtitle={`Call ${business.contact.primaryPhone} during our listed hours or send an online enquiry.`}
       />
     </div>
   );

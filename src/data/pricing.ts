@@ -1,3 +1,5 @@
+import { business } from "@/config/business";
+
 export interface PricingPlan {
   id: string;
   name: string;
@@ -11,26 +13,25 @@ export interface PricingPlan {
 export const pricingPlans: PricingPlan[] = [
   {
     id: "two-movers",
-    name: "2 Movers + Truck",
+    name: business.pricing.twoMovers.name,
     popular: false,
-    ratePerHalfHour: 79,
-    hourlyReference: 158,
+    ratePerHalfHour: business.pricing.twoMovers.thirtyMinutes,
+    hourlyReference: business.pricing.twoMovers.hourlyReference,
     suitability: "A two-person team with a truck.",
     ctaText: "Get Quote for 2 Movers",
   },
   {
     id: "three-movers",
-    name: "3 Movers + Truck",
+    name: business.pricing.threeMovers.name,
     popular: true,
-    ratePerHalfHour: 99,
-    hourlyReference: 198,
+    ratePerHalfHour: business.pricing.threeMovers.thirtyMinutes,
+    hourlyReference: business.pricing.threeMovers.hourlyReference,
     suitability: "A three-person team with a truck.",
     ctaText: "Get Quote for 3 Movers",
   },
 ];
 
-export const priceDisclaimer =
-  "Final pricing depends on move size, inventory, access, travel and any additional services required.";
+export const priceDisclaimer = business.pricing.disclaimer;
 
 export const quoteFactors = [
   { title: "Move size and inventory", description: "The size and contents of the move help determine the team and time needed." },

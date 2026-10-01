@@ -9,7 +9,7 @@ export function MobileActionBar() {
           Call {business.contact.primaryPhone}
         </Button>
         <Button href="/get-a-quote" leadingIcon="file-text">
-          Free Quote
+          Get a Quote
         </Button>
       </div>
     </div>

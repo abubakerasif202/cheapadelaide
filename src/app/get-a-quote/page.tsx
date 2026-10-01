@@ -6,9 +6,9 @@ import { QuoteForm } from "@/components/common/QuoteForm";
 import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Get a Free Moving Quote Adelaide | Cheap Adelaide Removalist",
+  title: "Get an Adelaide Removalist Quote | Cheap Adelaide Removalist",
   description:
-    "Request a moving quote for Adelaide house, apartment, office, furniture, or interstate relocations. Team rates start from $79 / 30 min.",
+    `Request an Adelaide removalist quote for a house, apartment, office, furniture or interstate move. Published team rates start from $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes.`,
   canonical: "/get-a-quote",
 });
 
@@ -50,7 +50,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
 
           <div className="mt-4 max-w-3xl">
             <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
-              Free Moving Estimate
+              Adelaide Moving Quote
             </span>
             <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
               Request Your Adelaide Moving Quote
@@ -114,17 +114,17 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                 <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-700">
                   <div className="flex items-center justify-between font-bold text-[#0B2D5B]">
                     <span>2 Movers + Truck</span>
-                    <span className="text-[#A63F00]">From $79 / 30 min</span>
+                    <span className="text-[#A63F00]">From ${business.pricing.twoMovers.thirtyMinutes} / 30 min</span>
                   </div>
-                  <span className="text-xs text-slate-500">Hourly reference: $158/hr</span>
+                  <span className="text-xs text-slate-500">Hourly reference: ${business.pricing.twoMovers.hourlyReference}/hr</span>
                 </div>
 
                 <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-700">
                   <div className="flex items-center justify-between font-bold text-[#0B2D5B]">
                     <span>3 Movers + Truck</span>
-                    <span className="text-[#A63F00]">From $99 / 30 min</span>
+                    <span className="text-[#A63F00]">From ${business.pricing.threeMovers.thirtyMinutes} / 30 min</span>
                   </div>
-                  <span className="text-xs text-slate-500">Hourly reference: $198/hr</span>
+                  <span className="text-xs text-slate-500">Hourly reference: ${business.pricing.threeMovers.hourlyReference}/hr</span>
                 </div>
 
                 <p className="text-[13px] text-slate-500 leading-snug pt-1">

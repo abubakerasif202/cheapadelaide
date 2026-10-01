@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import { business } from "@/config/business";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { QuoteForm } from "@/components/common/QuoteForm";
-import { ContactMethod, OperatorNotice } from "@/components/marketing";
+import { ContactMethod } from "@/components/marketing";
 import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
   title: "Contact Us & Adelaide Depot | Cheap Adelaide Removalist",
-  description:
-    "Contact Cheap Adelaide Removalist. Phone 0491 704 136, email admin@cheapadelaideremovalist.com.au, operations base at 26 Knowles Road, Elizabeth Vale SA. Open 7 days.",
+  description: `Contact ${business.name} by phone at ${business.contact.primaryPhone} or email ${business.contact.email}. Operations base: ${business.location.fullAddress}. ${business.hours}.`,
   canonical: "/contact",
 });
 
@@ -21,7 +20,7 @@ export default function ContactPage() {
   const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: "Contact Cheap Adelaide Removalist",
+    name: `Contact ${business.name}`,
     url: `${business.domain}/contact`,
     mainEntity: {
       "@id": `${business.domain}/#moving-company`,
@@ -98,10 +97,7 @@ export default function ContactPage() {
                   icon="clock"
                   label="Public Operating Hours"
                   value={business.hours}
-                  note="Monday to Sunday including public holidays by booking"
                 />
-
-                <OperatorNotice title="Operator Notice" action={null} />
             </div>
 
             {/* Quote Form */}

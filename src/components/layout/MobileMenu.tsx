@@ -110,7 +110,7 @@ export function MobileMenu({ isOpen, onClose, triggerRef }: MobileMenuProps) {
 
         <div className="ca-drawer__foot">
           <Button href="/get-a-quote" onClick={dismiss} block trailingIcon="arrow-right">
-            Get a Free Quote
+            Get a Quote
           </Button>
           <Button href={business.contact.primaryPhoneHref} variant="outline" block leadingIcon="phone">
             Call {business.contact.primaryPhone}

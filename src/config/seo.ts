@@ -114,17 +114,9 @@ export function generateMovingCompanySchema() {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "07:00",
-        closes: "20:00",
+        dayOfWeek: business.hoursDetail.days,
+        opens: business.hoursDetail.opens,
+        closes: business.hoursDetail.closes,
       },
     ],
     areaServed: [

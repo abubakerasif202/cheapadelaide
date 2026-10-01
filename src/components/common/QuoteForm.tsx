@@ -61,8 +61,8 @@ export function QuoteForm({
   ];
 
   const teamOptions = [
-    { label: "2 Movers + Truck — from $79 / 30 min ($158/hr)", value: "2 Movers + Truck" },
-    { label: "3 Movers + Truck — from $99 / 30 min ($198/hr)", value: "3 Movers + Truck" },
+    { label: `${business.pricing.twoMovers.name} — from $${business.pricing.twoMovers.thirtyMinutes} / 30 min ($${business.pricing.twoMovers.hourlyReference}/hr)`, value: business.pricing.twoMovers.name },
+    { label: `${business.pricing.threeMovers.name} — from $${business.pricing.threeMovers.thirtyMinutes} / 30 min ($${business.pricing.threeMovers.hourlyReference}/hr)`, value: business.pricing.threeMovers.name },
     { label: "Not Sure — Advise Me on Best Option", value: "Not Sure" },
   ];
 

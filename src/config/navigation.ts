@@ -40,7 +40,7 @@ export const navigation = {
         {
           title: "Packing & Unpacking",
           href: "/services/packing-unpacking",
-          description: "Systematic packing with protective materials for stress-free moves.",
+          description: "Packing and unpacking options to discuss when planning a move.",
         },
         {
           title: "Interstate Removals",

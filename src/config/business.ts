@@ -25,8 +25,9 @@ export const business = {
 
   hours: "7:00 am – 8:00 pm daily",
   hoursDetail: {
-    days: "Monday – Sunday",
-    times: "7:00 am – 8:00 pm",
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "07:00",
+    closes: "20:00",
   },
 
   market: "Adelaide, South Australia",
@@ -58,3 +59,10 @@ export const business = {
     white: "#FFFFFF",
   },
 } as const;
+
+export function formatStartingRate(team: {
+  thirtyMinutes: number;
+  hourlyReference: number;
+}) {
+  return `From $${team.thirtyMinutes} / 30 min ($${team.hourlyReference}/hr)`;
+}

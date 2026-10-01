@@ -13,9 +13,9 @@ export function CTASection({
   title = "Tell Us What You're Moving & Get a Clear Price Estimate",
   subtitle = "Call us during our listed hours or send your move details through the online quote form.",
   features = [
-    ["clock", "Open 7:00 am – 8:00 pm Daily"],
-    ["shield-check", "2 Movers from $79 / 30 min"],
-    ["shield-check", "3 Movers from $99 / 30 min"],
+    ["clock", `Open ${business.hours}`],
+    ["shield-check", `${business.pricing.twoMovers.name} from $${business.pricing.twoMovers.thirtyMinutes} / 30 min`],
+    ["shield-check", `${business.pricing.threeMovers.name} from $${business.pricing.threeMovers.thirtyMinutes} / 30 min`],
   ],
 }: CTASectionProps) {
   return (
@@ -39,7 +39,7 @@ export function CTASection({
           </div>
           <div className="ca-cta__actions">
             <Button size="lg" href="/get-a-quote" trailingIcon="arrow-right">
-              Request Free Moving Quote
+              Request a Moving Quote
             </Button>
             <Button size="lg" variant="inverse" href={business.contact.primaryPhoneHref} leadingIcon="phone">
               Call {business.contact.primaryPhone}

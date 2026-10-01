@@ -1,3 +1,5 @@
+import { business } from "@/config/business";
+
 export interface FAQItem {
   id: string;
   category: "general" | "pricing" | "services" | "preparation";
@@ -11,7 +13,7 @@ export const generalFaqs: FAQItem[] = [
     category: "general",
     question: "How do I request a moving quote?",
     answer:
-      "You can submit our online quote form anytime at /get-a-quote with your pickup and delivery suburbs, property type, and move date. Alternatively, call our team directly on 0491 704 136 between 7:00 am and 8:00 pm, 7 days a week.",
+      `You can submit our online quote form anytime at /get-a-quote with your pickup and delivery suburbs, property type, and move date. Alternatively, call our team on ${business.contact.primaryPhone} during our listed hours: ${business.hours}.`,
   },
   {
     id: "info-needed",
@@ -67,13 +69,13 @@ export const generalFaqs: FAQItem[] = [
     category: "pricing",
     question: "What affects the total cost of a move?",
     answer:
-      "Starting rates begin from $79 per 30 minutes ($158/hr) for 2 movers and a truck. Total cost depends on move size, inventory volume, property access (stairs, long walks, elevator waits), travel distance between addresses, and any additional packing or backloading requested.",
+      `Starting rates begin from $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes ($${business.pricing.twoMovers.hourlyReference}/hr) for 2 movers and a truck. Total cost depends on move size, inventory, property access, travel and additional services requested.`,
   },
   {
     id: "two-vs-three",
     category: "pricing",
     question: "How do I choose between two and three movers?",
     answer:
-      "Starting rates are $79 / 30 min for 2 Movers + Truck and $99 / 30 min for 3 Movers + Truck. Share your inventory, access and travel details if you would like help considering a team size.",
+      `Starting rates are $${business.pricing.twoMovers.thirtyMinutes} / 30 min for ${business.pricing.twoMovers.name} and $${business.pricing.threeMovers.thirtyMinutes} / 30 min for ${business.pricing.threeMovers.name}. Share your inventory, access and travel details if you would like help considering a team size.`,
   },
 ];

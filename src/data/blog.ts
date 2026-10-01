@@ -1,3 +1,5 @@
+import { business } from "@/config/business";
+
 export interface BlogPostSection {
   h2: string;
   h2Id: string;
@@ -78,7 +80,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "12 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-09-26",
+    updatedDate: "2026-10-02",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -87,10 +89,10 @@ export const blogPosts: BlogPost[] = [
     aeoDirectAnswer: {
       question: "How do you find reliable, cheap removalists in Adelaide?",
       answer:
-        "When comparing Adelaide removalists, ask what the quote includes, how time is billed, whether travel or access charges apply, and what cover is available for your belongings. Cheap Adelaide Removalist lists starting rates of $79 per 30 minutes for 2 movers and a truck, or $99 per 30 minutes for 3 movers and a truck. Confirm the terms for your own move before booking.",
+        `When comparing Adelaide removalists, ask what the quote includes, how time is billed, and whether travel or access charges apply. Cheap Adelaide Removalist lists starting rates of $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for 2 movers and a truck, or $${business.pricing.threeMovers.thirtyMinutes} per 30 minutes for 3 movers and a truck. Confirm the terms for your own move before booking.`,
       keyTakeaways: [
         "Compare the billing increments and minimum booking conditions in each quote.",
-        "The listed starting rates are $79 per 30 minutes for 2 movers with a truck and $99 per 30 minutes for 3 movers with a truck.",
+        `The listed starting rates are $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for 2 movers with a truck and $${business.pricing.threeMovers.thirtyMinutes} per 30 minutes for 3 movers with a truck.`,
         "Team size and total time depend on the inventory, access and route.",
         "Ask which travel, access or additional-service charges may apply before booking.",
       ],
@@ -100,7 +102,7 @@ export const blogPosts: BlogPost[] = [
     sections: [
       {
         h2: "What Should You Expect to Pay for Adelaide Removalists?",
-        h2Id: "removalist-pricing-benchmarks",
+        h2Id: "removalist-pricing",
         lead: "Compare the written quote terms, included services and handling arrangements before choosing a provider.",
         paragraphs: [
           "Removalist quotes can use hourly, half-hourly or fixed pricing, and the included services and conditions vary. Compare the total terms rather than relying on an advertised starting rate alone.",
@@ -109,8 +111,8 @@ export const blogPosts: BlogPost[] = [
         table: {
           headers: ["Team Configuration", "Published Starting Rate", "Equivalent Hourly Rate"],
           rows: [
-            ["2 Movers + Truck", "From $79 / 30 min", "$158 / hr"],
-            ["3 Movers + Truck", "From $99 / 30 min", "$198 / hr"],
+            [business.pricing.twoMovers.name, `From $${business.pricing.twoMovers.thirtyMinutes} / 30 min`, `$${business.pricing.twoMovers.hourlyReference} / hr`],
+            [business.pricing.threeMovers.name, `From $${business.pricing.threeMovers.thirtyMinutes} / 30 min`, `$${business.pricing.threeMovers.hourlyReference} / hr`],
           ],
           caption: "Starting rates published by Cheap Adelaide Removalist. Confirm the full quote and conditions for your move.",
         },
@@ -125,7 +127,7 @@ export const blogPosts: BlogPost[] = [
         h2Id: "two-vs-three-movers",
         lead: "The right team size depends on the inventory, access and timing of your move.",
         paragraphs: [
-          "The published starting rates are $79 per 30 minutes for 2 movers and a truck, and $99 per 30 minutes for 3 movers and a truck. The total cost also depends on the move details and applicable quote terms.",
+          `The published starting rates are $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for 2 movers and a truck, and $${business.pricing.threeMovers.thirtyMinutes} per 30 minutes for 3 movers and a truck. The total cost also depends on the move details and applicable quote terms.`,
           "Share your item list, stairs, walking distance and access at both addresses when requesting a quote. The provider can discuss which team option is suitable.",
         ],
         bullets: [
@@ -179,7 +181,7 @@ export const blogPosts: BlogPost[] = [
           "Is your depot travel fee fixed or charged on an open-ended meter?",
           "Are stairs charged as an additional hourly penalty, flat fee per flight, or included in the standard rate?",
           "Does your rate change on weekends, Sunday afternoons, or public holidays?",
-          "Do you supply heavy-duty protective furniture blankets and tie-down straps free of charge?",
+          "What protective materials and handling equipment should I ask about?",
           "What is your billing increment? (Billed in 15 or 30-minute increments vs rounded up to the nearest whole hour).",
         ],
         callout: {
@@ -217,7 +219,7 @@ export const blogPosts: BlogPost[] = [
           {
             h3: "Moving Day: Access & Final Walkthrough",
             paragraphs: [
-              "Reserve street parking or driveway space for the removal truck. Complete a walkthrough with the lead mover to point out delicate mirrors, glass table tops, or priority delivery items.",
+              "Check what parking arrangements are allowed at the property. Tell the removalist about fragile mirrors, glass table tops and items that need a particular delivery order.",
             ],
           },
         ],
@@ -232,7 +234,7 @@ export const blogPosts: BlogPost[] = [
       {
         question: "Do you charge extra for moving up and down stairs in Adelaide?",
         answer:
-          "We do not charge artificial stair penalty surcharges. Work on stairs naturally takes slightly longer to complete safely, which is reflected in the standard time elapsed rather than an arbitrary per-step fee.",
+          "Stairs can affect access and the time needed for a move. Include the number of flights, the items involved and access at both properties in your quote request, then ask how those details are reflected in the price.",
       },
       {
         question: "Are your removal trucks equipped with protective blankets and straps?",
@@ -251,7 +253,7 @@ export const blogPosts: BlogPost[] = [
       "how-to-move-house-on-a-budget-adelaide",
       "what-is-a-depot-fee-removalists-adelaide",
     ],
-    relatedServices: ["house-removals", "apartment-removals", "furniture-removals", "packing-unpacking"],
+    relatedServices: ["homepage", "house-removals", "apartment-removals", "furniture-removals", "packing-unpacking"],
   },
 
   // -------------------------------------------------------------
@@ -262,71 +264,70 @@ export const blogPosts: BlogPost[] = [
     slug: "how-much-do-removalists-cost-adelaide",
     tier: 1,
     category: "Cost & Pricing",
-    title: "How Much Do Removalists Cost in Adelaide? Rates and Quote Factors",
-    seoTitle: "Adelaide Removalist Costs: Starting Rates and Quote Factors",
+    title: "How Much Do Removalists Cost in Adelaide?",
+    seoTitle: "How Much Do Removalists Cost in Adelaide? | Cheap Adelaide Removalist",
     metaDescription:
-      "Understand the factors that affect Adelaide removalist quotes and compare starting rates published by Cheap Adelaide Removalist.",
-    primaryKeyword: "removalists adelaide cost",
+      `Cheap Adelaide Removalist lists starting rates of $${business.pricing.twoMovers.thirtyMinutes} per half hour for 2 movers and a truck, or $${business.pricing.threeMovers.thirtyMinutes} for 3 movers and a truck. See what affects a quote.`,
+    primaryKeyword: "cost of removalist adelaide",
     secondaryKeywords: [
-      "average removalist cost adelaide",
+      "removalist cost adelaide",
+      "how much do removalists cost adelaide",
       "removalist hourly rate adelaide",
       "cost of moving house adelaide",
-      "removalist cost per hour south australia",
     ],
     readTime: "9 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-09-26",
+    updatedDate: "2026-10-02",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
       base: "Elizabeth Vale Operations Base, SA",
     },
     aeoDirectAnswer: {
-      question: "How much do removalists cost in Adelaide per hour?",
+      question: "How much do removalists cost in Adelaide?",
       answer:
-        "There is no single price for an Adelaide move: the total depends on inventory, access, travel, timing and additional services. Cheap Adelaide Removalist publishes starting rates of $79 per 30 minutes for 2 movers with a truck and $99 per 30 minutes for 3 movers with a truck. Request a quote using your move details rather than treating a general estimate as a price.",
+        `Cheap Adelaide Removalist's listed starting rates are $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for 2 movers and a truck, and $${business.pricing.threeMovers.thirtyMinutes} per 30 minutes for 3 movers and a truck. The final quote depends on your inventory, access, travel and requested services; confirm any minimum booking and billing terms when requesting a quote.`,
       keyTakeaways: [
-        "Removalist prices vary with the move details and terms offered by each provider.",
-        "Cheap Adelaide Removalist rate: From $79 / 30 min ($158/hr) for 2 movers + truck.",
-        "3 Movers + Truck starting rate: From $99 / 30 min ($198/hr).",
-        "Compare billing increments and minimum booking conditions between quotes.",
+        `2 movers and a truck: from $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes ($${business.pricing.twoMovers.hourlyReference} per hour).`,
+        `3 movers and a truck: from $${business.pricing.threeMovers.thirtyMinutes} per 30 minutes ($${business.pricing.threeMovers.hourlyReference} per hour).`,
+        "The total depends on inventory, access, travel and any additional services.",
+        "Confirm minimum booking, billing increments and applicable travel terms in your quote.",
       ],
     },
     summary:
       "A practical overview of Adelaide moving quotes, the factors that affect cost and the published starting rates for two team options.",
     sections: [
       {
-        h2: "Adelaide Removalist Pricing Overview",
+        h2: "Published Adelaide Removalist Starting Rates",
         h2Id: "adelaide-pricing-overview",
-        lead: "Understanding the components of removalist pricing helps you budget accurately and compare quotes like-for-like.",
+        lead: "These are Cheap Adelaide Removalist's listed starting rates. Confirm the full price and terms for your move before booking.",
         paragraphs: [
-          "When planning a move in South Australia, removalist quotes typically fall into two categories: fixed flat-rate quotes and hourly (or half-hourly) variable quotes.",
-          "Hourly and fixed-price quotes each have different conditions. Compare what each includes, how changes are handled and what happens if access or inventory differs from the information supplied.",
-          "Cheap Adelaide Removalist lists its starting rates per 30-minute period. Ask which billing and minimum booking terms apply to your move.",
+          "The listed options are 2 movers and a truck or 3 movers and a truck. Both are billed in 30-minute increments; ask which minimum booking and other terms apply to your move.",
+          "The total can change with the items being moved, access at each property, travel and any additional services requested. Include those details when asking for a quote.",
         ],
         table: {
           headers: ["Team Configuration", "Published Starting Rate", "Equivalent Hourly Rate"],
           rows: [
-            ["2 Movers + Truck", "From $79 / 30 min", "$158 / hr"],
-            ["3 Movers + Truck", "From $99 / 30 min", "$198 / hr"],
+            [business.pricing.twoMovers.name, `From $${business.pricing.twoMovers.thirtyMinutes} / 30 min`, `$${business.pricing.twoMovers.hourlyReference} / hr`],
+            [business.pricing.threeMovers.name, `From $${business.pricing.threeMovers.thirtyMinutes} / 30 min`, `$${business.pricing.threeMovers.hourlyReference} / hr`],
           ],
           caption: "Published starting rates. Ask for a quote based on your inventory, access and route.",
         },
       },
       {
-        h2: "Hourly Billing vs Half-Hour Increments: Why It Matters",
-        h2Id: "half-hour-billing-advantage",
-        lead: "Billing increments and minimum booking terms can affect the final amount, so check them when comparing quotes.",
+        h2: "How 30-Minute Billing Works",
+        h2Id: "half-hour-billing",
+        lead: "The published rate is charged per 30-minute period. Check the minimum booking and any other applicable terms before confirming.",
         paragraphs: [
-          "Providers set their own billing increments and minimum booking conditions. Check whether waiting, travel or additional services are charged and how the final time is rounded.",
-          "Cheap Adelaide Removalist lists starting rates on a 30-minute basis: $79 for 2 movers and a truck, or $99 for 3 movers and a truck. Ask which terms apply to your move.",
+          "Ask how the time is counted, including travel, waiting and loading or unloading, and whether a minimum booking applies. Get the terms for your move in the quote.",
+          `For reference, the listed rates are $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for 2 movers and a truck, and $${business.pricing.threeMovers.thirtyMinutes} for 3 movers and a truck.`,
         ],
       },
       {
-        h2: "Key Variables That Influence Your Final Moving Invoice",
+        h2: "What Can Affect Your Adelaide Moving Quote?",
         h2Id: "factors-affecting-costs",
         paragraphs: [
-          "Every property in Adelaide is unique. Several practical factors dictate how long your move will take:",
+            "Share these details for both pickup and delivery so the quote can reflect the work involved:",
         ],
         bullets: [
           "Walking distance and access: stairs, lifts, parking distance and loading restrictions can affect the work involved. Describe access at both addresses when requesting a quote.",
@@ -358,7 +359,7 @@ export const blogPosts: BlogPost[] = [
       "hiring-removalists-vs-diy-truck-rental-adelaide",
       "what-is-a-depot-fee-removalists-adelaide",
     ],
-    relatedServices: ["house-removals", "apartment-removals", "furniture-removals"],
+    relatedServices: ["house-removals", "apartment-removals", "furniture-removals", "pricing", "get-a-quote"],
   },
 
   // -------------------------------------------------------------
@@ -382,7 +383,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "8 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-09-26",
+    updatedDate: "2026-10-02",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -391,11 +392,11 @@ export const blogPosts: BlogPost[] = [
     aeoDirectAnswer: {
       question: "Is it cheaper to rent a truck or hire removalists in Adelaide?",
       answer:
-      "A DIY truck hire and a removalist service include different responsibilities and costs. Compare the current rental quote, fuel, distance charges, equipment, insurance conditions and the labour you will arrange yourself with the removalist's quote and inclusions. Cheap Adelaide Removalist lists a starting rate of $79 per 30 minutes for 2 movers and a truck; the total depends on the move details and applicable terms.",
+        `Cheap Adelaide Removalist provides a moving service with a crew and truck; it does not offer self-drive truck hire. A DIY truck rental has different costs and responsibilities, so compare the current rental terms and labour you would arrange with a removalist quote. The listed 2-mover starting rate is $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes; your quote depends on the move details and applicable terms.`,
       keyTakeaways: [
       "Check what a truck hire quote includes, including fuel, distance charges, insurance and equipment.",
       "Include the cost of any extra labour and your time when comparing a DIY move.",
-      "Cheap Adelaide Removalist lists a 2-mover and truck starting rate of $79 per 30 minutes; request a quote for your move.",
+        `Cheap Adelaide Removalist provides a crew-and-truck moving service, not self-drive hire. Its 2-mover starting rate is $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes; request a quote for your move.`,
       "Consider the lifting, loading and driving responsibilities involved in a DIY move.",
       ],
     },
@@ -453,7 +454,7 @@ export const blogPosts: BlogPost[] = [
       "what-size-removal-truck-do-i-need",
       "how-to-move-house-on-a-budget-adelaide",
     ],
-    relatedServices: ["furniture-removals", "house-removals"],
+    relatedServices: ["furniture-removals", "house-removals", "get-a-quote"],
   },
 
   // -------------------------------------------------------------
@@ -464,8 +465,8 @@ export const blogPosts: BlogPost[] = [
     slug: "how-to-move-house-on-a-budget-adelaide",
     tier: 1,
     category: "Comparisons & Hacks",
-    title: "How to Plan a Move on a Budget in Adelaide",
-    seoTitle: "Moving on a Budget in Adelaide: Planning Tips",
+    title: "How to Move House on a Budget in Adelaide",
+    seoTitle: "Moving House in Adelaide on a Budget | Planning Guide",
     metaDescription:
       "Plan a move on a budget in Adelaide with practical preparation, packing and quote-comparison tips. Any savings depend on your move and quote terms.",
     primaryKeyword: "budget moving tips adelaide",
@@ -477,7 +478,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "8 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-09-26",
+    updatedDate: "2026-10-02",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -543,7 +544,7 @@ export const blogPosts: BlogPost[] = [
       "what-size-removal-truck-do-i-need",
       "cheap-removalists-adelaide-guide",
     ],
-    relatedServices: ["packing-unpacking", "house-removals"],
+    relatedServices: ["packing-unpacking", "house-removals", "pricing", "get-a-quote"],
   },
 
   // -------------------------------------------------------------
@@ -733,7 +734,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "7 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-09-26",
+    updatedDate: "2026-10-02",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -778,7 +779,7 @@ export const blogPosts: BlogPost[] = [
       "cheap-removalists-adelaide-guide",
       "what-size-removal-truck-do-i-need",
     ],
-    relatedServices: ["house-removals", "furniture-removals"],
+    relatedServices: ["house-removals", "furniture-removals", "adelaide-hills"],
   },
 
   // -------------------------------------------------------------
@@ -903,8 +904,8 @@ export const blogPosts: BlogPost[] = [
       keyTakeaways: [
         "Ask how weather conditions could affect your move and what protection is available.",
         "Ask the removalist whether drawers, wardrobes or other furniture should be emptied.",
-        "Rates start from $79 per 30 minutes for 2 movers and a truck.",
-        "Cheap Adelaide Removalist lists operating hours of 7:00 am to 8:00 pm daily.",
+        `Rates start from $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for 2 movers and a truck.`,
+        `Cheap Adelaide Removalist lists contact hours of ${business.hours}.`,
       ],
     },
     summary:
@@ -920,7 +921,7 @@ export const blogPosts: BlogPost[] = [
           {
             h3: "How do your 30-minute rates work?",
             paragraphs: [
-            "Our listed starting rates are $79 per 30 minutes ($158 per hour) for 2 movers and a truck, and $99 per 30 minutes ($198 per hour) for 3 movers and a truck. Ask for the minimum booking and other quote terms that apply to your move.",
+            `Our listed starting rates are $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes ($${business.pricing.twoMovers.hourlyReference} per hour) for 2 movers and a truck, and $${business.pricing.threeMovers.thirtyMinutes} per 30 minutes ($${business.pricing.threeMovers.hourlyReference} per hour) for 3 movers and a truck. Ask for the minimum booking and other quote terms that apply to your move.`,
             ],
           },
           {
@@ -932,7 +933,7 @@ export const blogPosts: BlogPost[] = [
           {
             h3: "Do you charge extra for weekend moves?",
             paragraphs: [
-          "We list operating hours of 7:00 am to 8:00 pm daily. Ask which starting rates and quote terms apply to your preferred date.",
+          `We list contact hours of ${business.hours}. Ask which starting rates and quote terms apply to your preferred date.`,
             ],
           },
         ],
@@ -1097,7 +1098,7 @@ export const blogPosts: BlogPost[] = [
         lead: "If your move date changes or you need to relocate at short notice, contact providers promptly and confirm the arrangements in writing.",
         paragraphs: [
           "Contact removalists directly by phone or through their quote form, explain the timing and route, and ask whether a suitable crew is available. Same-day availability cannot be assumed.",
-          "For this business, call 0491 704 136 or request a quote online. Confirm availability, the agreed arrival window and all pricing conditions before booking.",
+          `Call ${business.contact.primaryPhone} or request a quote online. Confirm availability, the agreed arrival window and all pricing conditions before booking.`,
         ],
       },
     ],
@@ -1105,7 +1106,7 @@ export const blogPosts: BlogPost[] = [
       {
         question: "Do you charge higher rates for emergency or same-day moves?",
         answer:
-          "Our published starting rates are $79 per 30 minutes for 2 movers and a truck and $99 per 30 minutes for 3 movers and a truck. Ask us for a quote to confirm the terms for your requested date and move details.",
+          `Our published starting rates are $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes for 2 movers and a truck and $${business.pricing.threeMovers.thirtyMinutes} per 30 minutes for 3 movers and a truck. Ask us for a quote to confirm the terms for your requested date and move details.`,
       },
     ],
     relatedArticles: [

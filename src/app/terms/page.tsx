@@ -54,7 +54,7 @@ export default function TermsPage() {
               2. Nature of Quotes & Estimates
             </h2>
             <p>
-              All rates and prices published on this website (such as 2 Movers from $79 / 30 min and 3 Movers from $99 / 30 min) represent starting base rates. Online estimates and telephone quotes are indicative assessments based on the information provided by the customer.
+              All rates and prices published on this website (such as {business.pricing.twoMovers.name} from ${business.pricing.twoMovers.thirtyMinutes} / 30 min and {business.pricing.threeMovers.name} from ${business.pricing.threeMovers.thirtyMinutes} / 30 min) represent starting rates. Online estimates and telephone quotes are based on the information provided by the customer.
             </p>
             <p className="mt-2">
               {business.pricing.disclaimer} Final billable hours reflect actual loading time, transport time, and unloading time required to complete the move.
@@ -81,7 +81,7 @@ export default function TermsPage() {
               4. Service Availability
             </h2>
             <p>
-              We operate 7 days a week between 7:00 am and 8:00 pm. Specific arrival time slots are agreed upon during the booking confirmation process and depend on traffic and previous job completions.
+              Our listed contact hours are {business.hours}. Arrival times are confirmed during booking and depend on the agreed schedule and route.
             </p>
           </div>
 

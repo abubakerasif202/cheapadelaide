@@ -18,6 +18,7 @@ import {
   Repeat,
 } from "lucide-react";
 import { services } from "@/data/services";
+import { blogPosts } from "@/data/blog";
 import { business } from "@/config/business";
 import {
   constructMetadata,
@@ -43,6 +44,15 @@ const serviceIcons: Record<string, React.ElementType> = {
   "packing-unpacking": PackageCheck,
   "interstate-removals": Truck,
   backloading: Repeat,
+};
+
+const supportingGuideByService: Record<string, string> = {
+  "house-removals": "how-much-do-removalists-cost-adelaide",
+  "apartment-removals": "moving-adelaide-cbd-apartment-guide",
+  "furniture-removals": "moving-heavy-furniture-safely-adelaide",
+  "packing-unpacking": "how-to-move-house-on-a-budget-adelaide",
+  "interstate-removals": "cheap-backloading-adelaide-guide",
+  backloading: "cheap-backloading-adelaide-guide",
 };
 
 export async function generateStaticParams() {
@@ -82,6 +92,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   const Icon = serviceIcons[service.slug] || Truck;
   const related = services.filter((s) => service.relatedServices.includes(s.slug));
+  const supportingGuide = blogPosts.find(
+    (post) => post.slug === supportingGuideByService[service.slug]
+  );
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", item: "/" },
@@ -139,7 +152,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   href="/get-a-quote"
                   className="rounded-xl bg-[#FF6A00] px-6 py-3.5 text-sm font-bold text-[#071933] shadow-lg shadow-orange-500/20 transition hover:bg-orange-300"
                 >
-                  Request a Free Quote
+                  Request a Quote
                 </Link>
                 <a
                   href={business.contact.primaryPhoneHref}
@@ -170,7 +183,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <div className="space-y-2 text-xs text-slate-600">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="h-4 w-4 text-[#FF6A00]" />
-                    <span>Starting rates from $79 / 30 min</span>
+                    <span>{service.startingRate}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-[#FF6A00]" />
@@ -361,15 +374,34 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </section>
       )}
 
+      <section className="border-t border-slate-200 bg-white py-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+          <Link
+            href="/pricing"
+            className="font-semibold text-[#0B2D5B] underline decoration-orange-500 underline-offset-4"
+          >
+            View Adelaide removalist prices and billing details
+          </Link>
+          {supportingGuide && (
+            <Link
+              href={`/blog/${supportingGuide.slug}`}
+              className="font-semibold text-[#A63F00] underline underline-offset-4"
+            >
+              Planning guide: {supportingGuide.title}
+            </Link>
+          )}
+        </div>
+      </section>
+
       {/* 6. QUOTE FORM BLOCK */}
       <section className="py-16 sm:py-24 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
-              Fast Quote Request
+              Quote Request
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
-              Request Your Free {service.title} Quote
+              Request a {service.title} Quote
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
               Share your pickup and delivery suburbs, inventory details, and preferred move date.
@@ -385,7 +417,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {/* 7. CTA */}
       <CTASection
         title={`Ready to Book Your Adelaide ${service.title}?`}
-        subtitle="Call 0491 704 136 during our listed hours or submit your move details online."
+        subtitle={`Call ${business.contact.primaryPhone} during our listed hours or submit your move details online.`}
       />
     </div>
   );

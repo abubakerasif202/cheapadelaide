@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -24,7 +25,14 @@ import { TrustSection } from "@/components/common/TrustSection";
 import { FAQAccordion } from "@/components/common/FAQAccordion";
 import { QuoteForm } from "@/components/common/QuoteForm";
 import { CTASection } from "@/components/common/CTASection";
-import { generateFAQSchema } from "@/config/seo";
+import { constructMetadata, generateFAQSchema } from "@/config/seo";
+
+export const metadata: Metadata = constructMetadata({
+  title: "Cheap Adelaide Removalists | Affordable Adelaide Movers",
+  description:
+    "Affordable removalist services for house, apartment, furniture and office moves across Adelaide. View published starting rates or request a quote.",
+  canonical: "/",
+});
 
 const serviceIcons: Record<string, React.ElementType> = {
   "house-removals": Home,
@@ -75,7 +83,7 @@ export default function HomePage() {
               </h1>
 
               <p className="max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Straightforward moving services for homes, apartments, offices, and furniture across Greater Adelaide. When you need affordable Adelaide removalists without the runaround, our crews deliver published 30-minute rates from $79, experienced movers, and careful handling from start to finish.
+                Straightforward moving services for homes, apartments, offices and furniture across Greater Adelaide. Compare our published team rates, share your inventory and access details, and request a quote for your move.
               </p>
 
               {/* Tactile Action Buttons */}
@@ -84,7 +92,7 @@ export default function HomePage() {
                   href="/get-a-quote"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FF6A00] px-7 py-4 text-base font-extrabold text-[#071933] shadow-xl shadow-orange-500/25 transition-all hover:bg-orange-300 active:scale-[0.98]"
                 >
-                  <span>Get My Free Quote</span>
+                  <span>Request a Quote</span>
                   <ArrowRight className="h-5 w-5" />
                 </Link>
 
@@ -109,8 +117,8 @@ export default function HomePage() {
                         2 Movers + Truck
                       </div>
                       <div className="text-xs leading-tight text-slate-300">
-                        From <strong className="text-orange-300 font-mono">$79</strong> / 30 min{" "}
-                        <span className="text-slate-400 font-mono">($158/hr)</span>
+                        From <strong className="text-orange-300 font-mono">${business.pricing.twoMovers.thirtyMinutes}</strong> / 30 min{" "}
+                        <span className="text-slate-400 font-mono">(${business.pricing.twoMovers.hourlyReference}/hr)</span>
                       </div>
                     </div>
                   </div>
@@ -124,8 +132,8 @@ export default function HomePage() {
                         3 Movers + Truck
                       </div>
                       <div className="text-xs leading-tight text-slate-300">
-                        From <strong className="text-orange-300 font-mono">$99</strong> / 30 min{" "}
-                        <span className="text-slate-400 font-mono">($198/hr)</span>
+                        From <strong className="text-orange-300 font-mono">${business.pricing.threeMovers.thirtyMinutes}</strong> / 30 min{" "}
+                        <span className="text-slate-400 font-mono">(${business.pricing.threeMovers.hourlyReference}/hr)</span>
                       </div>
                     </div>
                   </div>
@@ -342,7 +350,7 @@ export default function HomePage() {
                   <div>
                     <strong className="text-white block text-sm">Flexible 2 or 3 Mover Crews:</strong>
                     <span className="text-xs text-slate-300">
-                      Starting rates available for both 2 ($79/30 min) and 3 ($99/30 min) movers with a truck.
+                      Starting rates available for both 2 (${business.pricing.twoMovers.thirtyMinutes}/30 min) and 3 (${business.pricing.threeMovers.thirtyMinutes}/30 min) movers with a truck.
                     </span>
                   </div>
                 </div>
@@ -439,10 +447,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
-              Fast Quote Estimate
+              Adelaide Moving Quote
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
-              Request Your Free Adelaide Moving Quote
+              Request an Adelaide Moving Quote
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600">
               Tell us what you are moving and your locations for a transparent starting rate estimate without the runaround.

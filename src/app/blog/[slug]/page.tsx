@@ -58,7 +58,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const relatedArticlesData = blogPosts.filter((p) => post.relatedArticles.includes(p.slug));
   const utilityPages: Record<string, { title: string; href: string }> = {
+    homepage: { title: "Cheap Adelaide Removalist home page", href: "/" },
     pricing: { title: "Removalist Pricing", href: "/pricing" },
+    "get-a-quote": { title: "Request a quote", href: "/get-a-quote" },
+    "adelaide-hills": {
+      title: "Adelaide Hills removals service area",
+      href: "/service-areas/adelaide-hills-regional-sa",
+    },
     faq: { title: "Moving FAQs", href: "/faq" },
     contact: { title: "Contact Us", href: "/contact" },
   };
@@ -246,30 +252,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </section>
             )}
 
-            {/* Operational Truth & Transparency Box */}
-            <div className="ca-notice">
-              <div className="ca-notice__main">
-                <span className="ca-icon-tile ca-icon-tile--navy" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-                  </svg>
-                </span>
-                <div>
-                  <p className="ca-h4 font-bold" style={{ fontSize: 16 }}>
-                    Cheap Adelaide Removalist Operational Standards
-                  </p>
-                  <p className="ca-caption">
-                    {business.location.fullAddress} • Open 7 Days: 7:00 am – 8:00 pm
-                  </p>
-                </div>
-              </div>
-              <p className="ca-small" style={{ color: "var(--text-muted)" }}>
-                {business.operatorNotice} All rate quotes are supplied with complete clarity. Starting rates begin from $79
-                per 30 minutes ($158/hr) for 2 movers and a truck, and $99 per 30 minutes ($198/hr) for 3 movers and a
-                truck. Final pricing depends on move size, inventory, access, travel and any additional services
-                required.
-              </p>
-            </div>
           </article>
 
           {/* Sidebar */}

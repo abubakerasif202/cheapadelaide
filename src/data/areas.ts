@@ -192,34 +192,35 @@ export const adelaideRegions: RegionArea[] = [
     id: "adelaide-hills-regional",
     name: "Adelaide Hills & Regional SA",
     slug: "adelaide-hills-regional-sa",
-    seoTitle: "Removalists Adelaide Hills & Regional SA | Cheap Adelaide Removalist",
+    seoTitle: "Adelaide Hills Removalists | Cheap Adelaide Removalist",
     metaDescription:
-      "Removalist enquiries for Mount Barker, Stirling, Hahndorf, the Barossa Valley, Murray Bridge and Victor Harbor connected to Greater Adelaide.",
+      "Request an Adelaide Hills removals quote for Stirling, Crafers, Mount Barker and nearby communities. Share driveway, road and vehicle access details when planning your move.",
     description:
-      "Country properties, acreage, and regional towns connected to Greater Adelaide by main freight highways.",
-    keyHubs: ["Mount Barker", "Stirling", "Hahndorf", "Barossa Valley", "Murray Bridge", "Victor Harbor"],
-    serviceNotes: "Contact us with your route and timing to discuss availability.",
+      "For a move to or from the Adelaide Hills, include property access and route details when asking about availability around Stirling, Crafers, Mount Barker and nearby townships. The existing regional area also covers routes to the Barossa Valley, Murray Bridge and Victor Harbor.",
+    keyHubs: ["Stirling", "Crafers", "Mount Barker", "Hahndorf", "Barossa Valley", "Murray Bridge", "Victor Harbor"],
+    serviceNotes: "Share both addresses and your preferred date so the route and access can be discussed.",
     movingConsiderations: [
-      "Hills townships like Stirling and Hahndorf often have narrow, winding approach roads, so note the truck access point closest to the property.",
-      "Acreage properties can have long gravel driveways; mention the surface and length so the vehicle can be positioned correctly.",
-      "Regional routes to Murray Bridge, the Barossa Valley or Victor Harbor add travel distance, which is discussed as part of the quote.",
-      "Rural properties sometimes have limited mobile reception, so confirming a contact number and gate access in advance helps the day run smoothly.",
+      "Describe steep or sloped driveways, including the surface, gradient and a safe place for loading or unloading.",
+      "Note narrow roads, tight turns, limited turning areas and any overhead clearance restrictions on the route.",
+      "Check where a vehicle can legally stop at both properties and whether access needs to be arranged with anyone else.",
+      "Share the pickup and delivery addresses early so route, access and travel can be considered in the quote.",
     ],
     suitedFor: [
-      "Adelaide Hills township moves in Stirling, Hahndorf and Mount Barker",
-      "Acreage and rural property relocations",
-      "Regional moves to the Barossa Valley, Murray Bridge or Victor Harbor",
+      "Moves to or from Stirling, Crafers, Mount Barker and nearby Hills communities",
+      "Properties with sloped driveways or limited vehicle turning space",
+      "Moves where road width, clearance or parking needs to be discussed in advance",
+      "Regional routes to the Barossa Valley, Murray Bridge or Victor Harbor",
     ],
     faqs: [
       {
-        question: "Do you travel to the Adelaide Hills for a move?",
+        question: "Do you take moving enquiries for Stirling, Crafers and Mount Barker?",
         answer:
-          "Yes, Hills townships and regional SA are listed as areas we can discuss. Share your route and preferred timing so availability can be confirmed.",
+          "These Adelaide Hills locations are listed service-area hubs. Share both addresses and your preferred date so availability and route details can be discussed.",
       },
       {
         question: "Can your truck get down a long gravel driveway?",
         answer:
-          "It depends on the driveway width, length and surface. Describe the access so it can be assessed before the move is confirmed.",
+          "It depends on the gradient, surface, width and space to stop or turn. Share those details and ask for access to be assessed before confirming the move.",
       },
     ],
   },

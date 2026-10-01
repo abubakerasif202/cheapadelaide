@@ -1,3 +1,5 @@
+import { business, formatStartingRate } from "@/config/business";
+
 export interface ServiceItem {
   id: string;
   slug: string;
@@ -30,7 +32,7 @@ export const services: ServiceItem[] = [
     heroHeadline: "House Removals Across Adelaide",
     heroSubheadline:
       "From compact townhouses to full family residences, our local Adelaide removalists provide organised, careful moving services with transparent starting rates.",
-    startingRate: "From $79 / 30 min ($158/hr)",
+    startingRate: formatStartingRate(business.pricing.twoMovers),
     overview: [
       "Moving house doesn't need to be stressful or overpriced. Cheap Adelaide Removalist delivers practical, organised residential relocations tailored to the size and timeline of your household.",
       "Include your furniture, boxes, appliances and other larger items when describing the move so its scope can be discussed.",
@@ -85,7 +87,7 @@ export const services: ServiceItem[] = [
       {
         question: "Should I book 2 movers or 3 movers for my house move?",
         answer:
-          "Starting rates are $79 / 30 min for 2 Movers + Truck and $99 / 30 min for 3 Movers + Truck. The suitable option depends on your move details.",
+          `Starting rates are $${business.pricing.twoMovers.thirtyMinutes} / 30 min for ${business.pricing.twoMovers.name} and $${business.pricing.threeMovers.thirtyMinutes} / 30 min for ${business.pricing.threeMovers.name}. The suitable option depends on your move details.`,
       },
       {
         question: "Do I need to empty chest of drawers and wardrobes?",
@@ -107,7 +109,7 @@ export const services: ServiceItem[] = [
     heroHeadline: "Efficient Apartment Moves in Adelaide",
     heroSubheadline:
       "Apartment moves can involve lift reservations, building rules, narrow stairwells and other access requirements. Share these details when requesting a quote.",
-    startingRate: "From $79 / 30 min ($158/hr)",
+    startingRate: formatStartingRate(business.pricing.twoMovers),
     overview: [
       "Moving in or out of an apartment building requires specific planning that standard house moves don't encounter: lift bookings, shared foyer rules, narrow door frames, and loading dock height limits.",
       "When requesting an apartment move, include lift bookings, floor level, parking, loading bay rules and other building requirements.",
@@ -184,7 +186,7 @@ export const services: ServiceItem[] = [
     heroHeadline: "Careful Furniture Removals Adelaide",
     heroSubheadline:
       "Describe the size, weight, quantity and access needs of the furniture when requesting a quote.",
-    startingRate: "From $79 / 30 min ($158/hr)",
+    startingRate: formatStartingRate(business.pricing.twoMovers),
     overview: [
       "Furniture is often both valuable and awkward to carry. Dropping a wardrobe or scratching a polished dining table is the last thing you want on moving day.",
       "Share pickup and delivery suburbs, item details and access conditions so the scope can be discussed.",
@@ -260,7 +262,7 @@ export const services: ServiceItem[] = [
     heroHeadline: "Adelaide Office Relocations",
     heroSubheadline:
       "Office moves for workstations, files, meeting tables, and other office furniture.",
-    startingRate: "From $99 / 30 min ($198/hr)",
+    startingRate: formatStartingRate(business.pricing.threeMovers),
     overview: [
       "Office moves can involve equipment, files, furniture, access restrictions and timing requirements. Share these details so the move scope can be discussed.",
       "Office moves can include desks, workstations, chairs, equipment, cartons, and meeting room furniture described in the enquiry.",
@@ -311,7 +313,7 @@ export const services: ServiceItem[] = [
       {
         question: "Can our office move take place on a weekend?",
         answer:
-          "Our listed contact hours are 7:00 am–8:00 pm daily. Include your preferred moving date and time when making an enquiry.",
+          `Our listed contact hours are ${business.hours}. Include your preferred moving date and time when making an enquiry.`,
       },
       {
         question: "How should our employees prepare their desks?",
@@ -338,7 +340,7 @@ export const services: ServiceItem[] = [
     heroHeadline: "Adelaide Commercial Removals",
     heroSubheadline:
       "Practical transport solutions for retail fit-outs, commercial inventory, hospitality equipment, and trade businesses across South Australia.",
-    startingRate: "From $99 / 30 min ($198/hr)",
+    startingRate: formatStartingRate(business.pricing.threeMovers),
     overview: [
       "Commercial moves present unique operational challenges, from heavy display cabinets and shelving units to bulk inventory and point-of-sale fixtures.",
       "Commercial moves can include retail displays, shelving, stock, hospitality furniture and other items described in your enquiry.",
@@ -394,7 +396,7 @@ export const services: ServiceItem[] = [
       {
         question: "Do you operate outside standard retail trading hours?",
         answer:
-          "Our listed contact hours are 7:00 am–8:00 pm daily. Include any site access hours in your enquiry.",
+          `Our listed contact hours are ${business.hours}. Include any site access hours in your enquiry.`,
       },
       {
         question: "Can we book a 3-man crew for heavy commercial jobs?",
@@ -416,7 +418,7 @@ export const services: ServiceItem[] = [
     heroHeadline: "Packing & Unpacking in Adelaide",
     heroSubheadline:
       "Include the rooms and items you would like help with when requesting a packing or unpacking quote.",
-    startingRate: "From $79 / 30 min ($158/hr)",
+    startingRate: formatStartingRate(business.pricing.twoMovers),
     overview: [
       "Packing scope varies from a few rooms or items to a larger household. Share what you would like packed or unpacked so the requirements can be discussed.",
       "List fragile items and any material requirements in your enquiry. Confirm what supplies and services are available before booking.",

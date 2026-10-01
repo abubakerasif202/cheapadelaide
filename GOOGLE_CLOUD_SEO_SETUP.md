@@ -58,7 +58,7 @@ new project.**
 | Project number | `161826315730` |
 | Region used for BigQuery (legacy table) | `australia-southeast1` |
 | Active gcloud account | `abubakerasif202@gmail.com` |
-| Also credentialed | `Admin@hfremovalsadelaide.com.au`, `abubakarasif2002@gmail.com` |
+| Also credentialed | `Admin@hfremovalsadelaide.com.au` (Google access account, not the public business contact email), `abubakarasif2002@gmail.com` |
 | Billing | **NOT enabled** — native export requires this, see §4 |
 
 APIs already enabled on the project (checked with `gcloud services list

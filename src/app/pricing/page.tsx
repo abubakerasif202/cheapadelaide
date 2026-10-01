@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Info, Phone } from "lucide-react";
 import { business } from "@/config/business";
 import { quoteFactors } from "@/data/pricing";
@@ -15,9 +16,9 @@ import {
 } from "@/config/seo";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Removalist Pricing & Rates Adelaide | Cheap Adelaide Removalist",
+  title: "Adelaide Removalist Prices & Hourly Rates | Cheap Adelaide Removalist",
   description:
-    "Upfront starting rates for Adelaide removals: 2 Movers + Truck from $79 / 30 min, 3 Movers + Truck from $99 / 30 min. View transparent rates and get a quote.",
+    `View Adelaide removalist rates: 2 movers and a truck from $${business.pricing.twoMovers.thirtyMinutes} per 30 minutes, or 3 movers and a truck from $${business.pricing.threeMovers.thirtyMinutes}. Check billing details and request a move quote.`,
   canonical: "/pricing",
 });
 
@@ -41,12 +42,12 @@ export default function PricingPage() {
     itemListElement: [
       {
         "@type": "Offer",
-        name: "2 Movers + Truck",
-        price: "79",
+        name: business.pricing.twoMovers.name,
+        price: business.pricing.twoMovers.thirtyMinutes,
         priceCurrency: "AUD",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: "79",
+          price: business.pricing.twoMovers.thirtyMinutes,
           priceCurrency: "AUD",
           unitText: "per 30 minutes",
         },
@@ -55,12 +56,12 @@ export default function PricingPage() {
       },
       {
         "@type": "Offer",
-        name: "3 Movers + Truck",
-        price: "99",
+        name: business.pricing.threeMovers.name,
+        price: business.pricing.threeMovers.thirtyMinutes,
         priceCurrency: "AUD",
         priceSpecification: {
           "@type": "UnitPriceSpecification",
-          price: "99",
+          price: business.pricing.threeMovers.thirtyMinutes,
           priceCurrency: "AUD",
           unitText: "per 30 minutes",
         },
@@ -94,10 +95,10 @@ export default function PricingPage() {
               Transparent Rates
             </span>
             <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl lg:text-5xl font-[family-name:var(--font-heading)]">
-              Straightforward Moving Rates
+              Adelaide Removalist Pricing &amp; Rates
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Starting rates are shown for both team options. Final pricing depends on move size, inventory, access, travel and any additional services required.
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+              Starting rates are shown for both team options. Final pricing depends on move size, inventory, access, travel and any additional services required. For a guide to the factors behind a moving quote, read our <Link className="font-semibold text-[#A63F00] underline" href="/blog/how-much-do-removalists-cost-adelaide">Adelaide removalist cost guide</Link>.
             </p>
           </div>
         </div>
@@ -111,10 +112,10 @@ export default function PricingPage() {
               Published Rates
             </span>
             <h2 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
-              Adelaide Moving Packages & Starting Rates
+              Adelaide Removalist Rates by Team Size
             </h2>
             <p className="mt-2 text-base text-slate-600 max-w-xl mx-auto">
-              Transparent rates billed in standard 30-minute increments with no hidden booking fees.
+              Published starting rates are billed in 30-minute increments. Check the full terms that apply to your move when requesting a quote.
             </p>
           </div>
           <PricingCards />
@@ -178,7 +179,7 @@ export default function PricingPage() {
               className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-[#0B2D5B] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#071933] transition"
             >
               <Phone className="h-4 w-4 text-[#FF6A00]" />
-              <span>Call 0491 704 136</span>
+              <span>Call {business.contact.primaryPhone}</span>
             </a>
           </div>
         </div>
@@ -208,7 +209,7 @@ export default function PricingPage() {
               Tell Us About Your Move
             </h2>
             <p className="mt-2 text-sm text-slate-600">
-              Submit your inventory and dates below for a fast, free moving estimate.
+              Share your inventory and preferred date below so your move can be scoped for a quote.
             </p>
           </div>
           <QuoteForm sourcePage="Pricing Page" />

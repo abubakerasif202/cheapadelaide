@@ -9,7 +9,7 @@ export interface QuoteAsideProps {
 }
 
 export function QuoteAside({
-  eyebrow = "Instant Moving Estimate",
+  eyebrow = "Moving Quote Details",
   title = "Book Adelaide Movers Today",
   text = "Published starting rates use 30-minute increments. Share your move details to confirm the applicable quote terms.",
 }: QuoteAsideProps) {
@@ -28,7 +28,7 @@ export function QuoteAside({
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 24 }}>
         <Button href="/get-a-quote" block trailingIcon="arrow-right">
-          Request a Free Quote
+          Request a Quote
         </Button>
         <Button href={business.contact.primaryPhoneHref} variant="inverse" block leadingIcon="phone">
           Call {business.contact.primaryPhone}
