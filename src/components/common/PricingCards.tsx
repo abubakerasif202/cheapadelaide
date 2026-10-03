@@ -13,6 +13,7 @@ export function PricingCards() {
             rate={plan.ratePerHalfHour}
             hourly={plan.hourlyReference}
             featured={plan.popular}
+            flag=""
             icon={plan.id === "two-movers" ? "users" : "truck"}
             cta={plan.ctaText}
             href="/get-a-quote"

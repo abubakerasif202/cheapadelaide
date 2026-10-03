@@ -1,4 +1,4 @@
-import { business } from "@/config/business";
+import { business, googleReviewSummary } from "@/config/business";
 import { Icon, Button } from "@/components/core";
 
 export interface CTASectionProps {
@@ -13,6 +13,7 @@ export function CTASection({
   title = "Tell Us What You're Moving & Get a Clear Price Estimate",
   subtitle = "Call us during our listed hours or send your move details through the online quote form.",
   features = [
+    ["star", googleReviewSummary],
     ["clock", `Open ${business.hours}`],
     ["shield-check", `${business.pricing.twoMovers.name} from $${business.pricing.twoMovers.thirtyMinutes} / 30 min`],
     ["shield-check", `${business.pricing.threeMovers.name} from $${business.pricing.threeMovers.thirtyMinutes} / 30 min`],

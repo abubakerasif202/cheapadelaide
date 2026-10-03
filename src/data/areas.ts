@@ -60,21 +60,21 @@ export const adelaideRegions: RegionArea[] = [
     keyHubs: ["Elizabeth Vale", "Salisbury", "Mawson Lakes", "Golden Grove", "Munno Para", "Gawler"],
     serviceNotes: "Send your pickup and delivery suburbs to discuss availability for this area.",
     movingConsiderations: [
-      "Our operating base is at Elizabeth Vale, so moves starting or finishing in this area are a familiar route for our crews.",
+      "Our operating base is at Elizabeth Vale. Share your pickup and delivery suburbs so travel and access can be considered in your quote.",
       "Salisbury and Munno Para include a mix of established homes and newer estates, with driveway widths that vary block to block.",
       "Golden Grove and Mawson Lakes have many two-storey homes; let us know about internal stairs when describing furniture.",
       "Gawler moves may involve a longer travel distance; share your pickup and delivery suburbs so this can be factored into your quote.",
     ],
     suitedFor: [
       "House removals within the northern suburbs and Playford council area",
-      "Moves to or from our Elizabeth Vale operating base",
+      "Moves to or from homes and businesses in Elizabeth Vale",
       "Growing families relocating between newer estates in Golden Grove or Mawson Lakes",
     ],
     faqs: [
       {
         question: "Is Elizabeth Vale within your normal service area?",
         answer:
-          "Yes, Elizabeth Vale is our operating base, so moves in and around the northern suburbs are a regular route for us.",
+          "Yes, Elizabeth Vale is a listed service-area hub and our operating base. Share your addresses and preferred date to confirm availability.",
       },
       {
         question: "Do you charge extra for moves further out, like Gawler?",

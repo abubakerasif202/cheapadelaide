@@ -60,6 +60,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const utilityPages: Record<string, { title: string; href: string }> = {
     homepage: { title: "Cheap Adelaide Removalist home page", href: "/" },
     pricing: { title: "Removalist Pricing", href: "/pricing" },
+    "adelaide-cbd": { title: "Adelaide CBD & Inner Metro service area", href: "/service-areas/adelaide-cbd-inner-metro" },
     "get-a-quote": { title: "Request a quote", href: "/get-a-quote" },
     "adelaide-hills": {
       title: "Adelaide Hills removals service area",
@@ -69,7 +70,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     contact: { title: "Contact Us", href: "/contact" },
   };
   const relatedServicesData: { slug: string; title: string; href: string; startingRate?: string }[] =
-    post.relatedServices.flatMap((slug) => {
+    [...new Set([
+      ...post.relatedServices,
+      "pricing",
+      ...(post.slug === "moving-adelaide-cbd-apartment-guide" ? ["adelaide-cbd"] : []),
+    ])].flatMap((slug) => {
       const service = services.find((item) => item.slug === slug);
       if (service) return [{ slug, title: service.title, href: `/services/${slug}`, startingRate: service.startingRate }];
       const page = utilityPages[slug];
@@ -142,7 +147,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div style={{ marginTop: 16, maxWidth: 880 }}>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12 }}>
               <span className="ca-badge ca-badge--accent">{post.category}</span>
-              {post.isPillar && <span className="ca-badge ca-badge--navy">Pillar Master Guide</span>}
+              {post.isPillar && <span className="ca-badge ca-badge--navy">Complete Moving Guide</span>}
               <span className="ca-caption">{post.readTime}</span>
               <time className="ca-caption" dateTime={post.publishDate}>
                 Published {new Date(`${post.publishDate}T12:00:00`).toLocaleDateString("en-AU", {
@@ -252,6 +257,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </section>
             ))}
 
+            <section>
+              <h2 className="ca-h2">Plan Your Adelaide Move</h2>
+              <p>
+                <Link href="/service-areas">Check Adelaide service areas</Link>, compare{" "}
+                <Link href="/pricing">starting rates and quote factors</Link>, then{" "}
+                <Link href="/get-a-quote">request a quote with your move details</Link>.
+                Availability and final pricing depend on your addresses, inventory, access and preferred date.
+              </p>
+            </section>
+
             {/* In-Article FAQs */}
             {faqItems.length > 0 && (
               <section>
@@ -325,6 +340,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     </Link>
                   ))}
                 </div>
+                {relatedServicesData.some((service) => service.startingRate) && (
+                  <p className="ca-caption" style={{ marginTop: 12 }}>{business.pricing.disclaimer}</p>
+                )}
               </div>
             )}
           </aside>

@@ -16,7 +16,7 @@ import {
   MapPin,
   Check,
 } from "lucide-react";
-import { business } from "@/config/business";
+import { business, googleReviewSummary } from "@/config/business";
 import { services } from "@/data/services";
 import { generalFaqs } from "@/data/faqs";
 import { AdelaideMoveBento } from "@/components/home/AdelaideMoveBento";
@@ -55,7 +55,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       {/* 1. HERO SECTION (Asymmetric Split Screen with Liquid Glass) */}
-      <section className="relative overflow-hidden bg-[#071933] py-12 text-white sm:py-16 lg:py-24">
+      <section className="relative overflow-hidden bg-[#071933] py-8 text-white sm:py-12 lg:py-20">
         {/* Subtle geometric angle background */}
         <div
           aria-hidden="true"
@@ -65,25 +65,22 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
             {/* Left Column: Left-Aligned Editorial Typographic Hierarchy */}
-            <div className="relative z-10 space-y-6 text-left lg:col-span-7">
+            <div className="relative z-10 space-y-4 text-left lg:col-span-7">
               {/* Liquid Glass Status Pill */}
               <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-orange-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] backdrop-blur-md">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#FF6A00] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#FF6A00]" />
                 </span>
-                <span>Adelaide Removals • Open Daily</span>
+                <span>{googleReviewSummary}</span>
               </div>
 
-              <h1 className="text-4xl font-extrabold tracking-tighter text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] leading-[1.03]">
-                Affordable Adelaide Removalists{" "}
-                <span className="text-[#FF6A00] block mt-1">
-                  Without the Runaround.
-                </span>
+              <h1 className="text-3xl font-extrabold tracking-tighter text-white sm:text-5xl lg:text-6xl font-[family-name:var(--font-heading)] leading-[1.03]">
+                Affordable Adelaide <span className="text-[#FF6A00]">Removalists</span>
               </h1>
 
               <p className="max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Straightforward moving services for homes, apartments, offices and furniture across Greater Adelaide. Compare our published team rates, share your inventory and access details, and request a quote for your move.
+                Home, apartment, office and furniture moves across Greater Adelaide. Compare starting rates below and request a quote for your move.
               </p>
 
               {/* Tactile Action Buttons */}
@@ -98,7 +95,7 @@ export default function HomePage() {
 
                 <a
                   href={business.contact.primaryPhoneHref}
-                  className="hidden md:inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all hover:bg-white/15 active:scale-[0.98]"
+                  className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] transition-all hover:bg-white/15 active:scale-[0.98]"
                 >
                   <Phone className="h-5 w-5 text-[#FF6A00]" />
                   <span>Call {business.contact.primaryPhone}</span>
@@ -106,7 +103,7 @@ export default function HomePage() {
               </div>
 
               {/* Quick Pricing Badge Strip with Diffusion Shadows */}
-              <div className="pt-6 border-t border-white/10">
+              <div className="pt-4 border-t border-white/10">
                 <div className="grid grid-cols-1 gap-3 max-w-lg sm:grid-cols-2">
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF6A00] text-xs font-mono font-bold text-[#071933]">
@@ -138,7 +135,7 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-                <p className="mt-2.5 text-[13px] text-slate-400">
+                <p className="mt-2.5 text-[13px] text-slate-300">
                   {business.pricing.disclaimer}
                 </p>
               </div>
@@ -151,7 +148,7 @@ export default function HomePage() {
                   <div className="relative aspect-[16/11] w-full bg-slate-900">
                     <Image
                       src="/brand/hero-truck.webp"
-                      alt="Removal truck used for Adelaide moving services"
+                      alt="Illustration of a navy and orange removal truck with Cheap Adelaide Removalist branding"
                       fill
                       preload
                       className="object-cover"
@@ -163,8 +160,8 @@ export default function HomePage() {
                         <MapPin className="h-3.5 w-3.5 text-[#FF6A00]" />
                         Adelaide Metro & Regional SA
                       </span>
-                      <span className="hidden whitespace-nowrap rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-xs uppercase text-[#071933] sm:inline-block">
-                        Adelaide Moving Team
+                      <span className="whitespace-nowrap rounded-full bg-[#FF6A00] px-2.5 py-0.5 font-bold text-xs uppercase text-[#071933]">
+                        Illustrative artwork
                       </span>
                     </div>
                   </div>

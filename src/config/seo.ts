@@ -97,7 +97,7 @@ export function generateMovingCompanySchema() {
     "@id": `${business.domain}/#moving-company`,
     name: business.name,
     description: siteConfig.description,
-    image: `${business.domain}/brand/hero-truck.webp`,
+    image: `${business.domain}/brand/logo-horizontal.png`,
     logo: `${business.domain}/brand/logo-horizontal.png`,
     url: business.domain,
     telephone: business.contact.primaryPhone,

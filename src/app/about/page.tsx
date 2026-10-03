@@ -93,13 +93,14 @@ export default function AboutPage() {
                 <div className="relative aspect-[16/11] w-full bg-slate-900">
                   <Image
                     src="/brand/hero-truck.webp"
-                    alt="Cheap Adelaide Removalist Branded Moving Truck"
+                    alt="Illustration of a navy and orange removal truck with Cheap Adelaide Removalist branding"
                     fill
                     className="object-cover"
                     sizes="(min-width: 1280px) 479px, (min-width: 1024px) calc(41.667vw - 54.667px), (min-width: 640px) calc(100vw - 48px), calc(100vw - 32px)"
                   />
                 </div>
                 <div className="p-6 space-y-4">
+                  <p className="text-xs text-slate-500">Illustrative artwork.</p>
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                     <ShieldCheck className="h-4 w-4" />
                     <span>Operational Transparency</span>

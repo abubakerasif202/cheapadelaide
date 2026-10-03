@@ -4,6 +4,12 @@ const threeMoverHalfHourRate = 99;
 export const business = {
   name: "Cheap Adelaide Removalist",
   shortName: "Cheap Adelaide Movers",
+  googleBusinessProfile: {
+    rating: 5.0,
+    reviewCount: 9,
+    category: "Removalist",
+    verifiedOn: "2026-10-02",
+  },
   tagline: "Adelaide Moves Further Together",
   positioning: "Affordable Adelaide removalists presented with a premium, trustworthy and modern brand.",
   corePrinciple: "AFFORDABLE SERVICE. PREMIUM PRESENTATION.",
@@ -62,6 +68,8 @@ export const business = {
     white: "#FFFFFF",
   },
 } as const;
+
+export const googleReviewSummary = `${business.googleBusinessProfile.rating.toFixed(1)} Google rating · ${business.googleBusinessProfile.reviewCount} Google reviews`;
 
 export function formatStartingRate(team: {
   thirtyMinutes: number;

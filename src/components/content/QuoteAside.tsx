@@ -26,6 +26,7 @@ export function QuoteAside({
         <RateChip code="2P" name="2 Movers + Truck" rate={business.pricing.twoMovers.thirtyMinutes} hourly={business.pricing.twoMovers.hourlyReference} inverse />
         <RateChip code="3P" name="3 Movers + Truck" rate={business.pricing.threeMovers.thirtyMinutes} hourly={business.pricing.threeMovers.hourlyReference} inverse />
       </div>
+      <p className="ca-small" style={{ marginTop: 12 }}>{business.pricing.disclaimer}</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 24 }}>
         <Button href="/get-a-quote" block trailingIcon="arrow-right">
           Request a Quote

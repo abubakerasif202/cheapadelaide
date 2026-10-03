@@ -1,8 +1,9 @@
-import { business } from "@/config/business";
+import { business, googleReviewSummary } from "@/config/business";
 import { SectionHeader } from "@/components/core";
 import { TrustCard } from "@/components/marketing";
 
 const trustPoints = [
+  { icon: "star", title: "Google Reviews", description: googleReviewSummary },
   { icon: "badge-dollar-sign", title: "Published Starting Rates", description: `${business.pricing.twoMovers.name}: $${business.pricing.twoMovers.thirtyMinutes} / 30 min; ${business.pricing.threeMovers.name}: $${business.pricing.threeMovers.thirtyMinutes} / 30 min.` },
   { icon: "map-pin", title: "Adelaide Address", description: business.location.fullAddress },
   { icon: "phone", title: "Call Us Directly", description: business.contact.primaryPhone },

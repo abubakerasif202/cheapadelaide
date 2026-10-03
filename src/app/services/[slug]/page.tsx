@@ -382,6 +382,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           >
             View Adelaide removalist prices and billing details
           </Link>
+          <Link href="/service-areas" className="font-semibold text-[#0B2D5B] underline underline-offset-4">
+            Check Adelaide service areas for your move
+          </Link>
           {supportingGuide && (
             <Link
               href={`/blog/${supportingGuide.slug}`}

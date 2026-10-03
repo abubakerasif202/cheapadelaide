@@ -5,6 +5,7 @@ import { MapPin, ArrowRight, Compass, AlertTriangle, CheckCircle2 } from "lucide
 import { business } from "@/config/business";
 import { adelaideRegions } from "@/data/areas";
 import { services } from "@/data/services";
+import { blogPosts } from "@/data/blog";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { FAQAccordion } from "@/components/common/FAQAccordion";
 import { CTASection } from "@/components/common/CTASection";
@@ -50,6 +51,13 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
   if (!region) {
     notFound();
   }
+
+  const guideSlug = region.slug === "adelaide-cbd-inner-metro"
+    ? "moving-adelaide-cbd-apartment-guide"
+    : region.slug === "adelaide-hills-regional-sa"
+      ? "moving-to-adelaide-hills-removals-guide"
+      : "how-much-do-removalists-cost-adelaide";
+  const planningGuide = blogPosts.find((post) => post.slug === guideSlug);
 
   const otherRegions = adelaideRegions.filter((r) => r.slug !== region.slug);
   const featuredServices = services.filter((s) =>
@@ -245,6 +253,17 @@ export default async function RegionDetailPage({ params }: RegionPageProps) {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-slate-200 bg-white py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-[#0B2D5B]">Plan Your Move in {region.name}</h2>
+          <p className="mt-3 text-sm leading-relaxed text-slate-600">
+            Compare <Link href="/pricing" className="font-semibold text-[#A63F00] underline">starting rates and quote factors</Link>.{" "}
+            {planningGuide && <>Read our <Link href={`/blog/${planningGuide.slug}`} className="font-semibold text-[#A63F00] underline">{planningGuide.title}</Link>.{" "}</>}
+            <Link href="/get-a-quote" className="font-semibold text-[#A63F00] underline">Request a quote</Link> with your addresses, inventory and access details to confirm availability.
+          </p>
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { business } from "@/config/business";
 import { Icon, Button } from "@/components/core";
 import { TextField, SelectField, ChoiceCard } from "@/components/forms";
@@ -182,8 +183,7 @@ export function QuoteForm({
           Tell Us About Your Move
         </HeadingTag>
         <p className="ca-small">
-          Fields marked with <span style={{ color: "#C2410C", fontWeight: 700 }}>*</span> are required. Submission is handled by our
-          online form provider; see our privacy policy for details.
+          Fields marked with <span style={{ color: "#C2410C", fontWeight: 700 }}>*</span> are required.
         </p>
       </div>
 
@@ -279,6 +279,7 @@ export function QuoteForm({
 
         <fieldset>
           <legend className="ca-label ca-form__legend">Preferred Team Option</legend>
+          <p className="ca-small" style={{ marginBottom: 12 }}>{business.pricing.disclaimer}</p>
           <div className="ca-form__stack">
             {teamOptions.map((opt) => (
               <ChoiceCard
@@ -384,10 +385,10 @@ export function QuoteForm({
 
       <div className="ca-form__foot">
         <p className="ca-small">
-          Direct telephone enquiries:{" "}
-          <a href={business.contact.primaryPhoneHref} style={{ fontWeight: 700, color: "var(--navy-900)" }}>
-            {business.contact.primaryPhone}
-          </a>
+          Submitted through our online form provider. See our{" "}
+          <Link href="/privacy" style={{ fontWeight: 700, color: "var(--navy-900)", textDecoration: "underline" }}>
+            privacy policy
+          </Link>.
         </p>
 
         <Button type="submit" size="lg" loading={status === "loading"} trailingIcon={status === "loading" ? undefined : "send"}>

@@ -121,9 +121,11 @@ export function Header() {
                 {business.contact.primaryPhone}
               </span>
             </a>
-            <Button href="/get-a-quote" size="sm" trailingIcon="arrow-right">
-              Get a Quote
-            </Button>
+            {pathname !== "/get-a-quote" && (
+              <Button href="/get-a-quote" size="sm" trailingIcon="arrow-right">
+                Get a Quote
+              </Button>
+            )}
           </div>
 
           <div className="ca-header__mobile">

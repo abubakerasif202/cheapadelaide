@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Phone, Clock, CheckCircle2 } from "lucide-react";
-import { business } from "@/config/business";
+import { business, googleReviewSummary } from "@/config/business";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
 import { QuoteForm } from "@/components/common/QuoteForm";
 import { constructMetadata, generateBreadcrumbSchema } from "@/config/seo";
@@ -44,26 +44,23 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {/* 1. HERO */}
-      <section className="bg-slate-50 border-b border-slate-200/80 py-8 lg:py-10">
+      <section className="bg-slate-50 border-b border-slate-200/80 py-4 sm:py-6 lg:py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Breadcrumbs crumbs={[{ name: "Get a Quote", href: "/get-a-quote" }]} />
 
           <div className="mt-4 max-w-3xl">
-            <span className="rounded-full bg-orange-100 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#A63F00]">
-              Adelaide Moving Quote
-            </span>
             <h1 className="mt-3 text-3xl font-extrabold text-[#0B2D5B] sm:text-4xl font-[family-name:var(--font-heading)]">
               Request Your Adelaide Moving Quote
             </h1>
             <p className="mt-3 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Tell us what you&apos;re moving, where from, and where to. Include access details and any additional services you need so we can discuss your request.
+              Share your pickup and delivery suburbs, inventory and access details.
             </p>
           </div>
         </div>
       </section>
 
       {/* 2. FORM & BENEFIT HIGHLIGHTS */}
-      <section className="py-10 sm:py-12 bg-white">
+      <section className="py-6 sm:py-10 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             {/* Form Left/Main */}
@@ -77,35 +74,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
             </div>
 
             {/* Quick Details Sidebar */}
-            <div className="lg:col-span-4 space-y-6">
-              {/* Direct Call Box */}
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 space-y-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
-                  Prefer to Talk?
-                </span>
-                <h3 className="text-xl font-bold text-[#0B2D5B]">
-                  Direct Phone Enquiries
-                </h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Call us during our listed hours to discuss availability or access requirements.
-                </p>
-
-                <div className="pt-2">
-                  <a
-                    href={business.contact.primaryPhoneHref}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#0B2D5B] py-3.5 text-sm font-bold text-white hover:bg-[#071933] transition"
-                  >
-                    <Phone className="h-4 w-4 text-[#FF6A00]" />
-                    <span>Call {business.contact.primaryPhone}</span>
-                  </a>
-                </div>
-
-                <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
-                  <Clock className="h-3.5 w-3.5 text-[#FF6A00]" />
-                  <span>Open {business.hours}</span>
-                </div>
-              </div>
-
+            <div className="lg:col-span-4 flex flex-col gap-6">
               {/* Rates Recap */}
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
                 <p className="text-sm font-bold uppercase tracking-wider text-[#0B2D5B]">
@@ -137,6 +106,7 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                 <p className="font-bold text-[#0B2D5B] text-sm mb-2">
                   Before You Submit:
                 </p>
+                <p className="font-semibold text-[#0B2D5B]">{googleReviewSummary}</p>
                 <div className="flex items-start gap-2">
                     <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-[#A63F00] shrink-0 mt-0.5" />
                   <span>Include pickup and delivery suburbs</span>
@@ -152,6 +122,34 @@ export default async function GetQuotePage({ searchParams }: QuotePageProps) {
                 <div className="flex items-start gap-2">
                     <CheckCircle2 aria-hidden="true" className="h-4 w-4 text-[#A63F00] shrink-0 mt-0.5" />
                   <span>Tell us about any additional services you need</span>
+                </div>
+              </div>
+
+              {/* Direct Call Box */}
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 space-y-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
+                  Prefer to Talk?
+                </span>
+                <h3 className="text-xl font-bold text-[#0B2D5B]">
+                  Direct Phone Enquiries
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Call us during our listed hours to discuss availability or access requirements.
+                </p>
+
+                <div className="pt-2">
+                  <a
+                    href={business.contact.primaryPhoneHref}
+                    className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#0B2D5B] underline underline-offset-4"
+                  >
+                    <Phone className="h-4 w-4 text-[#FF6A00]" />
+                    <span>Call {business.contact.primaryPhone}</span>
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
+                  <Clock className="h-3.5 w-3.5 text-[#FF6A00]" />
+                  <span>Open {business.hours}</span>
                 </div>
               </div>
             </div>
