@@ -35,10 +35,16 @@ for (const path of paths) {
         if (!mainText.includes(normalize(question.acceptedAnswer?.text || ''))) schemaIssues.push(`FAQ answer absent: ${question.name}`);
       }
       if (schema['@type'] === 'BreadcrumbList' && !schema.itemListElement?.every(item => item.position > 0 && item.name && item.item)) schemaIssues.push('Incomplete breadcrumbs');
+      if (schema['@type'] === 'OfferCatalog') {
+        for (const [name, price] of [['2 Movers + Truck', 75], ['3 Movers + Truck', 95]]) {
+          const offer = schema.itemListElement?.find(item => item.name === name);
+          if (!offer || Number(offer.price) !== price || Number(offer.priceSpecification?.price) !== price || offer.priceCurrency !== 'AUD') schemaIssues.push(`Incorrect approved pricing offer: ${name}`);
+        }
+      }
       if (schema['@graph']) inspectSchema(schema['@graph']);
     }
     schemas.forEach(inspectSchema);
-    return { title: document.title, description: document.querySelector('meta[name="description"]')?.content, canonical: document.querySelector('link[rel="canonical"]')?.href, robots: document.querySelector('meta[name="robots"]')?.content, h1: [...document.querySelectorAll('h1')].map(el => el.textContent.trim()), headings, headingJumps, schemas, schemaIssues, stalePrice: /\$(?:75|79|158)\b|(?:75|79)\s*(?:\/|per)\s*30|"price"\s*:\s*"?(?:75|79|158)\b/.test(searchable), newPrice: /\$95\b/.test(document.body.innerText), links: [...document.querySelectorAll('a[href]')].map(el => el.getAttribute('href')), imageIssues: [...document.images].filter(el => !el.hasAttribute('alt')).map(el => el.src) };
+    return { title: document.title, description: document.querySelector('meta[name="description"]')?.content, canonical: document.querySelector('link[rel="canonical"]')?.href, robots: document.querySelector('meta[name="robots"]')?.content, h1: [...document.querySelectorAll('h1')].map(el => el.textContent.trim()), headings, headingJumps, schemas, schemaIssues, stalePrice: /\$(?:79|99|158|198)\b|(?:79|99)\s*(?:\/|per)\s*30|"price"\s*:\s*"?(?:79|99|158|198)\b/.test(searchable), newPrice: /\$75\b/.test(document.body.innerText) && /\$95\b/.test(document.body.innerText) && /\$150\/hr\b/.test(document.body.innerText) && /\$190\/hr\b/.test(document.body.innerText), links: [...document.querySelectorAll('a[href]')].map(el => el.getAttribute('href')), imageIssues: [...document.images].filter(el => !el.hasAttribute('alt')).map(el => el.src) };
   });
   report.routes.push({ path, status: response.status(), ...result, canonicalValid: result.canonical === `${canonicalBase}${path === '/' ? '' : path}` || result.canonical === `${canonicalBase}${path}` });
 }
@@ -145,7 +151,7 @@ for (const route of report.routes) {
   for (const heading of route.headingJumps) report.failures.push(`${route.path}: heading jump to H${heading.level} ${heading.text}`);
   for (const issue of route.schemaIssues) report.failures.push(`${route.path}: ${issue}`);
 }
-if (!report.routes.find(route => route.path === '/pricing')?.newPrice) report.failures.push('/pricing: new $95 rate absent');
+if (!report.routes.find(route => route.path === '/pricing')?.newPrice) report.failures.push('/pricing: approved $75/$150 and $95/$190 rates absent');
 for (const key of ['title', 'description']) for (const value of duplicates(key)) report.failures.push(`Duplicate ${key}: ${value}`);
 for (const check of report.responsive.filter(check => check.overflow || check.status !== 200)) report.failures.push(`${check.path}@${check.width}: responsive failure`);
 for (const check of report.notFound.filter(check => check.status !== 404 || !check.noindex)) report.failures.push(`${check.path}: missing HTTP404/noindex`);

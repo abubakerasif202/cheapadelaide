@@ -1,5 +1,5 @@
-const twoMoverHalfHourRate = 95;
-const threeMoverHalfHourRate = 99;
+const twoMoverHalfHourRate = 75;
+const threeMoverHalfHourRate = 95;
 
 export const business = {
   name: "Cheap Adelaide Removalist",

@@ -1,5 +1,6 @@
 # Sitewide production audit - 3 October 2026
 
+> Latest owner correction on 3 October 2026: 2 movers + truck $75 / 30 minutes ($150/hr reference); 3 movers + truck $95 / 30 minutes ($190/hr reference). Earlier rates in this document are historical release evidence. Current prices are configured in `src/config/business.ts`.
 
 
 ## Source findings and repairs

@@ -1,5 +1,6 @@
 # Post-launch CRO, SEO/AEO and credibility audit
 
+> Latest owner correction on 3 October 2026: 2 movers + truck $75 / 30 minutes ($150/hr reference); 3 movers + truck $95 / 30 minutes ($190/hr reference). Earlier rates in this document are historical release evidence. Current prices are configured in `src/config/business.ts`.
 > Historical audit record from 2 October 2026. Its old prices and environment blockers describe that run, not the current site. Production release `3f0821f` uses $95 / 30 min ($190/hr reference) for two movers and $99 / 30 min ($198/hr reference) for three movers. The remaining improvements are being reconciled and validated separately below.
 Date: 2 October 2026. Release status: **NOT READY — build, browser and live baseline verification blocked. No commit or push.**
 
