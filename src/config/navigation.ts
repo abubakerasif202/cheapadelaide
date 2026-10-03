@@ -25,7 +25,7 @@ export const navigation = {
         {
           title: "Furniture Removals",
           href: "/services/furniture-removals",
-          description: "Careful blanket-wrapped transport for single pieces, sets, and full suites.",
+          description: "Furniture transport for single pieces, sets and household moves.",
         },
         {
           title: "Office Removals",

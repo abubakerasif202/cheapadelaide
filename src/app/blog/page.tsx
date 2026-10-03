@@ -67,8 +67,8 @@ export default function BlogIndexPage() {
               Adelaide Moving Guides & Cost Advice
             </h1>
             <p className="ca-lead" style={{ marginTop: 16 }}>
-              Transparent rate breakdowns, local council logistics, packing blueprints, and realistic cost expectations for
-              moving across Greater Adelaide.
+              Adelaide moving costs, access planning, packing and common moving questions.
+              Use these guides to prepare your inventory and discuss the details of your move.
             </p>
           </div>
         </div>
@@ -91,8 +91,8 @@ export default function BlogIndexPage() {
         <div className="ca-container">
           <div className="ca-sechead ca-sechead--split">
             <div className="ca-sechead__text">
-              <span className="ca-eyebrow ca-eyebrow--rule">Topical Authority Cluster</span>
-              <h2 className="ca-h2">Key Removalist Guides & Analyses</h2>
+              <span className="ca-eyebrow ca-eyebrow--rule">Moving advice</span>
+              <h2 className="ca-h2">Practical Adelaide Moving Guides</h2>
             </div>
             <p className="ca-small" style={{ maxWidth: 380 }}>
               Targeted advice covering rates, vehicle sizing, council rules, and preparation tactics across South Australia.

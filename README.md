@@ -32,8 +32,10 @@ Cheap Adelaide Removalist is an Adelaide-focused moving service pairing value-dr
 
 ## 💰 Approved Pricing Structure
 
-- **2 Movers + Truck**: From **$79 per 30 minutes** (hourly reference: $158/hr)
+- **2 Movers + Truck**: From **$95 per 30 minutes** (hourly reference: $190/hr)
 - **3 Movers + Truck**: From **$99 per 30 minutes** (hourly reference: $198/hr)
+Rates are configured once in `src/config/business.ts`. The production build regenerates social pricing artwork automatically. To regenerate it separately, run `npm run assets:share`.
+
 - **Mandatory Qualifier**: *"Final pricing depends on move size, inventory, access, travel and any additional services required."*
 
 ---

@@ -87,9 +87,9 @@ function auditBusinessNAP() {
 
   record(
     cat,
-    "Two Movers Pricing ($79 / 30 min, $158/hr)",
-    business.pricing.twoMovers.thirtyMinutes === 79 &&
-      business.pricing.twoMovers.hourlyReference === 158,
+    "Two Movers Pricing ($95 / 30 min, $190/hr)",
+    business.pricing.twoMovers.thirtyMinutes === 95 &&
+      business.pricing.twoMovers.hourlyReference === 190,
     `Incorrect two-mover pricing configuration`
   );
 

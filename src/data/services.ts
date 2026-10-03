@@ -39,7 +39,6 @@ export const services: ServiceItem[] = [
       "For moves around Adelaide, share your pickup and delivery suburbs, preferred date, team size and any access requirements.",
     ],
     whatItCovers: [
-      "Full inventory loading, transport, and room-by-room unloading",
       "Loading, transport and unloading of the items discussed for your move",
       "Household furniture, appliances and boxed items as outlined in your inventory",
       "Pickup and delivery locations and access details supplied with your enquiry",
@@ -519,7 +518,7 @@ export const services: ServiceItem[] = [
       },
       {
         step: "2",
-        title: "Fixed Scope Estimate",
+        title: "Discuss Quote Terms",
         description: "Discuss available arrangements and pricing based on your move details.",
       },
       {
@@ -610,7 +609,7 @@ export const services: ServiceItem[] = [
       },
     ],
     accessConsiderations: [
-      "Flexibility of 1 to 3 days around pickup and drop-off windows",
+      "Share your flexibility around pickup and delivery windows",
       "Accurate inventory listing so the allocated cubic space matches your load exactly",
       "Clear communication of contact numbers for receiving goods at destination",
       "Truck access requirements along highway corridors and residential streets",

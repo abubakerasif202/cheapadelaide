@@ -80,7 +80,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "12 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-10-02",
+    updatedDate: "2026-10-03",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -265,7 +265,7 @@ export const blogPosts: BlogPost[] = [
     tier: 1,
     category: "Cost & Pricing",
     title: "How Much Do Removalists Cost in Adelaide?",
-    seoTitle: "How Much Do Removalists Cost in Adelaide? | Cheap Adelaide Removalist",
+    seoTitle: "Adelaide Removalist Costs & Half-Hour Rates | Moving Guide",
     metaDescription:
       `Cheap Adelaide Removalist lists starting rates of $${business.pricing.twoMovers.thirtyMinutes} per half hour for 2 movers and a truck, or $${business.pricing.threeMovers.thirtyMinutes} for 3 movers and a truck. See what affects a quote.`,
     primaryKeyword: "cost of removalist adelaide",
@@ -277,7 +277,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "9 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-10-02",
+    updatedDate: "2026-10-03",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -383,7 +383,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "8 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-10-02",
+    updatedDate: "2026-10-03",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -891,7 +891,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "11 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-09-26",
+    updatedDate: "2026-10-03",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -1073,7 +1073,7 @@ export const blogPosts: BlogPost[] = [
     ],
     readTime: "6 min read",
     publishDate: "2026-09-24",
-    updatedDate: "2026-09-26",
+    updatedDate: "2026-10-03",
     author: {
       name: "Operations Team",
       role: "Logistics & Removals Specialists",
@@ -1126,7 +1126,7 @@ export const blogPosts: BlogPost[] = [
     tier: 3,
     category: "Specialist Removals",
     title: "How to Move Heavy Furniture & Appliances Without Damaging Walls or Floors",
-    seoTitle: "Move Heavy Furniture Safely: Adelaide Floor & Wall Protection Guide",
+    seoTitle: "Moving Heavy Furniture Safely in Adelaide | Practical Guide",
     metaDescription:
       "Plan how to move heavy or oversized furniture in Adelaide by measuring the route and confirming handling requirements with your removalist.",
     primaryKeyword: "move heavy furniture safely adelaide",

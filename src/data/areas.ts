@@ -17,7 +17,7 @@ export const adelaideRegions: RegionArea[] = [
     id: "adelaide-cbd-inner",
     name: "Adelaide CBD & Inner Metro",
     slug: "adelaide-cbd-inner-metro",
-    seoTitle: "Removalists Adelaide CBD & Inner Metro | Cheap Adelaide Removalist",
+    seoTitle: "Adelaide CBD & Inner Metro Movers | Cheap Adelaide Removalist",
     metaDescription:
       "Removalist enquiries for Adelaide CBD, North Adelaide, Norwood, Parkside, Mile End and Prospect. Share your building access details to discuss a quote.",
     description:
@@ -87,7 +87,7 @@ export const adelaideRegions: RegionArea[] = [
     id: "eastern-suburbs",
     name: "Eastern Suburbs & Foothills",
     slug: "eastern-suburbs-foothills",
-    seoTitle: "Removalists Eastern Adelaide & Foothills | Cheap Adelaide Removalist",
+    seoTitle: "Eastern Adelaide & Foothills Movers | Cheap Adelaide Removalist",
     metaDescription:
       "Removalist enquiries for Burnside, Kensington, Magill, St Peters, Unley and Glenunga in Adelaide's eastern suburbs and foothills.",
     description:
@@ -122,7 +122,7 @@ export const adelaideRegions: RegionArea[] = [
     id: "western-suburbs-coast",
     name: "Western Suburbs & Coastal Strip",
     slug: "western-suburbs-coastal",
-    seoTitle: "Removalists Western Adelaide & Coastal Suburbs | Cheap Adelaide Removalist",
+    seoTitle: "Western Adelaide & Coastal Movers | Cheap Adelaide Removalist",
     metaDescription:
       "Removalist enquiries for Glenelg, Henley Beach, Semaphore, West Lakes, Findon and Woodville along Adelaide's western coastal strip.",
     description:
@@ -194,7 +194,7 @@ export const adelaideRegions: RegionArea[] = [
     slug: "adelaide-hills-regional-sa",
     seoTitle: "Adelaide Hills Removalists | Cheap Adelaide Removalist",
     metaDescription:
-      "Request an Adelaide Hills removals quote for Stirling, Crafers, Mount Barker and nearby communities. Share driveway, road and vehicle access details when planning your move.",
+      "Request an Adelaide Hills moving quote for Stirling, Crafers and Mount Barker. Share driveway, road and vehicle access details to plan your move.",
     description:
       "For a move to or from the Adelaide Hills, include property access and route details when asking about availability around Stirling, Crafers, Mount Barker and nearby townships. The existing regional area also covers routes to the Barossa Valley, Murray Bridge and Victor Harbor.",
     keyHubs: ["Stirling", "Crafers", "Mount Barker", "Hahndorf", "Barossa Valley", "Murray Bridge", "Victor Harbor"],

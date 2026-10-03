@@ -54,8 +54,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-white text-slate-800 font-[family-name:var(--font-body)]">
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <Header />
-        <main className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">{children}</main>
         <Footer />
         <MobileActionBar />
       </body>

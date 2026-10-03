@@ -1,3 +1,6 @@
+const twoMoverHalfHourRate = 95;
+const threeMoverHalfHourRate = 99;
+
 export const business = {
   name: "Cheap Adelaide Removalist",
   shortName: "Cheap Adelaide Movers",
@@ -36,14 +39,14 @@ export const business = {
   pricing: {
     twoMovers: {
       name: "2 Movers + Truck",
-      thirtyMinutes: 79,
-      hourlyReference: 158,
+      thirtyMinutes: twoMoverHalfHourRate,
+      hourlyReference: twoMoverHalfHourRate * 2,
       description: "A two-person moving team with a truck.",
     },
     threeMovers: {
       name: "3 Movers + Truck",
-      thirtyMinutes: 99,
-      hourlyReference: 198,
+      thirtyMinutes: threeMoverHalfHourRate,
+      hourlyReference: threeMoverHalfHourRate * 2,
       description: "A three-person moving team with a truck.",
     },
     disclaimer: "Final pricing depends on move size, inventory, access, travel and any additional services required.",

@@ -718,3 +718,7 @@ a.ca-contact__value:hover { color: var(--orange-700); }
 .ca-filter button { flex-shrink: 0; min-height: 40px; padding: 8px 16px; border-radius: var(--radius-button-sm); border: 1px solid var(--border-default); background: var(--white); font: var(--fw-semibold) var(--fs-sm)/1 var(--font-body); color: var(--slate-700); cursor: pointer; transition: all var(--dur-fast) ease; }
 .ca-filter button:hover { border-color: var(--border-strong); color: var(--navy-900); }
 .ca-filter button[aria-pressed="true"] { background: var(--navy-900); border-color: var(--navy-900); color: #fff; }
+
+/* Keep repeated navigation out of the keyboard path when requested. */
+.skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 12px 20px; border-radius: 8px; background: #0B2D5B; color: white; transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }

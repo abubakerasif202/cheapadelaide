@@ -1,3 +1,5 @@
+import { business } from "@/config/business";
+
 export interface RateChipProps {
   code?: string;
   name?: string;
@@ -6,7 +8,7 @@ export interface RateChipProps {
   inverse?: boolean;
 }
 
-export function RateChip({ code = "2P", name = "2 Movers + Truck", rate = 79, hourly = 158, inverse = false }: RateChipProps) {
+export function RateChip({ code = "2P", name = business.pricing.twoMovers.name, rate = business.pricing.twoMovers.thirtyMinutes, hourly = rate * 2, inverse = false }: RateChipProps) {
   return (
     <div className={"ca-rate" + (inverse ? " ca-rate--inverse" : "")}>
       <span className="ca-rate__code">{code}</span>

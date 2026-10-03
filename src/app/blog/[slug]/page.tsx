@@ -152,7 +152,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   timeZone: "Australia/Adelaide",
                 })}
               </time>
+              {post.updatedDate !== post.publishDate && (
+                <time className="ca-caption" dateTime={post.updatedDate}>
+                  Updated {new Date(`${post.updatedDate}T12:00:00`).toLocaleDateString("en-AU", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                    timeZone: "Australia/Adelaide",
+                  })}
+                </time>
+              )}
             </div>
+            <p className="ca-caption" style={{ marginTop: 12 }}>
+              By <Link href="/about">{business.name}</Link>
+            </p>
 
             {/* Exactly ONE H1 tag on the page */}
             <h1 className="ca-h1" style={{ marginTop: 16 }}>

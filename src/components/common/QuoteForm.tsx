@@ -108,6 +108,7 @@ export function QuoteForm({
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
+        signal: AbortSignal.timeout(20000),
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -133,9 +134,12 @@ export function QuoteForm({
         setStatus("error");
         setErrorMessage(result.message || `Submission failed. Please call us directly on ${business.contact.primaryPhone}.`);
       }
-    } catch {
+    } catch (error) {
       setStatus("error");
-      setErrorMessage(`Network error sending quote. Please call us directly on ${business.contact.primaryPhone}.`);
+      const timedOut = error instanceof DOMException && error.name === "TimeoutError";
+      setErrorMessage(timedOut
+        ? `We could not confirm your request. Please call ${business.contact.primaryPhone} before submitting again.`
+        : `Network error sending quote. Please call us directly on ${business.contact.primaryPhone}.`);
     } finally {
       submittingRef.current = false;
     }
@@ -329,8 +333,8 @@ export function QuoteForm({
       {/* Unconfigured Web3Forms Notice */}
       {status === "unconfigured" && (
         <div ref={feedbackRef} tabIndex={-1} style={{ marginTop: 20, outline: "none" }}>
-          <Alert type="warning" title="Online web form is currently in direct dispatch mode.">
-            <span>Connect with our local Adelaide moving coordinators immediately using either option below:</span>
+          <Alert type="warning" title="Online quote submission is unavailable.">
+            <span>Your request has not been sent. Please call or email your move details using either option below:</span>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 12 }}>
               <Button href={business.contact.primaryPhoneHref} variant="secondary" size="sm" leadingIcon="phone">
                 Call Dispatch ({business.contact.primaryPhone})

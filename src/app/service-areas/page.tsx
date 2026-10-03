@@ -82,9 +82,9 @@ export default function ServiceAreasPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-[#A63F00]">
                   Depot Location
                 </span>
-                <h3 className="text-lg font-bold text-[#0B2D5B]">
+                <p className="text-lg font-bold text-[#0B2D5B]">
                   {business.location.street}, {business.location.suburb} SA {business.location.postcode}
-                </h3>
+                </p>
                 <p className="mt-1 text-xs sm:text-sm text-slate-600">
                   Our listed address is {business.location.fullAddress}. Contact us with your route and timing to discuss availability.
                 </p>

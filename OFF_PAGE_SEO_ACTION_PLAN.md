@@ -69,7 +69,7 @@ Every citation must strictly use identical NAP data:
   - `Piano Moving Service`
   - `Delivery Service`
 - **Business Description:**  
-  *"Affordable Adelaide removalists providing dependable home, apartment, office, and single-item moves across Greater Adelaide. Starting rates from $79 per 30 minutes ($158/hr) for 2 movers and a truck. Based in Elizabeth Vale SA and servicing Adelaide CBD, North Adelaide, Salisbury, Elizabeth, Gawler, Norwood, Marion, and surrounding suburbs. Transparent pricing, no hidden call-out fees without notice, and respectful handling."*
+  *"Affordable Adelaide removalists providing dependable home, apartment, office, and single-item moves across Greater Adelaide. Starting rates from $95 per 30 minutes ($190/hr) for 2 movers and a truck. Based in Elizabeth Vale SA and servicing Adelaide CBD, North Adelaide, Salisbury, Elizabeth, Gawler, Norwood, Marion, and surrounding suburbs. Confirm inventory, travel, access and additional-service charges when requesting a quote."*
 - **Service Areas:** Select specific Adelaide LGAs and regions:
   - City of Adelaide (CBD, North Adelaide)
   - City of Playford (Elizabeth, Elizabeth Vale, Munno Para)
