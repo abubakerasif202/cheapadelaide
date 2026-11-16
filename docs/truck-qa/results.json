@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "path": "/",
+      "width": 320,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 360,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 375,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 430,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 768,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/",
+      "width": 1440,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/pricing",
+      "width": 320,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/pricing",
+      "width": 360,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/pricing",
+      "width": 375,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/pricing",
+      "width": 390,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/pricing",
+      "width": 430,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/pricing",
+      "width": 768,
+      "selection": true,
+      "overflow": false
+    },
+    {
+      "path": "/pricing",
+      "width": 1440,
+      "selection": true,
+      "overflow": false
+    }
+  ],
+  "mockedPayload": {
+    "selectedTruck": "Small Truck",
+    "preferredTeam": "2 Movers + Truck"
+  }
+}

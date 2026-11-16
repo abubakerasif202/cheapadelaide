@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { truckOptions, type TruckPreference } from "@/data/pricing";
 import { business } from "@/config/business";
 import { Icon, Button } from "@/components/core";
 import { TextField, SelectField, ChoiceCard } from "@/components/forms";
@@ -30,6 +31,7 @@ export function QuoteForm({
     moveType: defaultMoveType,
     propertySize: "2 Bedrooms",
     preferredTeam: defaultTeam,
+    selectedTruck: "unsure" as TruckPreference,
     additionalServices: [] as string[],
     accessDetails: "",
     message: "",
@@ -48,6 +50,15 @@ export function QuoteForm({
       feedbackRef.current?.focus();
     }
   }, [status, errorMessage]);
+
+  useEffect(() => {
+    const update = (event: Event) => {
+      const selectedTruck = (event as CustomEvent<TruckPreference>).detail;
+      if (["small", "big", "unsure"].includes(selectedTruck)) setFormData(prev => ({ ...prev, selectedTruck }));
+    };
+    window.addEventListener("cheap-truck-selection", update);
+    return () => window.removeEventListener("cheap-truck-selection", update);
+  }, []);
 
   const moveTypeOptions = ["House", "Apartment", "Office", "Commercial", "Furniture", "Interstate", "Other"];
 
@@ -122,6 +133,7 @@ export function QuoteForm({
           lead_type: "Moving Quote Request",
           submission_source: sourcePage,
           ...formData,
+          selectedTruck: truckOptions.find(truck => truck.id === formData.selectedTruck)?.name || "Please advise on truck size",
           botcheck: formData.botcheck || false,
           additionalServices: formData.additionalServices.join(", ") || "None",
         }),
@@ -277,6 +289,12 @@ export function QuoteForm({
           onChange={(e) => setFormData({ ...formData, propertySize: e.target.value })}
         />
 
+        <SelectField label="Preferred Truck Size" id="selectedTruck" options={[{ label: "Please advise on truck size", value: "unsure" }, ...truckOptions.map(truck => ({ label: `${truck.name} — tailored quote`, value: truck.id }))]} value={formData.selectedTruck} onChange={e => {
+          const selectedTruck = e.target.value as TruckPreference;
+          setFormData({ ...formData, selectedTruck });
+          window.dispatchEvent(new CustomEvent("cheap-truck-selection", { detail: selectedTruck }));
+        }} />
+        <p className="ca-small">Truck size is a preference. Capacity, crew and truck-specific pricing will be confirmed in your quote.</p>
         <fieldset>
           <legend className="ca-label ca-form__legend">Preferred Team Option</legend>
           <p className="ca-small" style={{ marginBottom: 12 }}>{business.pricing.disclaimer}</p>
@@ -344,7 +362,7 @@ export function QuoteForm({
                 href={`mailto:${business.contact.email}?subject=${encodeURIComponent(
                   `Moving Quote Request: ${formData.fullName || "Adelaide Move"} (${formData.moveType})`
                 )}&body=${encodeURIComponent(
-                  `Hi Cheap Adelaide Removalist Team,\n\nI would like a quote for my upcoming move:\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nFrom: ${formData.movingFrom}\nTo: ${formData.movingTo}\nDate: ${formData.moveDate}\nMove Type: ${formData.moveType}\nProperty Size: ${formData.propertySize}\nPreferred Team: ${formData.preferredTeam}\nAccess / Lift Notes: ${formData.accessDetails}\nAdditional Services: ${formData.additionalServices.join(", ") || "None"}\nInventory / Notes: ${formData.message}\n\nThank you!`
+                  `Hi Cheap Adelaide Removalist Team,\n\nI would like a quote for my upcoming move:\n\nName: ${formData.fullName}\nPhone: ${formData.phone}\nFrom: ${formData.movingFrom}\nTo: ${formData.movingTo}\nDate: ${formData.moveDate}\nMove Type: ${formData.moveType}\nProperty Size: ${formData.propertySize}\nPreferred Truck: ${formData.selectedTruck}\nPreferred Team: ${formData.preferredTeam}\nAccess / Lift Notes: ${formData.accessDetails}\nAdditional Services: ${formData.additionalServices.join(", ") || "None"}\nInventory / Notes: ${formData.message}\n\nThank you!`
                 )}`}
                 variant="outline"
                 size="sm"

@@ -1,3 +1,4 @@
+import { TruckSelection } from "@/components/common/TruckSelection";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Info, Phone } from "lucide-react";
@@ -104,6 +105,7 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <TruckSelection />
       {/* 2. PRICING CARDS */}
       <section className="py-16 sm:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -122,6 +124,7 @@ export default function PricingPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-5xl px-4 pb-12"><h2 className="ca-h2">Compare crew rates</h2><div style={{ overflowX: "auto" }}><table className="w-full text-left"><caption className="py-4 text-left">Truck-size preferences are quoted separately from these published crew packages.</caption><thead><tr><th scope="col">Crew package</th><th scope="col">30 minutes</th><th scope="col">Hourly equivalent</th></tr></thead><tbody>{[business.pricing.twoMovers, business.pricing.threeMovers].map(plan => <tr key={plan.name}><th scope="row" className="py-4">{plan.name}</th><td>${plan.thirtyMinutes}</td><td>${plan.hourlyReference}</td></tr>)}</tbody></table></div><p>The lowest hourly rate does not always mean the lowest total cost. Compare the crew, time required, access, travel and minimum booking conditions in your written quote.</p></section>
       {/* 3. WHAT AFFECTS YOUR QUOTE */}
       <section className="py-16 sm:py-24 bg-slate-50 border-y border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

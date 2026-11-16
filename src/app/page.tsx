@@ -1,3 +1,4 @@
+import { TruckSelection } from "@/components/common/TruckSelection";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -30,7 +31,7 @@ import { constructMetadata, generateFAQSchema } from "@/config/seo";
 export const metadata: Metadata = constructMetadata({
   title: "Cheap Adelaide Removalists | Affordable Adelaide Movers",
   description:
-    "Affordable removalist services for house, apartment, furniture and office moves across Adelaide. View published starting rates or request a quote.",
+    `Cheap removalists Adelaide: compare 2 movers + truck from $${business.pricing.twoMovers.thirtyMinutes}/30 min and 3 movers + truck from $${business.pricing.threeMovers.thirtyMinutes}/30 min. Request a quote for your route and inventory.`,
   canonical: "/",
 });
 
@@ -244,6 +245,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <TruckSelection />
       {/* 3. BENTO 2.0 ARCHITECTURAL SECTION (Move Sizer, Radar, Zero-Surprise & Metro Matrix) */}
       <section className="py-16 sm:py-24 bg-slate-50 border-y border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

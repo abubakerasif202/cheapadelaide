@@ -40,3 +40,11 @@ export const quoteFactors = [
   { title: "Additional services", description: "Any additional services requested form part of the quote discussion." },
   { title: "Team size", description: "Choose a team size or ask for guidance based on your move details." },
 ];
+
+// Truck preferences are separate from the published crew packages.
+export const truckOptions = [
+  { id: "small", name: "Small Truck", description: "For smaller moving enquiries, apartments, units and compact loads.", benefits: ["Share your furniture list", "Tell us about stairs and lifts", "Ask us to assess truck access"] },
+  { id: "big", name: "Big Truck", description: "For larger moving enquiries, family relocations and substantial inventories.", benefits: ["Share your full inventory", "Flag heavy or oversized items", "Plan loading and parking access"] },
+] as const;
+export type TruckPreference = "small" | "big" | "unsure";
+export const truckQuoteNotice = "Truck capacity, crew, availability and applicable rate are confirmed in your quote. Minimum booking, travel and call-out charges must also be confirmed before booking.";
